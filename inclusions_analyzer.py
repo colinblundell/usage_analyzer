@@ -6,13 +6,13 @@ import subprocess
 from operator import itemgetter
 
 INPUT_FILES = [
-"src/components/signin/core/browser/account_fetcher_service.h",
-"src/components/signin/core/browser/account_tracker_service.h",
-"src/components/signin/core/browser/profile_oauth2_token_service.h",
-"src/components/signin/core/browser/signin_manager_base.h",
-"src/components/signin/core/browser/signin_manager.h",
-"src/components/sync/driver/signin_manager_wrapper.h",
-"src/google_apis/gaia/oauth2_token_service.h",
+"components/signin/core/browser/account_fetcher_service",
+"components/signin/core/browser/account_tracker_service",
+"components/signin/core/browser/profile_oauth2_token_service",
+"components/signin/core/browser/signin_manager_base",
+"components/signin/core/browser/signin_manager",
+"components/sync/driver/signin_manager_wrapper",
+"google_apis/gaia/oauth2_token_service",
 ]
 
 EXCLUDED_DIRECTORIES = [
@@ -61,36 +61,45 @@ CLIENTS = [
 CLIENTS += CATCHALLS
 
 def collect_inclusions_of_file(input_file, prod_inclusions_by_directory,
-                               test_inclusions_by_directory):
+                               test_inclusions_by_directory,
+                               prod_including_files_by_directory):
   inclusion_string = '\'include "\'' + input_file
   inclusions = subprocess.Popen("git grep -l " + inclusion_string, shell=True, stdout=subprocess.PIPE,
                                 cwd=os.getenv("HOME") + "/chromium/src").stdout.read()
   for filename in inclusions.splitlines():
-    if filename in INPUT_FILES:
+    if os.path.splitext(filename)[0] in INPUT_FILES:
       continue
     parent_dir = os.path.dirname(filename)
     if parent_dir in EXCLUDED_DIRECTORIES:
       continue
     dictionary = prod_inclusions_by_directory
+    is_prod = True
     if "test" in filename or "fake" in filename:
       dictionary = test_inclusions_by_directory
+      is_prod = False
     if parent_dir not in dictionary:
       dictionary[parent_dir] = 0
     dictionary[parent_dir] += 1
+    if is_prod:
+      if parent_dir not in prod_including_files_by_directory:
+        prod_including_files_by_directory[parent_dir] = set()
+      prod_including_files_by_directory[parent_dir].add(filename)
 
 def analyze_inclusions():
   prod_inclusions_by_directory = {}
   test_inclusions_by_directory = {}
+  prod_including_files_by_directory = {}
 
   for input_file in INPUT_FILES:
     print "Analyzing", input_file
 
-    # Strip off the "src/" prefix.
-    collect_inclusions_of_file(input_file[4:], prod_inclusions_by_directory,
-                               test_inclusions_by_directory)
+    collect_inclusions_of_file(input_file, prod_inclusions_by_directory,
+                               test_inclusions_by_directory,
+                               prod_including_files_by_directory)
 
   print
   print "Prod inclusions:"
+  clients_to_including_files = {}
   clients_to_inclusions = {}
   clients_to_dirs = {}
   catchalls_to_inclusions = {}
@@ -114,7 +123,9 @@ def analyze_inclusions():
     if client_to_use not in to_inclusions:
       to_inclusions[client_to_use] = 0
       to_dirs[client_to_use] = []
+      clients_to_including_files[client_to_use] = set()
     to_inclusions[client_to_use] += num_inclusions
+    clients_to_including_files[client_to_use] = clients_to_including_files[client_to_use].union(prod_including_files_by_directory[directory])
     if client_to_use != directory:
       to_dirs[client_to_use].append(directory + ": " + str(num_inclusions))
 
@@ -152,7 +163,13 @@ def analyze_inclusions():
     print client + ":", num_inclusions, "inclusions"
     for including_dir in clients_to_dirs[client]:
       print "  " + including_dir
-    print
+    if category == "giant":
+      print "Including files: "
+      including_files = list(clients_to_including_files[client])
+      including_files.sort()
+      for f in including_files:
+        if "factory" not in f:
+          print f
 
   print "Summary of small features:", clients_in_category, "clients with", inclusions_in_category, "inclusions"
   
