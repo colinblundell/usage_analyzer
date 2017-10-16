@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import codesearch
 import os
 import subprocess
 
@@ -78,46 +77,6 @@ def collect_inclusions_of_file(input_file, prod_inclusions_by_directory,
     if parent_dir not in dictionary:
       dictionary[parent_dir] = 0
     dictionary[parent_dir] += 1
-
-def collect_usage_of_file(input_file, prod_usage_by_directory,
-                          test_usage_by_directory):
-  methods = codesearch.getMethodsFor(input_file)
-  for method in methods:
-    #print method
-    #print
-    callgraph = codesearch.getCallGraphFor(method)
-    #print "Called", len(callgraph), "times"
-    #print
-    #print
-
-    for caller in callgraph:
-      filename = caller["filename"]
-      if filename in INPUT_FILES:
-        continue
-      parent_dir = os.path.dirname(filename)
-      if parent_dir in EXCLUDED_DIRECTORIES:
-        continue
-      dictionary = prod_usage_by_directory
-      if "test" in filename or "fake" in filename:
-        dictionary = test_usage_by_directory
-      if parent_dir not in dictionary:
-        dictionary[parent_dir] = 0
-      dictionary[parent_dir] += 1
-
-def analyze_api_usage():
-  prod_usage_by_directory = {}
-  test_usage_by_directory = {}
-
-  for input_file in INPUT_FILES:
-    print "Analyzing", input_file
-    collect_usage_of_file(input_file, prod_usage_by_directory,
-                          test_usage_by_directory)
-
-  print
-  print "Prod usage:"
-  for k, v in sorted(prod_usage_by_directory.items(), key=itemgetter(1), 
-                     reverse=True):
-    print k + ":", v, "calls"
 
 def analyze_inclusions():
   prod_inclusions_by_directory = {}
