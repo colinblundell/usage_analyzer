@@ -12,9 +12,18 @@ TEST_CONFIG = {
 
 class TestInclusionsGenerator(unittest.TestCase):
   
-  def test_find_including_files(self):
+  def test_map_including_files_to_included_files(self):
     generator = inclusions_generator.InclusionsGenerator(TEST_CONFIG)
-    inclusions = generator.find_including_files()
+    inclusions = generator.map_including_files_to_included_files()
     including_files = inclusions.keys()
     including_files.sort()
     self.assertEqual(including_files, ["bar/bar.h", "bar/core.h", "foo/foo.cc"])
+
+  def test_map_included_files_to_including_files(self):
+    generator = inclusions_generator.InclusionsGenerator(TEST_CONFIG)
+    inclusions = generator.map_included_files_to_including_files()
+    print inclusions
+    self.assertIn("foo/foo.h", inclusions)
+    inclusions_of_foo = inclusions["foo/foo.h"]
+    inclusions_of_foo.sort()
+    self.assertEqual(inclusions_of_foo, ["bar/bar.h", "bar/core.h", "foo/foo.cc"])

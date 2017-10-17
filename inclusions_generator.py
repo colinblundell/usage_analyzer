@@ -9,7 +9,7 @@ class InclusionsGenerator:
     self.included_files = config["included_files"]
 
   # Given a filename about which to generate inclusions (relative to the repo
-  # root) returns the list of files that include |included_file| in the repo.
+  # root), returns the list of files that include |included_file| in the repo.
   def find_including_files_for_file(self, included_file):
     inclusion_string = '\'include "\'' + included_file
     including_files = subprocess.Popen("git grep -l " + inclusion_string,
@@ -17,11 +17,12 @@ class InclusionsGenerator:
                                        cwd=self.repo_root).stdout.read()
     return including_files.splitlines()
 
-  # Generates the set of inclusions for the total set of included files
+  # Generates the mapping of including files to included files for the total set
+  # of included files.
   # Params: None.
   # Returns: a dictionary mapping including filenames to lists of included
   # filenames.
-  def find_including_files(self):
+  def map_including_files_to_included_files(self):
     including_files_to_included_files = {}
 
     for included_file in self.included_files:
@@ -32,3 +33,18 @@ class InclusionsGenerator:
         including_files_to_included_files[including_file].append(included_file)
 
     return including_files_to_included_files
+
+  # Generates the mapping of included files to including files for the total set
+  # of included files.
+  # Params: None.
+  # Returns: a dictionary mapping included filenames to lists of including
+  # filenames.
+  def map_included_files_to_including_files(self):
+    including_files_to_included_files = \
+        self.map_including_files_to_included_files()
+
+    included_files_to_including_files = []
+    for including_file, included_files in including_files_to_included_files.items():
+      pass
+    return included_files_to_including_files
+
