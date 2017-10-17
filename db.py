@@ -1,4 +1,4 @@
-# Definition of configuration and database dictionaries and facilities to
+# Definition of inclusions database dictionaries and facilities to
 # operate on them (move them to/from disk, generate databases, ...).
 
 import ast
@@ -8,17 +8,7 @@ import pprint
 import subprocess
 import sys
 
-# A configuration is of the following form:
-CONFIG_TEMPLATE = {
-  # A short-but-descriptive name for this config.
-  "name" : "descriptive_name",
-  # The path to the repository to be analyzed. Can be a relative path, in which
-  # case the location is treated as being relative to the location of config.py.
-  "repo_root" : "path/to/repo",
-  # A list of files whose inclusions are analyzed. Paths should be given
-  # relative to |repo_root|.
-  "included_files" : ["included/file/1", "included/file/2"],
-}
+import inclusions_config
 
 # A database is of the following form:
 DATABASE_TEMPLATE = {
@@ -35,24 +25,7 @@ DATABASE_TEMPLATE = {
   "timestamp (UTC)": "timestamp",
 }
 
-def validate_config(config):
-  assert "name" in config
-  assert type(config["name"]) == str
-  assert "repo_root" in config
-  assert type(config["repo_root"]) == str
-  assert "included_files" in config
-  assert type(config["included_files"]) == list
-
-# Reads a config from |config_filename| and returns it. Converts |repo_root|
-# from a relative to an absolute path following the rule above.
-def read_config_from_file(config_filename):
-  with open(config_filename, 'r') as config_file:
-    config = ast.literal_eval(config_file.read())
-  validate_config(config)
-  config["repo_root"] = os.path.abspath(config["repo_root"])
-  return config
-
-# Generates an output database from the given config and analyses.
+# Generates an output database from the given inclusions config and analyses.
 def generate_output_database(config, included_files_to_including_files,
                              including_files_to_included_files):
   output_db = {}

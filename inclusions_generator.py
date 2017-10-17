@@ -1,4 +1,5 @@
 import db
+import inclusions_config
 import subprocess
 import sys
 
@@ -7,7 +8,7 @@ import sys
 class InclusionsGenerator:
   # Parameters: The configuration for this instance, as defined in config.py.
   def __init__(self, config):
-    db.validate_config(config)
+    inclusions_config.validate_config(config)
     self.config = config
 
   # Given a filename about which to generate inclusions (relative to the repo
