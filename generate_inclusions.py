@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import pprint
 import sys
 
 import db
@@ -12,12 +11,5 @@ if __name__ == '__main__':
   config = db.read_config_from_file(config_filename)
 
   generator = inclusions_generator.InclusionsGenerator(config)
-  including_files_to_included_files = generator.map_including_files_to_included_files()
-  included_files_to_including_files = generator.map_included_files_to_including_files()
-
-  output_db = db.generate_output_database(config, 
-                                          included_files_to_including_files, 
-                                          including_files_to_included_files)
-  printer = pprint.PrettyPrinter(indent=2)
-  printer.pprint(output_db)
-  #db.write_output_db_to_file(output_db, output_filename)
+  output_db = generator.generate_inclusions_database()
+  db.write_output_db_to_file(output_db, output_filename)

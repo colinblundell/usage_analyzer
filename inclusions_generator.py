@@ -1,3 +1,4 @@
+import db
 import subprocess
 import sys
 
@@ -6,8 +7,7 @@ import sys
 class InclusionsGenerator:
   # Parameters: The configuration for this instance, as defined in config.py.
   def __init__(self, config):
-    self.repo_root = config["repo_root"]
-    self.included_files = config["included_files"]
+    self.config = config
 
   # Given a filename about which to generate inclusions (relative to the repo
   # root), returns the list of files that include |included_file| in the repo.
@@ -15,7 +15,7 @@ class InclusionsGenerator:
     inclusion_string = '\'include "\'' + included_file
     including_files = subprocess.Popen("git grep -l " + inclusion_string,
                                        shell=True, stdout=subprocess.PIPE,
-                                       cwd=self.repo_root).stdout.read()
+                                       cwd=self.config["repo_root"]).stdout.read()
     return including_files.splitlines()
 
   # Generates the mapping of including files to included files for the total set
@@ -26,7 +26,7 @@ class InclusionsGenerator:
   def map_including_files_to_included_files(self):
     including_files_to_included_files = {}
 
-    for included_file in self.included_files:
+    for included_file in self.config["included_files"]:
       for including_file in self.find_including_files_for_file(included_file):
         if including_file not in including_files_to_included_files:
           including_files_to_included_files[including_file] = []
@@ -55,3 +55,14 @@ class InclusionsGenerator:
         included_files_to_including_files[included_file].append(including_file)
 
     return included_files_to_including_files
+
+  # Generates and returns a database (as defined in db.py) for the config
+  # associated with this instance.
+  def generate_inclusions_database(self):
+    including_files_to_included_files = self.map_including_files_to_included_files()
+    included_files_to_including_files = self.map_included_files_to_including_files()
+
+    output_db = db.generate_output_database(self.config, 
+                                            included_files_to_including_files, 
+                                            including_files_to_included_files)
+    return output_db

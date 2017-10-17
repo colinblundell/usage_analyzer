@@ -4,6 +4,7 @@
 import ast
 import datetime
 import os
+import pprint
 import subprocess
 
 # A configuration is of the following form:
@@ -64,3 +65,9 @@ def generate_output_database(config, included_files_to_including_files,
   output_db["including_files_to_included_files"] = ( 
     including_files_to_included_files)
   return output_db
+
+def write_output_db_to_file(output_db, output_path):
+  print output_path
+  print
+  printer = pprint.PrettyPrinter(indent=2)
+  printer.pprint(output_db)
