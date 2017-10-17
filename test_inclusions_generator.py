@@ -76,29 +76,3 @@ class TestInclusionsGenerator(unittest.TestCase):
     generator = inclusions_generator.InclusionsGenerator(COMPLEX_TEST_CONFIG)
     inclusions = generator.map_included_files_to_including_files()
     self.verify_complex_included_files_to_including_files(inclusions)
-
-  def test_generate_inclusions_database_simple(self):
-    generator = inclusions_generator.InclusionsGenerator(BASIC_TEST_CONFIG)
-    output_db = generator.generate_inclusions_database()
-
-    self.assertIn("timestamp (UTC)", output_db)
-    self.assertIn("repo_rev", output_db)
-    self.assertIn("config", output_db)
-    self.assertEqual(output_db["config"], BASIC_TEST_CONFIG)
-    self.verify_basic_included_files_to_including_files(
-        output_db["included_files_to_including_files"])
-    self.verify_basic_including_files_to_included_files(
-        output_db["including_files_to_included_files"])
-
-  def test_generate_inclusions_database_complex(self):
-    generator = inclusions_generator.InclusionsGenerator(COMPLEX_TEST_CONFIG)
-    output_db = generator.generate_inclusions_database()
-
-    self.assertIn("timestamp (UTC)", output_db)
-    self.assertIn("repo_rev", output_db)
-    self.assertIn("config", output_db)
-    self.assertEqual(output_db["config"], COMPLEX_TEST_CONFIG)
-    self.verify_complex_included_files_to_including_files(
-        output_db["included_files_to_including_files"])
-    self.verify_complex_including_files_to_included_files(
-        output_db["including_files_to_included_files"])

@@ -9,6 +9,7 @@ import subprocess
 import sys
 
 import inclusions_config
+import inclusions_generator
 
 # A database is of the following form:
 DATABASE_TEMPLATE = {
@@ -25,9 +26,14 @@ DATABASE_TEMPLATE = {
   "timestamp (UTC)": "timestamp",
 }
 
-# Generates an output database from the given inclusions config and analyses.
-def generate_output_database(config, included_files_to_including_files,
-                             including_files_to_included_files):
+# Generates an inclusions database from the given inclusions config.
+def generate_inclusions_database(config):
+  generator = inclusions_generator.InclusionsGenerator(config)
+  including_files_to_included_files = (
+    generator.map_including_files_to_included_files())
+  included_files_to_including_files = (
+    generator.map_included_files_to_including_files())
+
   output_db = {}
   output_db["config"] = config
 
@@ -43,6 +49,7 @@ def generate_output_database(config, included_files_to_including_files,
     included_files_to_including_files)
   output_db["including_files_to_included_files"] = (
     including_files_to_included_files)
+
   return output_db
 
 # Writes the given output database to disk at the following location:
@@ -70,6 +77,7 @@ def write_output_db_to_disk(output_db):
   database_filepath = os.path.join(dirname, database_name)
   with open(database_filepath, "w") as database_file:
     database_file.write(database_contents)
+    database_file.write("\n")
 
 # Reads the given database in from disk.
 def read_output_db_from_disk(database_filepath):
