@@ -1,9 +1,15 @@
+#!/usr/bin/python
+
+import config
+import datetime
+import pprint
 import subprocess
+import sys
 
 # Class that analyzes a repository to generate information about the inclusions
 # of a given set of files within that repository.
 class InclusionsGenerator:
-  # Parameters: The configuration for this instance.
+  # Parameters: The configuration for this instance, as defined in config.py.
   def __init__(self, config):
     self.repo_root = config["repo_root"]
     self.included_files = config["included_files"]
@@ -55,3 +61,27 @@ class InclusionsGenerator:
 
     return included_files_to_including_files
 
+if __name__ == '__main__':
+  config_filename = sys.argv[1]
+  config = config.read_config_from_file(config_filename)
+
+  generator = InclusionsGenerator(config)
+  including_files_to_included_files = generator.map_including_files_to_included_files()
+  included_files_to_including_files = generator.map_included_files_to_including_files()
+
+  output_db = {}
+  output_db["config"] = config
+
+  now = datetime.datetime.utcnow()
+  output_db["timestamp (UTC)"] = str(now)
+
+  repo_rev = subprocess.Popen("git rev-parse --short HEAD",
+                              shell=True, stdout=subprocess.PIPE,
+                              cwd=config["repo_root"]).stdout.read()
+  output_db["repo_rev"] = repo_rev.strip()
+
+  output_db["including_files_to_included_files"] = including_files_to_included_files
+  output_db["included_files_to_including_files"] = included_files_to_including_files
+
+  printer = pprint.PrettyPrinter(indent=2)
+  printer.pprint(output_db)
