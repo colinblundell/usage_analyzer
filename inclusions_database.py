@@ -34,30 +34,30 @@ def generate_inclusions_database(config):
   included_files_to_including_files = (
     generator.map_included_files_to_including_files())
 
-  output_db = {}
-  output_db["config"] = config
+  inclusions_db = {}
+  inclusions_db["config"] = config
 
   now = datetime.datetime.utcnow()
-  output_db["timestamp (UTC)"] = str(now)
+  inclusions_db["timestamp (UTC)"] = str(now)
 
   repo_rev = subprocess.Popen("git rev-parse --short HEAD",
                               shell=True, stdout=subprocess.PIPE,
                               cwd=config["repo_root"]).stdout.read()
-  output_db["repo_rev"] = repo_rev.strip()
+  inclusions_db["repo_rev"] = repo_rev.strip()
 
-  output_db["included_files_to_including_files"] = (
+  inclusions_db["included_files_to_including_files"] = (
     included_files_to_including_files)
-  output_db["including_files_to_included_files"] = (
+  inclusions_db["including_files_to_included_files"] = (
     including_files_to_included_files)
 
-  return output_db
+  return inclusions_db
 
 # Writes the given output database to disk at the following location:
 # ./data/output/<config_name>/<repo_rev>/<config_name>_<repo_rev>_inclusions_db.py.
 # Warns the user if the above directory already exists.
-def write_output_db_to_disk(output_db):
-  config_name = output_db["config"]["name"]
-  repo_rev = output_db["repo_rev"]
+def write_inclusions_db_to_disk(inclusions_db):
+  config_name = inclusions_db["config"]["name"]
+  repo_rev = inclusions_db["repo_rev"]
   base_path = "data/output"
   dirname = os.path.join(base_path, config_name, repo_rev)
 
@@ -71,7 +71,7 @@ def write_output_db_to_disk(output_db):
     os.makedirs(dirname)
 
   printer = pprint.PrettyPrinter(indent=2)
-  database_contents = printer.pformat(output_db)
+  database_contents = printer.pformat(inclusions_db)
 
   database_name = "_".join([config_name, repo_rev, "inclusions_db.py"])
   database_filepath = os.path.join(dirname, database_name)
@@ -80,7 +80,7 @@ def write_output_db_to_disk(output_db):
     database_file.write("\n")
 
 # Reads the given database in from disk.
-def read_output_db_from_disk(database_filepath):
+def read_inclusions_db_from_disk(database_filepath):
   with open(database_filepath, "r") as database_file:
     database = ast.literal_eval(database_file.read())
   return database
