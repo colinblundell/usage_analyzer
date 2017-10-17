@@ -6,7 +6,7 @@ import unittest
 
 # Add the parent directory to the path.
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from dummy_test import *
+from test_inclusions_generator import *
 
 if __name__ == '__main__':
   unittest.main()
