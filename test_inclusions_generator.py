@@ -22,7 +22,6 @@ class TestInclusionsGenerator(unittest.TestCase):
   def test_map_included_files_to_including_files(self):
     generator = inclusions_generator.InclusionsGenerator(TEST_CONFIG)
     inclusions = generator.map_included_files_to_including_files()
-    print inclusions
     self.assertIn("foo/foo.h", inclusions)
     inclusions_of_foo = inclusions["foo/foo.h"]
     inclusions_of_foo.sort()
