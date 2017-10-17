@@ -1,4 +1,4 @@
-# Definition of configuration and database dictionaries and facilities to 
+# Definition of configuration and database dictionaries and facilities to
 # operate on them (move them to/from disk, generate databases, ...).
 
 import ast
@@ -52,6 +52,7 @@ def read_config_from_file(config_filename):
   config["repo_root"] = os.path.abspath(config["repo_root"])
   return config
 
+# Generates an output database from the given config and analyses.
 def generate_output_database(config, included_files_to_including_files,
                              including_files_to_included_files):
   output_db = {}
@@ -65,12 +66,15 @@ def generate_output_database(config, included_files_to_including_files,
                               cwd=config["repo_root"]).stdout.read()
   output_db["repo_rev"] = repo_rev.strip()
 
-  output_db["included_files_to_including_files"] = ( 
+  output_db["included_files_to_including_files"] = (
     included_files_to_including_files)
-  output_db["including_files_to_included_files"] = ( 
+  output_db["including_files_to_included_files"] = (
     including_files_to_included_files)
   return output_db
 
+# Writes the given output database to disk at the following location:
+# ./data/output/<config_name>/<repo_rev>/<config_name>_<repo_rev>_inclusions_db.py.
+# Warns the user if the above directory already exists.
 def write_output_db_to_disk(output_db):
   config_name = output_db["config"]["name"]
   repo_rev = output_db["repo_rev"]
@@ -93,3 +97,9 @@ def write_output_db_to_disk(output_db):
   database_filepath = os.path.join(dirname, database_name)
   with open(database_filepath, "w") as database_file:
     database_file.write(database_contents)
+
+# Reads the given database in from disk.
+def read_output_db_from_disk(database_filepath):
+  with open(database_filepath, "r") as database_file:
+    database = ast.literal_eval(database_file.read())
+  return database
