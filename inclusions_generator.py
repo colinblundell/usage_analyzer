@@ -1,5 +1,5 @@
-import db
 import inclusions_config
+import inclusions_database
 import subprocess
 import sys
 
@@ -58,13 +58,13 @@ class InclusionsGenerator:
 
     return included_files_to_including_files
 
-  # Generates and returns a database (as defined in db.py) for the config
-  # associated with this instance.
+  # Generates and returns a database (as defined in inclusions_database.py) for 
+  # the config associated with this instance.
   def generate_inclusions_database(self):
     including_files_to_included_files = self.map_including_files_to_included_files()
     included_files_to_including_files = self.map_included_files_to_including_files()
 
-    output_db = db.generate_output_database(self.config, 
+    output_db = inclusions_database.generate_output_database(self.config, 
                                             included_files_to_including_files, 
                                             including_files_to_included_files)
     return output_db
