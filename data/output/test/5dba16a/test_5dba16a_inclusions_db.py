@@ -1,0 +1,13 @@
+{ 'config': { 'included_files': ['foo/foo.h', 'bar/bar.h'],
+              'name': 'test',
+              'repo_root': '/usr/local/google/home/blundell/usage_analyzer/test/data'},
+  'included_files_to_including_files': { 'bar/bar.h': ['foo/foo.h'],
+                                         'foo/foo.h': [ 'foo/foo.cc',
+                                                        'bar/bar.h',
+                                                        'bar/core.h']},
+  'including_files_to_included_files': { 'bar/bar.h': ['foo/foo.h'],
+                                         'bar/core.h': ['foo/foo.h'],
+                                         'foo/foo.cc': ['foo/foo.h'],
+                                         'foo/foo.h': ['bar/bar.h']},
+  'repo_rev': '5dba16a',
+  'timestamp (UTC)': '2017-10-17 13:02:03.740328'}

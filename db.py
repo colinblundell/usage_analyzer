@@ -6,9 +6,12 @@ import datetime
 import os
 import pprint
 import subprocess
+import sys
 
 # A configuration is of the following form:
 CONFIG_TEMPLATE = {
+  # A short-but-descriptive name for this config.
+  "name" : "descriptive_name",
   # The path to the repository to be analyzed. Can be a relative path, in which
   # case the location is treated as being relative to the location of config.py.
   "repo_root" : "path/to/repo",
@@ -33,6 +36,8 @@ DATABASE_TEMPLATE = {
 }
 
 def validate_config(config):
+  assert "name" in config
+  assert type(config["name"]) == str
   assert "repo_root" in config
   assert type(config["repo_root"]) == str
   assert "included_files" in config
@@ -66,8 +71,25 @@ def generate_output_database(config, included_files_to_including_files,
     including_files_to_included_files)
   return output_db
 
-def write_output_db_to_file(output_db, output_path):
-  print output_path
-  print
+def write_output_db_to_disk(output_db):
+  config_name = output_db["config"]["name"]
+  repo_rev = output_db["repo_rev"]
+  base_path = "data/output"
+  dirname = os.path.join(base_path, config_name, repo_rev)
+
+  if os.path.exists(dirname):
+    print "Warning: data already exists for this analysis, risk of overwriting!"
+    answer = raw_input("Continue? (y/n)")
+    if answer == "n":
+      print "Exiting"
+      sys.exit(0)
+  else:
+    os.makedirs(dirname)
+
   printer = pprint.PrettyPrinter(indent=2)
-  printer.pprint(output_db)
+  database_contents = printer.pformat(output_db)
+
+  database_name = "_".join([config_name, repo_rev, "inclusions_db.py"])
+  database_filepath = os.path.join(dirname, database_name)
+  with open(database_filepath, "w") as database_file:
+    database_file.write(database_contents)

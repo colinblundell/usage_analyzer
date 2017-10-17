@@ -4,6 +4,7 @@ import unittest
 import inclusions_generator
 
 BASIC_TEST_CONFIG = {
+  "name" : "basic_test",
   "repo_root" : os.path.abspath("./test/data"),
   "included_files" : [
     "foo/foo.h",
@@ -11,6 +12,7 @@ BASIC_TEST_CONFIG = {
 }
 
 COMPLEX_TEST_CONFIG = {
+  "name" : "complex_test",
   "repo_root" : os.path.abspath("./test/data"),
   "included_files" : [
     "bar/bar.h",
