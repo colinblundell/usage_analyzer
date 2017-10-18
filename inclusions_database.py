@@ -54,13 +54,12 @@ def generate_inclusions_database(config):
   return inclusions_db
 
 # Writes the given output database to disk at the following location:
-# ./data/output/<config_name>/<repo_rev>/<config_name>_<repo_rev>_inclusions_db.py.
+# <output_dir>/<config_name>/<repo_rev>/<config_name>_<repo_rev>_inclusions_db.py.
 # Warns the user if the above directory already exists.
-def write_inclusions_db_to_disk(inclusions_db):
+def write_inclusions_db_to_disk(inclusions_db, output_dir):
   config_name = inclusions_db["config"]["name"]
   repo_rev = inclusions_db["repo_rev"]
-  base_path = "data/output"
-  dirname = os.path.join(base_path, config_name, repo_rev)
+  dirname = os.path.join(output_dir, config_name, repo_rev)
 
   if os.path.exists(dirname):
     print "Warning: data already exists for this analysis, risk of overwriting!"
