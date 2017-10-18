@@ -12,7 +12,6 @@ import inclusions_database
 def generate_inclusions(config_filename, output_dir):
   # TODO: Parameterize this.
   chromium_root = os.path.join(os.environ["HOME"], "chromium", "src")
-  print chromium_root
   config = inclusions_config.read_config_from_file(config_filename, 
                                                    chromium_root)
   inclusions_db = inclusions_database.generate_inclusions_database(config)

@@ -33,8 +33,9 @@ def validate_config(config):
   assert type(config["included_files"]) == list
 
 # Evaluates |config| in-place, following the evaluation rules mentioned above.
-def evaluate_config(config):
+def evaluate_config(config, chromium_root=""):
   if (config["repo_root"] == "CHROMIUM_ROOT"):
+    assert chromium_root != ""
     config["evaluated_repo_root"] = chromium_root
   else:
     config["evaluated_repo_root"] = os.path.abspath(config["repo_root"])
@@ -43,6 +44,6 @@ def evaluate_config(config):
 def read_config_from_file(config_filename, chromium_root):
   with open(config_filename, 'r') as config_file:
     config = ast.literal_eval(config_file.read())
-  evaluate_config(config)
+  evaluate_config(config, chromium_root)
   validate_config(config)
   return config
