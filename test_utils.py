@@ -3,6 +3,8 @@
 import os
 import unittest
 
+import inclusions_config
+
 BASIC_TEST_CONFIG = {
   "name" : "basic_test",
   "repo_root" : os.path.abspath("./test/test_repo"),
@@ -10,6 +12,7 @@ BASIC_TEST_CONFIG = {
     "foo/foo.h",
   ],
 }
+inclusions_config.evaluate_config(BASIC_TEST_CONFIG)
 
 COMPLEX_TEST_CONFIG = {
   "name" : "complex_test",
@@ -19,6 +22,7 @@ COMPLEX_TEST_CONFIG = {
     "bar/core.h",
   ],
 }
+inclusions_config.evaluate_config(COMPLEX_TEST_CONFIG)
 
 def verify_basic_including_files_to_included_files(test_case,
     including_files_to_included_files):

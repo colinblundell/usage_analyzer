@@ -20,7 +20,7 @@ DATABASE_TEMPLATE = {
   # Map from including files to included files.
   "including_files_to_included_files" : {},
   # The revision of the repo that was analyzed (i.e., the repo
-  # specified by the configuration's |repo_root| field).
+  # specified by the configuration's |evaluated_repo_root| field).
   "repo_rev" : "short-rev",
   # The time at which this database was generated.
   "timestamp (UTC)": "timestamp",
@@ -40,7 +40,7 @@ def generate_inclusions_database(config):
   now = datetime.datetime.utcnow()
   inclusions_db["timestamp (UTC)"] = str(now)
 
-  repo_rev = git_utils.get_repo_revision(config["repo_root"])
+  repo_rev = git_utils.get_repo_revision(config["evaluated_repo_root"])
   inclusions_db["repo_rev"] = repo_rev
 
   usage_analyzer_rev = git_utils.get_usage_analyzer_repo_revision()

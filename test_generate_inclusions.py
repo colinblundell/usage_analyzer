@@ -6,6 +6,7 @@ import unittest
 
 import common_utils
 import git_utils
+import inclusions_config
 import inclusions_database
 import generate_inclusions
 from test_utils import *
@@ -13,8 +14,9 @@ from test_utils import *
 EXPECTED_TEST_CONFIG = {
   'name': 'test',
   'included_files': ['foo/foo.h', 'bar/bar.h'],
-  'repo_root': '/usr/local/google/home/blundell/usage_analyzer/test/test_repo'
+  'repo_root': 'test/test_repo'
 }
+inclusions_config.evaluate_config(EXPECTED_TEST_CONFIG)
 
 EXPECTED_INCLUDED_FILES_TO_INCLUDING_FILES = {
   'bar/bar.h': ['foo/foo.h'],

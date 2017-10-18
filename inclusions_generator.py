@@ -16,7 +16,7 @@ class InclusionsGenerator:
     inclusion_string = '\'include "\'' + included_file
     including_files = subprocess.Popen("git grep -l " + inclusion_string,
                                        shell=True, stdout=subprocess.PIPE,
-                                       cwd=self.config["repo_root"]).stdout.read()
+                                       cwd=self.config["evaluated_repo_root"]).stdout.read()
     return including_files.splitlines()
 
   # Generates the mapping of including files to included files for the total set

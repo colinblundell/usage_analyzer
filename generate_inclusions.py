@@ -3,13 +3,18 @@
 # Script that generate an inclusions database from a config file and a base
 # output directory.
 
+import os
 import sys
 
 import inclusions_config
 import inclusions_database
 
 def generate_inclusions(config_filename, output_dir):
-  config = inclusions_config.read_config_from_file(config_filename)
+  # TODO: Parameterize this.
+  chromium_root = os.path.join(os.environ["HOME"], "chromium", "src")
+  print chromium_root
+  config = inclusions_config.read_config_from_file(config_filename, 
+                                                   chromium_root)
   inclusions_db = inclusions_database.generate_inclusions_database(config)
   inclusions_database.write_inclusions_db_to_disk(inclusions_db, output_dir)
 
