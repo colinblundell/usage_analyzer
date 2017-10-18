@@ -1,3 +1,5 @@
+# End-to-end test of generate_inclusions.py.
+
 import datetime
 import os
 import unittest
@@ -34,7 +36,8 @@ class TestGenerateInclusions(unittest.TestCase):
 
       repo_rev = git_utils.get_usage_analyzer_repo_revision()
       database_name = "_".join(["test", repo_rev, "inclusions_db.py"])
-      database_filepath = os.path.join(output_dir, "test", repo_rev, database_name)
+      database_filepath = os.path.join(output_dir, "test", repo_rev, 
+                                       database_name)
       assert os.path.isfile(database_filepath)
 
       inclusions_db = (
