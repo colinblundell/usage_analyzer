@@ -8,6 +8,7 @@ import unittest
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from test_inclusions_database import *
 from test_inclusions_generator import *
+from test_generate_inclusions import *
 
 if __name__ == '__main__':
   unittest.main()

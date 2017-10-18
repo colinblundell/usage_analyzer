@@ -5,7 +5,7 @@ import unittest
 
 BASIC_TEST_CONFIG = {
   "name" : "basic_test",
-  "repo_root" : os.path.abspath("./test/data"),
+  "repo_root" : os.path.abspath("./test/test_repo"),
   "included_files" : [
     "foo/foo.h",
   ],
@@ -13,7 +13,7 @@ BASIC_TEST_CONFIG = {
 
 COMPLEX_TEST_CONFIG = {
   "name" : "complex_test",
-  "repo_root" : os.path.abspath("./test/data"),
+  "repo_root" : os.path.abspath("./test/test_repo"),
   "included_files" : [
     "bar/bar.h",
     "bar/core.h",
