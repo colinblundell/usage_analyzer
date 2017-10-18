@@ -41,7 +41,10 @@ def generate_inclusions_database(config):
   inclusions_db["timestamp (UTC)"] = str(now)
 
   repo_rev = git_utils.get_repo_revision(config["repo_root"])
-  inclusions_db["repo_rev"] = repo_rev.strip()
+  inclusions_db["repo_rev"] = repo_rev
+
+  usage_analyzer_rev = git_utils.get_usage_analyzer_repo_revision()
+  inclusions_db["usage_analyzer_rev"] = usage_analyzer_rev
 
   inclusions_db["included_files_to_including_files"] = (
     included_files_to_including_files)

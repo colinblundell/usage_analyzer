@@ -1,6 +1,7 @@
 import os
 import unittest
 
+import git_utils
 import inclusions_database
 from test_utils import *
 
@@ -11,6 +12,11 @@ class TestInclusionsDatabase(unittest.TestCase):
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
+    self.assertEqual(output_db["repo_rev"],
+                     git_utils.get_usage_analyzer_repo_revision())
+    self.assertIn("usage_analyzer_rev", output_db)
+    self.assertEqual(output_db["usage_analyzer_rev"],
+                     git_utils.get_usage_analyzer_repo_revision())
     self.assertIn("config", output_db)
     self.assertEqual(output_db["config"], BASIC_TEST_CONFIG)
     verify_basic_included_files_to_including_files(
@@ -24,6 +30,11 @@ class TestInclusionsDatabase(unittest.TestCase):
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
+    self.assertEqual(output_db["repo_rev"],
+                     git_utils.get_usage_analyzer_repo_revision())
+    self.assertIn("usage_analyzer_rev", output_db)
+    self.assertEqual(output_db["usage_analyzer_rev"],
+                     git_utils.get_usage_analyzer_repo_revision())
     self.assertIn("config", output_db)
     self.assertEqual(output_db["config"], COMPLEX_TEST_CONFIG)
     verify_complex_included_files_to_including_files(
