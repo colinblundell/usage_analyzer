@@ -5,9 +5,9 @@ import ast
 import datetime
 import os
 import pprint
-import subprocess
 import sys
 
+import git_utils
 import inclusions_config
 import inclusions_generator
 
@@ -40,9 +40,7 @@ def generate_inclusions_database(config):
   now = datetime.datetime.utcnow()
   inclusions_db["timestamp (UTC)"] = str(now)
 
-  repo_rev = subprocess.Popen("git rev-parse --short HEAD",
-                              shell=True, stdout=subprocess.PIPE,
-                              cwd=config["repo_root"]).stdout.read()
+  repo_rev = git_utils.get_repo_revision(config["repo_root"])
   inclusions_db["repo_rev"] = repo_rev.strip()
 
   inclusions_db["included_files_to_including_files"] = (
