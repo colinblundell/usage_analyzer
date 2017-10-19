@@ -6,6 +6,7 @@ import unittest
 
 # Add the parent directory to the path.
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
+from test_common_utils import *
 from test_inclusions_database import *
 from test_inclusions_generator import *
 from test_generate_inclusions import *
