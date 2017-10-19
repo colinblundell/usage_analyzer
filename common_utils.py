@@ -28,3 +28,11 @@ def dict_to_csv(dictionary, field_names, key_order):
     csv_writer.writerow(row)
 
   return output.getvalue()
+
+# Takes in a dictionary whose values are lists and returns a dictionary whose
+# values are the lengths of the source lists.
+def dict_list_values_to_sums(dictionary):
+  output_dict = {}
+  for key, value in dictionary.items():
+    output_dict[key] = len(value)
+  return output_dict
