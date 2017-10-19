@@ -36,3 +36,9 @@ def dict_list_values_to_sums(dictionary):
   for key, value in dictionary.items():
     output_dict[key] = len(value)
   return output_dict
+
+# Takes in a dictionary whose values are numbers and returns a list of its keys 
+# sorted in order of descending value.
+def dict_keys_sorted_by_value(dictionary):
+  output_dict = sorted(dictionary, key=lambda k: dictionary[k], reverse=True)
+  return output_dict
