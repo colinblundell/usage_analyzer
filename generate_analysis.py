@@ -32,15 +32,17 @@ CLIENTS = [
 "first_run",
 "bookmarks",
 "api/identity",
-# TODO: Should I restore these?
-"chrome/browser/extensions",
-#"extensions",
 "webui",
+"ios/chrome/browser/ui",
+"chrome/browser/ui",
+"chrome/browser/extensions",
+"extensions",
 ]
 
 def signin_clients_partition_function(filename):
-  if "signin" in filename:
-    return "signin"
+  for client in CLIENTS:
+    if client in filename:
+      return client
 
   return os.path.dirname(filename)
 
@@ -71,7 +73,7 @@ def generate_analysis(database_filename):
   # Prepare |feature_dict| for display.
   feature_dict = common_utils.dict_with_total(feature_dict)
 
-  field_names = ["including file", "num inclusions"]
+  field_names = ["signin client", "num inclusions"]
   key_order = common_utils.dict_keys_sorted_by_value(feature_dict)
   output_csv = common_utils.dict_to_csv(feature_dict, field_names, key_order)
   print output_csv
