@@ -47,3 +47,26 @@ class TestCommonUtils(unittest.TestCase):
     output = common_utils.dict_filter_keys_matching_regex(test_dict,
                                                           test_regexes)
     self.assertEqual(expected_output, output)
+
+  def test_dict_partition_keys(self):
+    test_dict = {"foo.h" : ["bar.h"],
+                 "foo.cc" : ["foo.h", "bar.h"],
+                 "bar.h" : ["baz.h", "qux.h"],
+                 "bad/bad.h" : ["baz.h", "foo.h"]}
+    def test_partition_function(key):
+      if key.startswith("foo"):
+        return "foo"
+      if key.startswith("bar"):
+        return "bar"
+      if key.startswith("bad"):
+        return "bad"
+      return None
+
+    # TODO: This makes an assumption on list ordering and so is somewhat
+    # fragile.
+    expected_output = {"foo" : ["foo.cc", "foo.h"],
+                       "bar" : ["bar.h"],
+                       "bad" : ["bad/bad.h"]}
+    output = common_utils.dict_partition_keys(test_dict, 
+                                              test_partition_function)
+    self.assertEqual(expected_output, output)

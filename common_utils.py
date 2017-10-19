@@ -80,3 +80,18 @@ def dict_filter_keys_matching_regex(dictionary, regex_list):
       output_dict[key] = dictionary[key]
 
   return output_dict
+
+# Takes in a dictionary whose keys are strings and a function that goes from
+# string -> string. Returns a dictionary whose keys are outputs of the partition
+# function and whose values are the lists of keys from |dictionary| that the
+# partition function mapped to that output.
+def dict_partition_keys(dictionary, key_partition_function):
+  output_dict = {}
+
+  for key in dictionary.keys():
+    partition = key_partition_function(key)
+    if partition not in output_dict:
+      output_dict[partition] = []
+    output_dict[partition].append(key)
+
+  return output_dict
