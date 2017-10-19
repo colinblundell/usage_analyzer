@@ -59,4 +59,3 @@ def verify_complex_included_files_to_including_files(test_case,
   inclusions_of_core.sort()
   test_case.assertEqual(inclusions_of_core, ["bar/bar.h",
                                              "bar/baz/bar_core_factory.h"])
-

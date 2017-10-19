@@ -1,7 +1,10 @@
+import copy
 import csv
 import contextlib
 import io
+import os
 import shutil
+import re
 import tempfile
 
 # Returns a freshly-created directory that gets automatically deleted after
@@ -13,6 +16,13 @@ def TemporaryDirectory(suffix='', prefix='tmp'):
     yield name
   finally:
     shutil.rmtree(name)
+
+# Takes in a string and returns a string specifying a regular expression that
+# matches the input string's root with any extension.
+def root_regex(filepath):
+  root = os.path.splitext(filepath)[0]
+  output = root + r"\..*"
+  return output
 
 # Returns a string that represents |dictionary| in CSV form. |field_names| is
 # written as the header, followed by rows of key->value maps in the order
@@ -47,8 +57,26 @@ def dict_keys_sorted_by_value(dictionary):
 # is the input augmented with a "total" key whose value is the sum of all the 
 # values.
 def dict_with_total(dictionary):
-  output_dict = {}
-  for key, value in dictionary.items():
-    output_dict[key] = value
+  output_dict = copy.deepcopy(dictionary)
   output_dict["total"] = sum(output_dict.values())
+  return output_dict
+
+# Takes in a dictionary whose keys are strings. Returns a dictionary that is 
+# equivalent to the original except that keys matching any regex in 
+# |regex_list| have been removed.
+def dict_filter_keys_matching_regex(dictionary, regex_list):
+  output_dict = {}
+  patterns = [re.compile(regex) for regex in regex_list]
+
+  for key in dictionary.keys():
+    preserve = True
+
+    for pattern in patterns:
+      if pattern.match(key):
+        preserve = False
+        break
+
+    if preserve:
+      output_dict[key] = dictionary[key]
+
   return output_dict

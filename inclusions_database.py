@@ -7,6 +7,7 @@ import os
 import pprint
 import sys
 
+import common_utils
 import git_utils
 import inclusions_config
 import inclusions_generator
@@ -84,3 +85,17 @@ def read_inclusions_db_from_disk(database_filepath):
   with open(database_filepath, "r") as database_file:
     database = ast.literal_eval(database_file.read())
   return database
+
+# Takes in an inclusions database and returns
+# an including_files_to_included_files dictionary that has no included files as
+# keys.
+def filter_including_files_by_included_files(inclusions_db):
+  included_files = inclusions_db["config"]["included_files"]
+  included_files_regexes = [
+    common_utils.root_regex(f) for f in included_files]
+
+  output_dict = common_utils.dict_filter_keys_matching_regex(
+    inclusions_db["including_files_to_included_files"],
+    included_files_regexes)
+
+  return output_dict

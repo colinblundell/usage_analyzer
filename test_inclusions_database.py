@@ -41,3 +41,23 @@ class TestInclusionsDatabase(unittest.TestCase):
         self, output_db["included_files_to_including_files"])
     verify_complex_including_files_to_included_files(
         self, output_db["including_files_to_included_files"])
+
+  def test_filter_including_files_by_included_files_simple(self):
+    db = inclusions_database.generate_inclusions_database(
+      BASIC_TEST_CONFIG)
+
+    output = inclusions_database.filter_including_files_by_included_files(
+      db)
+    expected_output = {"bar/bar.h" : ["foo/foo.h"],
+                       "bar/core.h" : ["foo/foo.h"]}
+    self.assertEqual(expected_output, output)
+
+  def test_filter_including_files_by_included_files_complex(self):
+    db = inclusions_database.generate_inclusions_database(
+      COMPLEX_TEST_CONFIG)
+
+    output = inclusions_database.filter_including_files_by_included_files(
+      db)
+    expected_output = {"bar/baz/bar_core_factory.h" : ["bar/core.h"],
+                       "foo/foo.h" : ["bar/bar.h"]}
+    self.assertEqual(expected_output, output)
