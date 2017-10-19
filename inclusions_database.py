@@ -89,7 +89,7 @@ def read_inclusions_db_from_disk(database_filepath):
 # Takes in an inclusions database and returns
 # an including_files_to_included_files dictionary that has no included files as
 # keys.
-def filter_including_files_by_included_files(inclusions_db):
+def filter_out_included_files_as_keys(inclusions_db):
   included_files = inclusions_db["config"]["included_files"]
   included_files_regexes = [
     common_utils.root_regex(f) for f in included_files]

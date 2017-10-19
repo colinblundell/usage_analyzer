@@ -12,7 +12,7 @@ def generate_analysis(database_filename):
     database_filename)
 
   # Eliminate inclusions coming from included files.
-  output_dict = inclusions_database.filter_including_files_by_included_files(
+  output_dict = inclusions_database.filter_out_included_files_as_keys(
     inclusions_db)
 
   # Eliminate inclusions coming from the Identity Service.
