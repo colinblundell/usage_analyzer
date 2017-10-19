@@ -25,3 +25,8 @@ class TestCommonUtils(unittest.TestCase):
     output = common_utils.dict_keys_sorted_by_value(test_dict)
     self.assertEqual(expected_output, output)
 
+  def test_dict_with_total(self):
+    test_dict = {"key1" : 2, "key2" : 0, "key3" : 4}
+    expected_output = {"key1" : 2, "key2" : 0, "key3" : 4, "total" : 6}
+    output = common_utils.dict_with_total(test_dict)
+    self.assertEqual(expected_output, output)

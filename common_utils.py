@@ -42,3 +42,13 @@ def dict_list_values_to_sums(dictionary):
 def dict_keys_sorted_by_value(dictionary):
   output_dict = sorted(dictionary, key=lambda k: dictionary[k], reverse=True)
   return output_dict
+
+# Takes in a dictionary whose values are numbers and returns a dictionary that 
+# is the input augmented with a "total" key whose value is the sum of all the 
+# values.
+def dict_with_total(dictionary):
+  output_dict = {}
+  for key, value in dictionary.items():
+    output_dict[key] = value
+  output_dict["total"] = sum(output_dict.values())
+  return output_dict

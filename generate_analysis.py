@@ -14,7 +14,7 @@ def generate_analysis(database_filename):
     inclusions_db["including_files_to_included_files"])
   output_dict = common_utils.dict_list_values_to_sums(
     including_files_to_included_files)
-  output_dict["total"] = sum([v for v in output_dict.values()])
+  output_dict = common_utils.dict_with_total(output_dict)
   field_names = ["including file", "num inclusions"]
   key_order = common_utils.dict_keys_sorted_by_value(output_dict)
   output_csv = common_utils.dict_to_csv(output_dict, field_names, key_order)
