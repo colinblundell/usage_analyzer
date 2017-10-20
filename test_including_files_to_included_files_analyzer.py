@@ -45,3 +45,13 @@ class TestGenerateIncludingFilesToIncludedFilesAnalyzer(unittest.TestCase):
       expected_output = {"total" : 2, "bar" : 2}
       output = analyzer.generate_global_feature_analysis(key_partition_function)
       self.assertEqual(expected_output, output)
+
+  def test_generate_global_feature_analysis_with_multiple_filters(self):
+      def key_partition_function(filename):
+        return os.path.dirname(filename)
+
+      analyzer = self.create_analyzer([r"bar/baz.*"])
+      expected_output = {"total" : 0}
+      output = analyzer.generate_global_feature_analysis(key_partition_function,
+        extra_including_files_filters=["bar/bar\..*"])
+      self.assertEqual(expected_output, output)
