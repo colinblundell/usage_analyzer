@@ -1,6 +1,14 @@
 # Library of common functions for analyzing signin code.
 
 import os
+  
+
+# Filters for including files that should *not* be analyzed as external clients
+# of signin code.
+INCLUDING_FILE_FILTERS = [
+  # The Identity Service.
+  "^services/identity/.*",
+]
 
 # Set of signin clients. Each of these clients captures all files that:
 # (a) are not captured earlier in the list and
