@@ -6,45 +6,7 @@ import sys
 import common_utils
 import inclusions_config
 import inclusions_database
-
-CLIENTS = [
-"ios/web_view/internal/signin",
-"arc/auth",
-"login",
-"sync",
-"signin",
-"history",
-"autofill",
-"password",
-"policy",
-"supervised_user",
-"gcm",
-# NOTE: This should be below sync and gcm to avoid catching their driver dirs.
-"drive",
-"invalidation",
-"ntp_snippets",
-"suggestions",
-"profiles",
-"google_apis",
-"settings",
-"payments",
-"cryptauth",
-"first_run",
-"bookmarks",
-"api/identity",
-"webui",
-"ios/chrome/browser/ui",
-"chrome/browser/ui",
-"chrome/browser/extensions",
-"extensions",
-]
-
-def signin_clients_partition_function(filename):
-  for client in CLIENTS:
-    if client in filename:
-      return client
-
-  return os.path.dirname(filename)
+import signin_analysis_lib
 
 def generate_analysis(database_filename):
   inclusions_db = inclusions_database.read_inclusions_db_from_disk(
@@ -63,7 +25,7 @@ def generate_analysis(database_filename):
     including_file_dict)
 
   feature_groups = common_utils.dict_partition_keys(
-    including_file_dict, signin_clients_partition_function)
+    including_file_dict, signin_analysis_lib.filename_to_signin_client)
   feature_dict = {}
   for feature, including_files in feature_groups.items():
     feature_dict[feature] = 0
