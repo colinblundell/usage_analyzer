@@ -38,6 +38,7 @@ class IncludingFilesToIncludedFilesAnalyzer:
   # sums of the total inclusions of all including files within those features.
   # Augments the dictionary with the total number of inclusions.
   # Returns the produced dictionary.
+  # Note that by default, |filters| is [], i.e., no custom filters are applied.
   def generate_global_analysis_for_filters(self, key_partition_function,
                                            filters=[]):
     including_file_dict = common_utils.dict_filter_keys_matching_regex(
@@ -57,6 +58,15 @@ class IncludingFilesToIncludedFilesAnalyzer:
     feature_dict = common_utils.dict_with_total(feature_dict)
     return feature_dict
 
+  # Generates a global analysis of |self.including_file_dict| as follows:
+  # Partitions including files into features based on |key_partition_function|.
+  # Produces global analyses for:
+  # (1) all inclusions
+  # (2) all inclusions from prod files
+  # (3) all inclusions from non-factory prod files
+  # Returns a list of pairs where the first element is an identifier for the
+  # analysis and the second element is the dictionary representing the analysis
+  # itself.
   def generate_global_analysis(self, key_partition_function):
     feature_dicts = []
     including_files_filters = [
@@ -72,6 +82,9 @@ class IncludingFilesToIncludedFilesAnalyzer:
       feature_dicts.append([name, feature_dict])
     return feature_dicts
 
+  # Generates a global analysis as described above and returns a string
+  # representing that global analysis in CSV format. |key_header_name| is
+  # used in the CSV's header as the name for the column of keys.
   def generate_global_analysis_as_csv(self,
                                       key_partition_function,
                                       key_header_name):
