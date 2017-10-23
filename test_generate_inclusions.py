@@ -9,7 +9,6 @@ import git_utils
 import inclusions_config
 import inclusions_database
 import generate_inclusions
-from test_utils import *
 
 EXPECTED_TEST_CONFIG = {
     'name': 'test',

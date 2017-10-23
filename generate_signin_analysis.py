@@ -17,5 +17,5 @@ def generate_analysis(database_filename):
 
 
 if __name__ == '__main__':
-  database_filename = sys.argv[1]
-  generate_analysis(database_filename)
+  database_path = sys.argv[1]
+  generate_analysis(database_path)

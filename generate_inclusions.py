@@ -20,6 +20,6 @@ def generate_inclusions(config_filename, output_dir):
 
 
 if __name__ == '__main__':
-  config_filename = sys.argv[1]
-  output_dir = sys.argv[2]
-  generate_inclusions(config_filename, output_dir)
+  config_path = sys.argv[1]
+  output_path = sys.argv[2]
+  generate_inclusions(config_path, output_path)
