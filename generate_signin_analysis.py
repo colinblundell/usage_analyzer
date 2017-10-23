@@ -1,39 +1,15 @@
 #!/usr/bin/python
 
-import os
 import sys
 
-import common_utils
 from including_files_to_included_files_analyzer import IncludingFilesToIncludedFilesAnalyzer
-import inclusions_config
-import inclusions_database
 import signin_analysis_lib
-
-test_filters = [".*fake.*", ".*test.*"]
-factory_filters = [".*_factory.*"]
-
-including_files_filters = {
-"all" : [],
-"prod" : test_filters,
-"prod non-factory" : test_filters + factory_filters,
-}
-
-presentation_order = ["total inclusions", "inclusions from prod", "inclusions from prod non-factory"]
 
 def generate_analysis(database_filename):
   analyzer = (IncludingFilesToIncludedFilesAnalyzer(database_filename,
     signin_analysis_lib.INCLUDING_FILE_FILTERS))
-
-  feature_dicts = []
-  for name, filters in including_files_filters.items():
-    feature_dict = analyzer.generate_global_feature_analysis(
-      signin_analysis_lib.filename_to_signin_client,
-      extra_including_files_filters=filters)
-    feature_dicts.append(feature_dict)
-
-  field_names = ["signin client"] + presentation_order
-  key_order = common_utils.dict_keys_sorted_by_value(feature_dict)
-  output_csv = common_utils.dicts_to_csv(feature_dicts, field_names, key_order)
+  output_csv = analyzer.generate_global_analysis_as_csv(
+    signin_analysis_lib.filename_to_signin_client, "feature")
   print output_csv
   print
 

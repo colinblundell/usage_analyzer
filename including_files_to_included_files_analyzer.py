@@ -5,6 +5,12 @@ import os
 import common_utils
 import inclusions_database
 
+# Regexes that filter out test files, leaving only prod files.
+PROD_FILTERS = [".*fake.*", ".*test.*"]
+
+# Regexes that filter both test files and factories.
+PROD_NON_FACTORY_FILTERS = PROD_FILTERS + [".*_factory.*"]
+
 # Class that can analyze the including_files_to_included_files dictionary of an
 # inclusions database.
 class IncludingFilesToIncludedFilesAnalyzer:
@@ -50,3 +56,30 @@ class IncludingFilesToIncludedFilesAnalyzer:
 
     feature_dict = common_utils.dict_with_total(feature_dict)
     return feature_dict
+
+  def generate_global_analysis(self, key_partition_function):
+    feature_dicts = []
+    including_files_filters = [
+      ["all", []],
+      ["prod", PROD_FILTERS],
+      ["prod non-factory", PROD_NON_FACTORY_FILTERS]
+    ]
+
+    for name, filters in including_files_filters:
+      feature_dict = self.generate_global_feature_analysis(
+        key_partition_function,
+        extra_including_files_filters=filters)
+      feature_dicts.append([name, feature_dict])
+    return feature_dicts
+
+  def generate_global_analysis_as_csv(self,
+                                      key_partition_function,
+                                      key_header_name):
+    global_analysis = self.generate_global_analysis(key_partition_function)
+    presentation_order, feature_dicts = zip(*global_analysis)
+    key_order = common_utils.dict_keys_sorted_by_value(feature_dicts[0])
+    feature_dicts = common_utils.dicts_with_missing_entries_filled(
+      feature_dicts, key_order, 0)
+    field_names = [key_header_name] + list(presentation_order)
+    output_csv = common_utils.dicts_to_csv(feature_dicts, field_names, key_order)
+    return output_csv

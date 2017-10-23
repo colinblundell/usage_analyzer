@@ -31,6 +31,23 @@ class TestCommonUtils(unittest.TestCase):
     output = common_utils.dicts_to_csv(test_dicts, field_names, key_order)
     self.assertEqual(expected_output, output)
 
+  def test_dict_with_missing_entries_filled(self):
+    test_dict = {"key2" : 5}
+    keys = ["key1", "key2", "key3"]
+    expected_output = {"key1" : 0, "key2" : 5, "key3" : 0}
+    output = common_utils.dict_with_missing_entries_filled(test_dict, keys, 0)
+    self.assertEqual(expected_output, output)
+
+  def test_dicts_with_missing_entries_filled(self):
+    test_dict_a = {"key2" : 5}
+    test_dict_b = {"key1" : 3}
+    keys = ["key1", "key2", "key3"]
+    expected_output = [{"key1" : 0, "key2" : 5, "key3" : 0},
+                       {"key1" : 3, "key2" : 0, "key3" : 0}]
+    output = common_utils.dicts_with_missing_entries_filled(
+      [test_dict_a, test_dict_b], keys, 0)
+    self.assertEqual(expected_output, output)
+
   def test_dict_list_values_to_sums(self):
     test_dict = {"key1" : [1, 2, 3, 4], "key2" : [], "key3" : [1]}
     expected_output = {"key1" : 4, "key2" : 0, "key3" : 1}

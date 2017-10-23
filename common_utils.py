@@ -58,6 +58,28 @@ def dicts_to_csv(dictionaries, field_names, key_order):
 
   return output.getvalue()
 
+
+# Takes in a dictionary, a list of keys, and a default value.
+# Returns a dictionary that's equivalent to the original but with all
+# missing keys filled with the default value.
+def dict_with_missing_entries_filled(dictionary, keys, default_value):
+  output = copy.deepcopy(dictionary)
+  for key in keys:
+    if key in output:
+      continue
+    output[key] = default_value
+  return output
+
+# Takes in a list of dictionaries, a list of keys, and a default value.
+# Returns a list of dictionaries that's equivalent to the original but with all
+# missing keys filled with the default value.
+def dicts_with_missing_entries_filled(dictionaries, keys, default_value):
+  output = []
+  for d in dictionaries:
+    output.append(
+      dict_with_missing_entries_filled(d, keys, default_value))
+  return output
+
 # Takes in a dictionary whose values are lists and returns a dictionary whose
 # values are the lengths of the source lists.
 def dict_list_values_to_sums(dictionary):
