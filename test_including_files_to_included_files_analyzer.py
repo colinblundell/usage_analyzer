@@ -28,30 +28,30 @@ class TestGenerateIncludingFilesToIncludedFilesAnalyzer(unittest.TestCase):
         including_file_filters)
     return analyzer
 
-  def test_generate_global_feature_analysis(self):
+  def test_generate_global_analysis_for_filters_default_filter(self):
       def key_partition_function(filename):
         return os.path.dirname(filename)
 
       analyzer = self.create_analyzer([])
       expected_output = {"total" : 3, "bar" : 2, "bar/baz" : 1}
-      output = analyzer.generate_global_feature_analysis(key_partition_function)
+      output = analyzer.generate_global_analysis_for_filters(key_partition_function)
       self.assertEqual(expected_output, output)
 
-  def test_generate_global_feature_analysis_with_filter(self):
+  def test_generate_global_analysis_for_filters_custom_filter(self):
       def key_partition_function(filename):
         return os.path.dirname(filename)
 
       analyzer = self.create_analyzer([r"bar/baz.*"])
       expected_output = {"total" : 2, "bar" : 2}
-      output = analyzer.generate_global_feature_analysis(key_partition_function)
+      output = analyzer.generate_global_analysis_for_filters(key_partition_function)
       self.assertEqual(expected_output, output)
 
-  def test_generate_global_feature_analysis_with_multiple_filters(self):
+  def test_generate_global_analysis_for_filters_multiple_custom_filters(self):
       def key_partition_function(filename):
         return os.path.dirname(filename)
 
       analyzer = self.create_analyzer([r"bar/baz.*"])
       expected_output = {"total" : 0}
-      output = analyzer.generate_global_feature_analysis(key_partition_function,
+      output = analyzer.generate_global_analysis_for_filters(key_partition_function,
         extra_including_files_filters=["bar/bar\..*"])
       self.assertEqual(expected_output, output)

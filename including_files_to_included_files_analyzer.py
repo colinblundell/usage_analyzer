@@ -30,18 +30,18 @@ class IncludingFilesToIncludedFilesAnalyzer:
 
     self.including_file_dict = including_file_dict
 
-  # Generates a global feature analysis of |self.including_file_dict| as
+  # Generates a global analysis of |self.including_file_dict| and |filters| as
   # follows:
-  # Filters |self.including_file_dict| by |extra_including_file_filters|.
+  # Filters |self.including_file_dict| by |filters|.
   # Partitions including files into features based on |key_partition_function|.
   # Produces a dictionary whose keys are features and whose values are the
   # sums of the total inclusions of all including files within those features.
   # Augments the dictionary with the total number of inclusions.
   # Returns the produced dictionary.
-  def generate_global_feature_analysis(self, key_partition_function,
-                                       extra_including_files_filters=[]):
+  def generate_global_analysis_for_filters(self, key_partition_function,
+                                           filters=[]):
     including_file_dict = common_utils.dict_filter_keys_matching_regex(
-      self.including_file_dict, extra_including_files_filters)
+      self.including_file_dict, filters)
 
     feature_groups = common_utils.dict_partition_keys(
       including_file_dict, key_partition_function)
@@ -66,9 +66,9 @@ class IncludingFilesToIncludedFilesAnalyzer:
     ]
 
     for name, filters in including_files_filters:
-      feature_dict = self.generate_global_feature_analysis(
+      feature_dict = self.generate_global_analysis_for_filters(
         key_partition_function,
-        extra_including_files_filters=filters)
+        filters=filters)
       feature_dicts.append([name, feature_dict])
     return feature_dicts
 
