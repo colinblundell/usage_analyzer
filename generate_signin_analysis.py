@@ -2,7 +2,7 @@
 
 import sys
 
-from including_files_to_included_files_analyzer import IncludingFilesToIncludedFilesAnalyzer
+from including_to_included_analyzer import IncludingFilesToIncludedFilesAnalyzer
 import signin_analysis_lib
 
 

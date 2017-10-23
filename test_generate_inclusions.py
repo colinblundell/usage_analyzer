@@ -51,7 +51,7 @@ class TestGenerateInclusions(unittest.TestCase):
 
       self.assertEqual(inclusions_db["included_files_to_including_files"],
                        EXPECTED_INCLUDED_FILES_TO_INCLUDING_FILES)
-      self.assertEqual(inclusions_db["including_files_to_included_files"],
+      self.assertEqual(inclusions_db["including_to_included"],
                        EXPECTED_INCLUDING_FILES_TO_INCLUDED_FILES)
 
       self.assertEqual(inclusions_db["repo_rev"], repo_rev)

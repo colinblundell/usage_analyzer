@@ -23,8 +23,8 @@ class TestInclusionsDatabase(unittest.TestCase):
     self.assertEqual(output_db["config"], BASIC_TEST_CONFIG)
     verify_basic_included_files_to_including_files(
         self, output_db["included_files_to_including_files"])
-    verify_basic_including_files_to_included_files(
-        self, output_db["including_files_to_included_files"])
+    verify_basic_including_to_included(
+        self, output_db["including_to_included"])
 
   def test_generate_inclusions_database_complex(self):
     output_db = inclusions_database.generate_inclusions_database(
@@ -41,8 +41,8 @@ class TestInclusionsDatabase(unittest.TestCase):
     self.assertEqual(output_db["config"], COMPLEX_TEST_CONFIG)
     verify_complex_included_files_to_including_files(
         self, output_db["included_files_to_including_files"])
-    verify_complex_including_files_to_included_files(
-        self, output_db["including_files_to_included_files"])
+    verify_complex_including_to_included(
+        self, output_db["including_to_included"])
 
   def test_filter_out_included_files_as_keys_simple(self):
     db = inclusions_database.generate_inclusions_database(BASIC_TEST_CONFIG)

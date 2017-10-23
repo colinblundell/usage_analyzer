@@ -19,7 +19,7 @@ DATABASE_TEMPLATE = {
     # Map from included files to including files.
     "included_files_to_including_files": {},
     # Map from including files to included files.
-    "including_files_to_included_files": {},
+    "including_to_included": {},
     # The revision of the repo that was analyzed (i.e., the repo
     # specified by the configuration's |evaluated_repo_root| field).
     "repo_rev": "short-rev",
@@ -31,8 +31,8 @@ DATABASE_TEMPLATE = {
 # Generates an inclusions database from the given inclusions config.
 def generate_inclusions_database(config):
   generator = inclusions_generator.InclusionsGenerator(config)
-  including_files_to_included_files = (
-      generator.map_including_files_to_included_files())
+  including_to_included = (
+      generator.map_including_to_included())
   included_files_to_including_files = (
       generator.map_included_files_to_including_files())
 
@@ -50,8 +50,8 @@ def generate_inclusions_database(config):
 
   inclusions_db["included_files_to_including_files"] = (
       included_files_to_including_files)
-  inclusions_db["including_files_to_included_files"] = (
-      including_files_to_included_files)
+  inclusions_db["including_to_included"] = (
+      including_to_included)
 
   return inclusions_db
 
@@ -91,14 +91,14 @@ def read_inclusions_db_from_disk(database_filepath):
 
 
 # Takes in an inclusions database and returns
-# an including_files_to_included_files dictionary that has no included files as
+# an including_to_included dictionary that has no included files as
 # keys.
 def filter_out_included_files_as_keys(inclusions_db):
   included_files = inclusions_db["config"]["included_files"]
   included_files_regexes = [common_utils.root_regex(f) for f in included_files]
 
   output_dict = common_utils.dict_filter_keys_matching_regex(
-      inclusions_db["including_files_to_included_files"],
+      inclusions_db["including_to_included"],
       included_files_regexes)
 
   return output_dict

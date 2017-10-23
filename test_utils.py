@@ -23,9 +23,9 @@ COMPLEX_TEST_CONFIG = {
 inclusions_config.evaluate_config(COMPLEX_TEST_CONFIG)
 
 
-def verify_basic_including_files_to_included_files(
-    test_case, including_files_to_included_files):
-  including_files = including_files_to_included_files.keys()
+def verify_basic_including_to_included(
+    test_case, including_to_included):
+  including_files = including_to_included.keys()
   including_files.sort()
   test_case.assertEqual(including_files,
                         ["bar/bar.h", "bar/core.h", "foo/foo.cc"])
@@ -40,9 +40,9 @@ def verify_basic_included_files_to_including_files(
                         ["bar/bar.h", "bar/core.h", "foo/foo.cc"])
 
 
-def verify_complex_including_files_to_included_files(
-    test_case, including_files_to_included_files):
-  including_files = including_files_to_included_files.keys()
+def verify_complex_including_to_included(
+    test_case, including_to_included):
+  including_files = including_to_included.keys()
   including_files.sort()
   test_case.assertEqual(
       including_files, ["bar/bar.h", "bar/baz/bar_core_factory.h", "foo/foo.h"])

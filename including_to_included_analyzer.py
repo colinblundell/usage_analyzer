@@ -12,11 +12,11 @@ PROD_FILTERS = [".*fake.*", ".*test.*"]
 PROD_NON_FACTORY_FILTERS = PROD_FILTERS + [".*_factory.*"]
 
 
-# Class that can analyze the including_files_to_included_files dictionary of an
+# Class that can analyze the including_to_included dictionary of an
 # inclusions database.
 class IncludingFilesToIncludedFilesAnalyzer:
   # Reads an inclusions database from |database_filename| and performs the
-  # following filters on its including_files_to_included_files dictionary:
+  # following filters on its including_to_included dictionary:
   # - Filters out any included files as keys.
   # - Filters out keys based on the regexes in |including_files_filters|.
   def __init__(self, database_filename, including_files_filters):

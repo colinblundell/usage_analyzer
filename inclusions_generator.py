@@ -27,17 +27,17 @@ class InclusionsGenerator:
   # Params: None.
   # Returns: a dictionary mapping including filenames to lists of included
   # filenames.
-  def map_including_files_to_included_files(self):
-    including_files_to_included_files = {}
+  def map_including_to_included(self):
+    including_to_included = {}
 
     for included_file in self.config["included_files"]:
       for including_file in self.find_including_files_for_file(included_file):
-        if including_file not in including_files_to_included_files:
-          including_files_to_included_files[including_file] = []
+        if including_file not in including_to_included:
+          including_to_included[including_file] = []
 
-        including_files_to_included_files[including_file].append(included_file)
+        including_to_included[including_file].append(included_file)
 
-    return including_files_to_included_files
+    return including_to_included
 
   # Generates the mapping of included files to including files for the total set
   # of included files.
@@ -47,10 +47,10 @@ class InclusionsGenerator:
   def map_included_files_to_including_files(self):
     included_files_to_including_files = {}
 
-    including_files_to_included_files = (
-        self.map_including_files_to_included_files())
+    including_to_included = (
+        self.map_including_to_included())
     for including_file, included_files in (
-        including_files_to_included_files.items()):
+        including_to_included.items()):
 
       for included_file in included_files:
         if included_file not in included_files_to_including_files:
