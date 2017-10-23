@@ -18,18 +18,18 @@ including_files_filters = {
 "prod non-factory" : test_filters + factory_filters,
 }
 
-presentation_order = ["all", "prod", "prod non-factory"]
+presentation_order = ["total inclusions", "inclusions from prod", "inclusions from prod non-factory"]
 
 def generate_analysis(database_filename):
   analyzer = (IncludingFilesToIncludedFilesAnalyzer(database_filename,
     signin_analysis_lib.INCLUDING_FILE_FILTERS))
 
-  feature_dicts = {}
+  feature_dicts = []
   for name, filters in including_files_filters.items():
     feature_dict = analyzer.generate_global_feature_analysis(
       signin_analysis_lib.filename_to_signin_client,
       extra_including_files_filters=filters)
-    feature_dicts[name] = feature_dict
+    feature_dicts.append(feature_dict)
 
   field_names = ["signin client"] + presentation_order
   key_order = common_utils.dict_keys_sorted_by_value(feature_dict)
