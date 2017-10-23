@@ -42,7 +42,9 @@ class IncludingToIncludedAnalyzer:
   # Note that by default, |filters| is [], i.e., no custom filters are applied.
   def generate_global_analysis_for_filters(self,
                                            key_partition_function,
-                                           filters=[]):
+                                           filters=None):
+    if filters is None:
+      filters = []
     including_file_dict = common_utils.dict_filter_keys_matching_regex(
         self.including_file_dict, filters)
 
