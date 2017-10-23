@@ -12,17 +12,17 @@ class TestInclusionsGenerator(unittest.TestCase):
     inclusions = generator.map_including_to_included()
     verify_basic_including_to_included(self, inclusions)
 
-  def test_map_included_files_to_including_files_basic(self):
+  def test_map_included_to_including_basic(self):
     generator = inclusions_generator.InclusionsGenerator(BASIC_TEST_CONFIG)
-    inclusions = generator.map_included_files_to_including_files()
-    verify_basic_included_files_to_including_files(self, inclusions)
+    inclusions = generator.map_included_to_including()
+    verify_basic_included_to_including(self, inclusions)
 
   def test_map_including_to_included_complex(self):
     generator = inclusions_generator.InclusionsGenerator(COMPLEX_TEST_CONFIG)
     inclusions = generator.map_including_to_included()
     verify_complex_including_to_included(self, inclusions)
 
-  def test_map_included_files_to_including_files_complex(self):
+  def test_map_included_to_including_complex(self):
     generator = inclusions_generator.InclusionsGenerator(COMPLEX_TEST_CONFIG)
-    inclusions = generator.map_included_files_to_including_files()
-    verify_complex_included_files_to_including_files(self, inclusions)
+    inclusions = generator.map_included_to_including()
+    verify_complex_included_to_including(self, inclusions)

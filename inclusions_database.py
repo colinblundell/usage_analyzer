@@ -17,7 +17,7 @@ DATABASE_TEMPLATE = {
     # The configuration that was used to generate this database.
     "config": {},
     # Map from included files to including files.
-    "included_files_to_including_files": {},
+    "included_to_including": {},
     # Map from including files to included files.
     "including_to_included": {},
     # The revision of the repo that was analyzed (i.e., the repo
@@ -33,8 +33,8 @@ def generate_inclusions_database(config):
   generator = inclusions_generator.InclusionsGenerator(config)
   including_to_included = (
       generator.map_including_to_included())
-  included_files_to_including_files = (
-      generator.map_included_files_to_including_files())
+  included_to_including = (
+      generator.map_included_to_including())
 
   inclusions_db = {}
   inclusions_db["config"] = config
@@ -48,8 +48,8 @@ def generate_inclusions_database(config):
   usage_analyzer_rev = git_utils.get_usage_analyzer_repo_revision()
   inclusions_db["usage_analyzer_rev"] = usage_analyzer_rev
 
-  inclusions_db["included_files_to_including_files"] = (
-      included_files_to_including_files)
+  inclusions_db["included_to_including"] = (
+      included_to_including)
   inclusions_db["including_to_included"] = (
       including_to_included)
 

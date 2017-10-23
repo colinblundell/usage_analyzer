@@ -21,8 +21,8 @@ class TestInclusionsDatabase(unittest.TestCase):
                      git_utils.get_usage_analyzer_repo_revision())
     self.assertIn("config", output_db)
     self.assertEqual(output_db["config"], BASIC_TEST_CONFIG)
-    verify_basic_included_files_to_including_files(
-        self, output_db["included_files_to_including_files"])
+    verify_basic_included_to_including(
+        self, output_db["included_to_including"])
     verify_basic_including_to_included(
         self, output_db["including_to_included"])
 
@@ -39,8 +39,8 @@ class TestInclusionsDatabase(unittest.TestCase):
                      git_utils.get_usage_analyzer_repo_revision())
     self.assertIn("config", output_db)
     self.assertEqual(output_db["config"], COMPLEX_TEST_CONFIG)
-    verify_complex_included_files_to_including_files(
-        self, output_db["included_files_to_including_files"])
+    verify_complex_included_to_including(
+        self, output_db["included_to_including"])
     verify_complex_including_to_included(
         self, output_db["including_to_included"])
 
