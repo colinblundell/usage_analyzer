@@ -21,8 +21,10 @@ class TestInclusionsDatabase(unittest.TestCase):
                      git_utils.get_usage_analyzer_repo_revision())
     self.assertIn("config", output_db)
     self.assertEqual(output_db["config"], test_utils.BASIC_TEST_CONFIG)
-    test_utils.verify_basic_included_to_including(self, output_db["included_to_including"])
-    test_utils.verify_basic_including_to_included(self, output_db["including_to_included"])
+    test_utils.verify_basic_included_to_including(
+        self, output_db["included_to_including"])
+    test_utils.verify_basic_including_to_included(
+        self, output_db["including_to_included"])
 
   def test_generate_inclusions_database_complex(self):
     output_db = inclusions_database.generate_inclusions_database(
@@ -37,20 +39,22 @@ class TestInclusionsDatabase(unittest.TestCase):
                      git_utils.get_usage_analyzer_repo_revision())
     self.assertIn("config", output_db)
     self.assertEqual(output_db["config"], test_utils.COMPLEX_TEST_CONFIG)
-    test_utils.verify_complex_included_to_including(self,
-                                         output_db["included_to_including"])
-    test_utils.verify_complex_including_to_included(self,
-                                         output_db["including_to_included"])
+    test_utils.verify_complex_included_to_including(
+        self, output_db["included_to_including"])
+    test_utils.verify_complex_including_to_included(
+        self, output_db["including_to_included"])
 
   def test_filter_out_included_files_as_keys_simple(self):
-    db = inclusions_database.generate_inclusions_database(test_utils.BASIC_TEST_CONFIG)
+    db = inclusions_database.generate_inclusions_database(
+        test_utils.BASIC_TEST_CONFIG)
 
     output = inclusions_database.filter_out_included_files_as_keys(db)
     expected_output = {"bar/bar.h": ["foo/foo.h"], "bar/core.h": ["foo/foo.h"]}
     self.assertEqual(expected_output, output)
 
   def test_filter_out_included_files_as_keys_complex(self):
-    db = inclusions_database.generate_inclusions_database(test_utils.COMPLEX_TEST_CONFIG)
+    db = inclusions_database.generate_inclusions_database(
+        test_utils.COMPLEX_TEST_CONFIG)
 
     output = inclusions_database.filter_out_included_files_as_keys(db)
     expected_output = {
