@@ -31,10 +31,8 @@ DATABASE_TEMPLATE = {
 # Generates an inclusions database from the given inclusions config.
 def generate_inclusions_database(config):
   generator = inclusions_generator.InclusionsGenerator(config)
-  including_to_included = (
-      generator.map_including_to_included())
-  included_to_including = (
-      generator.map_included_to_including())
+  including_to_included = (generator.map_including_to_included())
+  included_to_including = (generator.map_included_to_including())
 
   inclusions_db = {}
   inclusions_db["config"] = config
@@ -48,10 +46,8 @@ def generate_inclusions_database(config):
   usage_analyzer_rev = git_utils.get_usage_analyzer_repo_revision()
   inclusions_db["usage_analyzer_rev"] = usage_analyzer_rev
 
-  inclusions_db["included_to_including"] = (
-      included_to_including)
-  inclusions_db["including_to_included"] = (
-      including_to_included)
+  inclusions_db["included_to_including"] = (included_to_including)
+  inclusions_db["including_to_included"] = (including_to_included)
 
   return inclusions_db
 
@@ -98,7 +94,6 @@ def filter_out_included_files_as_keys(inclusions_db):
   included_files_regexes = [common_utils.root_regex(f) for f in included_files]
 
   output_dict = common_utils.dict_filter_keys_matching_regex(
-      inclusions_db["including_to_included"],
-      included_files_regexes)
+      inclusions_db["including_to_included"], included_files_regexes)
 
   return output_dict

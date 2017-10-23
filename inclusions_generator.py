@@ -47,10 +47,8 @@ class InclusionsGenerator:
   def map_included_to_including(self):
     included_to_including = {}
 
-    including_to_included = (
-        self.map_including_to_included())
-    for including_file, included_files in (
-        including_to_included.items()):
+    including_to_included = (self.map_including_to_included())
+    for including_file, included_files in (including_to_included.items()):
 
       for included_file in included_files:
         if included_file not in included_to_including:

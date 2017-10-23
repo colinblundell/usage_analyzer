@@ -8,8 +8,8 @@ import signin_analysis_lib
 
 def generate_analysis(database_filename):
   analyzer = (
-      IncludingToIncludedAnalyzer(
-          database_filename, signin_analysis_lib.INCLUDING_FILE_FILTERS))
+      IncludingToIncludedAnalyzer(database_filename,
+                                  signin_analysis_lib.INCLUDING_FILE_FILTERS))
   output_csv = analyzer.generate_global_analysis_as_csv(
       signin_analysis_lib.filename_to_signin_client, "feature")
   print output_csv

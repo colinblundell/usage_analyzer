@@ -26,7 +26,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
       assert os.path.isfile(database_filepath)
 
       analyzer = IncludingToIncludedAnalyzer(database_filepath,
-                                                       including_file_filters)
+                                             including_file_filters)
     return analyzer
 
   def test_generate_global_analysis_for_filters_default_filters(self):
