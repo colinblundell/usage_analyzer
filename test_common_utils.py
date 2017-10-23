@@ -29,7 +29,9 @@ class TestCommonUtils(unittest.TestCase):
     field_names = ["name", "value"]
     key_order = ["key3", "key1", "key2"]
 
-    expected_output = "name,value\r\nkey3,valc3,vala3,valb3\r\nkey1,valc1,vala1,valb1\r\nkey2,valc2,vala2,valb2\r\n"
+    expected_output = "name,value\r\nkey3,valc3,vala3,valb3\r\n"
+    expected_output += "key1,valc1,vala1,valb1\r\n"
+    expected_output += "key2,valc2,vala2,valb2\r\n"
     output = common_utils.dicts_to_csv(test_dicts, field_names, key_order)
     self.assertEqual(expected_output, output)
 

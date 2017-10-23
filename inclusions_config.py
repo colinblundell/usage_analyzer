@@ -8,8 +8,8 @@ import os
 CONFIG_TEMPLATE = {
     # A short-but-descriptive name for this config.
     "name": "descriptive_name",
-    # The path to the repository to be analyzed. Can be a relative path, in which
-    # case the location is evaluated as being relative to the location of
+    # The path to the repository to be analyzed. Can be a relative path, in
+    # which case the location is evaluated as being relative to the location of
     # config.py.  Can also be "CHROMIUM_ROOT", in which case the "chromium_root"
     # key below is added as the evaluated root.
     "repo_root": "path/to/repo",

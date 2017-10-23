@@ -16,7 +16,8 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
   def create_analyzer(self, including_file_filters):
     with common_utils.TemporaryDirectory() as output_dir:
       # TODO: Should I have a test database that I read off disk?
-      config_filename = "./test/data/configs/test_including_to_included_analyzer_config.py"
+      config_filename = (
+          "./test/data/configs/test_including_to_included_analyzer_config.py")
       generate_inclusions.generate_inclusions(config_filename, output_dir)
 
       repo_rev = git_utils.get_usage_analyzer_repo_revision()

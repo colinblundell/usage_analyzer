@@ -24,7 +24,7 @@ CLIENTS = [
     "policy",
     "supervised_user",
     "gcm",
-    # NOTE: This should be below sync and gcm to avoid catching their driver dirs.
+    # NOTE: This must be below sync and gcm to avoid catching their driver dirs.
     "drive",
     "invalidation",
     "ntp_snippets",

@@ -53,7 +53,9 @@ def generate_inclusions_database(config):
 
 
 # Writes the given output database to disk at the following location:
-# <output_dir>/<config_name>/<repo_rev>/<config_name>_<repo_rev>_inclusions_db.py.
+# <output_dir>/<config_name>/<repo_rev>/
+# with the following filename:
+# <config_name>_<repo_rev>_inclusions_db.py.
 # Warns the user if the above directory already exists.
 def write_inclusions_db_to_disk(inclusions_db, output_dir):
   config_name = inclusions_db["config"]["name"]
