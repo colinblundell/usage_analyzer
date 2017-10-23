@@ -19,6 +19,18 @@ class TestCommonUtils(unittest.TestCase):
     output = common_utils.dict_to_csv(test_dict, field_names, key_order)
     self.assertEqual(expected_output, output)
 
+  def test_dicts_to_csv(self):
+    test_dict_a = {"key1" : "vala1", "key2" : "vala2", "key3" : "vala3"}
+    test_dict_b = {"key1" : "valb1", "key2" : "valb2", "key3" : "valb3"}
+    test_dict_c = {"key1" : "valc1", "key2" : "valc2", "key3" : "valc3"}
+    test_dicts = [test_dict_c, test_dict_a, test_dict_b]
+    field_names = ["name", "value"]
+    key_order = ["key3", "key1", "key2"]
+  
+    expected_output = "name,value\r\nkey3,valc3,vala3,valb3\r\nkey1,valc1,vala1,valb1\r\nkey2,valc2,vala2,valb2\r\n"
+    output = common_utils.dicts_to_csv(test_dicts, field_names, key_order)
+    self.assertEqual(expected_output, output)
+
   def test_dict_list_values_to_sums(self):
     test_dict = {"key1" : [1, 2, 3, 4], "key2" : [], "key3" : [1]}
     expected_output = {"key1" : 4, "key2" : 0, "key3" : 1}

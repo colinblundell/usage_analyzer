@@ -31,13 +31,11 @@ def generate_analysis(database_filename):
       extra_including_files_filters=filters)
     feature_dicts[name] = feature_dict
 
-  for name in presentation_order:
-    feature_dict = feature_dicts[name]
-    field_names = ["signin client", "num inclusions"]
-    key_order = common_utils.dict_keys_sorted_by_value(feature_dict)
-    output_csv = common_utils.dict_to_csv(feature_dict, field_names, key_order)
-    print output_csv
-    print
+  field_names = ["signin client"] + presentation_order
+  key_order = common_utils.dict_keys_sorted_by_value(feature_dict)
+  output_csv = common_utils.dicts_to_csv(feature_dicts, field_names, key_order)
+  print output_csv
+  print
 
 if __name__ == '__main__':
   database_filename = sys.argv[1]

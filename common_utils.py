@@ -39,6 +39,25 @@ def dict_to_csv(dictionary, field_names, key_order):
 
   return output.getvalue()
 
+# Returns a string that represents |dictionaries| in CSV form. Each dictionary
+# in |dictionaries| must be indexed by the set of keys in |key_order|.
+# |field_names| is written as the header, followed by rows of
+# [key, value1, value2, value3, ...] lines in the order given by |key_order|.
+def dicts_to_csv(dictionaries, field_names, key_order):
+  output = io.BytesIO()
+
+ 
+  csv_writer = csv.writer(output)
+  csv_writer.writerow(field_names)
+
+  for key in key_order:
+    row = [key]
+    for dictionary in dictionaries:
+      row.append(dictionary[key])
+    csv_writer.writerow(row)
+
+  return output.getvalue()
+
 # Takes in a dictionary whose values are lists and returns a dictionary whose
 # values are the lengths of the source lists.
 def dict_list_values_to_sums(dictionary):
