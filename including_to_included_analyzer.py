@@ -14,7 +14,7 @@ PROD_NON_FACTORY_FILTERS = PROD_FILTERS + [".*_factory.*"]
 
 # Class that can analyze the including_to_included dictionary of an
 # inclusions database.
-class IncludingFilesToIncludedFilesAnalyzer:
+class IncludingToIncludedAnalyzer:
   # Reads an inclusions database from |database_filename| and performs the
   # following filters on its including_to_included dictionary:
   # - Filters out any included files as keys.

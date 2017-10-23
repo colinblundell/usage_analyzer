@@ -6,11 +6,11 @@ import generate_inclusions
 import git_utils
 import inclusions_config
 import inclusions_database
-from including_to_included_analyzer import IncludingFilesToIncludedFilesAnalyzer
+from including_to_included_analyzer import IncludingToIncludedAnalyzer
 
 
-class TestGenerateIncludingFilesToIncludedFilesAnalyzer(unittest.TestCase):
-  # Creates an IncludingFilesToIncludedFilesAnalyzer instance that operates on
+class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
+  # Creates an IncludingToIncludedAnalyzer instance that operates on
   # the test config associated with these tests and uses
   # |including_file_filters|.
   def create_analyzer(self, including_file_filters):
@@ -25,7 +25,7 @@ class TestGenerateIncludingFilesToIncludedFilesAnalyzer(unittest.TestCase):
                                        database_name)
       assert os.path.isfile(database_filepath)
 
-      analyzer = IncludingFilesToIncludedFilesAnalyzer(database_filepath,
+      analyzer = IncludingToIncludedAnalyzer(database_filepath,
                                                        including_file_filters)
     return analyzer
 
