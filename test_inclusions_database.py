@@ -5,10 +5,12 @@ import git_utils
 import inclusions_database
 from test_utils import *
 
+
 class TestInclusionsDatabase(unittest.TestCase):
+
   def test_generate_inclusions_database_simple(self):
     output_db = inclusions_database.generate_inclusions_database(
-      BASIC_TEST_CONFIG)
+        BASIC_TEST_CONFIG)
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
@@ -26,7 +28,7 @@ class TestInclusionsDatabase(unittest.TestCase):
 
   def test_generate_inclusions_database_complex(self):
     output_db = inclusions_database.generate_inclusions_database(
-      COMPLEX_TEST_CONFIG)
+        COMPLEX_TEST_CONFIG)
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
@@ -43,19 +45,18 @@ class TestInclusionsDatabase(unittest.TestCase):
         self, output_db["including_files_to_included_files"])
 
   def test_filter_out_included_files_as_keys_simple(self):
-    db = inclusions_database.generate_inclusions_database(
-      BASIC_TEST_CONFIG)
+    db = inclusions_database.generate_inclusions_database(BASIC_TEST_CONFIG)
 
     output = inclusions_database.filter_out_included_files_as_keys(db)
-    expected_output = {"bar/bar.h" : ["foo/foo.h"],
-                       "bar/core.h" : ["foo/foo.h"]}
+    expected_output = {"bar/bar.h": ["foo/foo.h"], "bar/core.h": ["foo/foo.h"]}
     self.assertEqual(expected_output, output)
 
   def test_filter_out_included_files_as_keys_complex(self):
-    db = inclusions_database.generate_inclusions_database(
-      COMPLEX_TEST_CONFIG)
+    db = inclusions_database.generate_inclusions_database(COMPLEX_TEST_CONFIG)
 
     output = inclusions_database.filter_out_included_files_as_keys(db)
-    expected_output = {"bar/baz/bar_core_factory.h" : ["bar/core.h"],
-                       "foo/foo.h" : ["bar/bar.h"]}
+    expected_output = {
+        "bar/baz/bar_core_factory.h": ["bar/core.h"],
+        "foo/foo.h": ["bar/bar.h"]
+    }
     self.assertEqual(expected_output, output)

@@ -6,66 +6,70 @@ import subprocess
 from operator import itemgetter
 
 INPUT_FILES = [
-"components/signin/core/browser/account_fetcher_service",
-"components/signin/core/browser/account_tracker_service",
-"components/signin/core/browser/profile_oauth2_token_service",
-"components/signin/core/browser/signin_manager_base",
-"components/signin/core/browser/signin_manager",
-"components/sync/driver/signin_manager_wrapper",
-"google_apis/gaia/oauth2_token_service",
+    "components/signin/core/browser/account_fetcher_service",
+    "components/signin/core/browser/account_tracker_service",
+    "components/signin/core/browser/profile_oauth2_token_service",
+    "components/signin/core/browser/signin_manager_base",
+    "components/signin/core/browser/signin_manager",
+    "components/sync/driver/signin_manager_wrapper",
+    "google_apis/gaia/oauth2_token_service",
 ]
 
 EXCLUDED_DIRECTORIES = [
-"services/identity",
+    "services/identity",
 ]
 
 # Listed in priority order, i.e., earlier entries are prioritized
 # for matching over later entries.
 CATCHALLS = [
-#"ios/chrome/browser/ui",
-#"chrome/browser/ui",
-#"ios",
+    #"ios/chrome/browser/ui",
+    #"chrome/browser/ui",
+    #"ios",
 ]
 
 CLIENTS = [
-"ios/web_view/internal/signin",
-"arc/auth",
-"login",
-"sync",
-"signin",
-"history",
-"autofill",
-"password",
-"policy",
-"supervised_user",
-"gcm",
-# NOTE: This should be below sync and gcm to avoid catching their driver dirs.
-"drive",
-"invalidation",
-"ntp_snippets",
-"suggestions",
-"profiles",
-"google_apis",
-"settings",
-"payments",
-"cryptauth",
-"first_run",
-"bookmarks",
-"api/identity",
-# TODO: Should I restore these?
-"chrome/browser/extensions",
-#"extensions",
-"webui",
+    "ios/web_view/internal/signin",
+    "arc/auth",
+    "login",
+    "sync",
+    "signin",
+    "history",
+    "autofill",
+    "password",
+    "policy",
+    "supervised_user",
+    "gcm",
+    # NOTE: This should be below sync and gcm to avoid catching their driver dirs.
+    "drive",
+    "invalidation",
+    "ntp_snippets",
+    "suggestions",
+    "profiles",
+    "google_apis",
+    "settings",
+    "payments",
+    "cryptauth",
+    "first_run",
+    "bookmarks",
+    "api/identity",
+    # TODO: Should I restore these?
+    "chrome/browser/extensions",
+    #"extensions",
+    "webui",
 ]
 
 CLIENTS += CATCHALLS
+
 
 def collect_inclusions_of_file(input_file, prod_inclusions_by_directory,
                                test_inclusions_by_directory,
                                prod_including_files_by_directory):
   inclusion_string = '\'include "\'' + input_file
-  inclusions = subprocess.Popen("git grep -l " + inclusion_string, shell=True, stdout=subprocess.PIPE,
-                                cwd=os.getenv("HOME") + "/chromium/src").stdout.read()
+  inclusions = subprocess.Popen(
+      "git grep -l " + inclusion_string,
+      shell=True,
+      stdout=subprocess.PIPE,
+      cwd=os.getenv("HOME") + "/chromium/src").stdout.read()
   for filename in inclusions.splitlines():
     if os.path.splitext(filename)[0] in INPUT_FILES:
       continue
@@ -84,6 +88,7 @@ def collect_inclusions_of_file(input_file, prod_inclusions_by_directory,
       if parent_dir not in prod_including_files_by_directory:
         prod_including_files_by_directory[parent_dir] = set()
       prod_including_files_by_directory[parent_dir].add(filename)
+
 
 def analyze_inclusions():
   prod_inclusions_by_directory = {}
@@ -106,8 +111,8 @@ def analyze_inclusions():
   catchalls_to_dirs = {}
   total_inclusions = 0
   total_catchall_inclusions = 0
-  for directory, num_inclusions in sorted(prod_inclusions_by_directory.items(), key=itemgetter(1), 
-                     reverse=True):
+  for directory, num_inclusions in sorted(
+      prod_inclusions_by_directory.items(), key=itemgetter(1), reverse=True):
     client_to_use = directory
     for client in CLIENTS:
       if client in directory:
@@ -125,7 +130,8 @@ def analyze_inclusions():
       to_dirs[client_to_use] = []
       clients_to_including_files[client_to_use] = set()
     to_inclusions[client_to_use] += num_inclusions
-    clients_to_including_files[client_to_use] = clients_to_including_files[client_to_use].union(prod_including_files_by_directory[directory])
+    clients_to_including_files[client_to_use] = clients_to_including_files[
+        client_to_use].union(prod_including_files_by_directory[directory])
     if client_to_use != directory:
       to_dirs[client_to_use].append(directory + ": " + str(num_inclusions))
 
@@ -138,8 +144,8 @@ def analyze_inclusions():
   inclusions_in_category = 0
   category = "giant"
   summary = ""
-  for client, num_inclusions in sorted(clients_to_inclusions.items(), key=itemgetter(1), 
-                     reverse=True):
+  for client, num_inclusions in sorted(
+      clients_to_inclusions.items(), key=itemgetter(1), reverse=True):
     if category == "giant" and num_inclusions < 50:
       print "Summary of giant features:", clients_in_category, "clients with", inclusions_in_category, "inclusions"
       clients_in_category = 0
@@ -172,11 +178,12 @@ def analyze_inclusions():
           print f
 
   print "Summary of small features:", clients_in_category, "clients with", inclusions_in_category, "inclusions"
-  
+
+
 #  print "Total catchalls: ", len(catchalls_to_inclusions.keys())
 #  print "Total catchall inclusions:", total_catchall_inclusions
 #  print
-#  for catchall, num_inclusions in sorted(catchalls_to_inclusions.items(), key=itemgetter(1), 
+#  for catchall, num_inclusions in sorted(catchalls_to_inclusions.items(), key=itemgetter(1),
 #                     reverse=True):
 #    print catchall + ":", num_inclusions, "inclusions"
 #    for including_dir in catchalls_to_dirs[catchall]:

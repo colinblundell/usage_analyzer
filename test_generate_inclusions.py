@@ -12,25 +12,27 @@ import generate_inclusions
 from test_utils import *
 
 EXPECTED_TEST_CONFIG = {
-  'name': 'test',
-  'included_files': ['foo/foo.h', 'bar/bar.h'],
-  'repo_root': 'test/test_repo'
+    'name': 'test',
+    'included_files': ['foo/foo.h', 'bar/bar.h'],
+    'repo_root': 'test/test_repo'
 }
 inclusions_config.evaluate_config(EXPECTED_TEST_CONFIG)
 
 EXPECTED_INCLUDED_FILES_TO_INCLUDING_FILES = {
-  'bar/bar.h': ['foo/foo.h'],
-  'foo/foo.h': [ 'foo/foo.cc', 'bar/bar.h', 'bar/core.h']
+    'bar/bar.h': ['foo/foo.h'],
+    'foo/foo.h': ['foo/foo.cc', 'bar/bar.h', 'bar/core.h']
 }
 
 EXPECTED_INCLUDING_FILES_TO_INCLUDED_FILES = {
-  'bar/bar.h': ['foo/foo.h'],
-  'bar/core.h': ['foo/foo.h'],
-  'foo/foo.cc': ['foo/foo.h'],
-  'foo/foo.h': ['bar/bar.h']
+    'bar/bar.h': ['foo/foo.h'],
+    'bar/core.h': ['foo/foo.h'],
+    'foo/foo.cc': ['foo/foo.h'],
+    'foo/foo.h': ['bar/bar.h']
 }
 
+
 class TestGenerateInclusions(unittest.TestCase):
+
   def test_generate_inclusions(self):
     with common_utils.TemporaryDirectory() as output_dir:
       config_filename = "./test/data/configs/test.py"
@@ -38,18 +40,18 @@ class TestGenerateInclusions(unittest.TestCase):
 
       repo_rev = git_utils.get_usage_analyzer_repo_revision()
       database_name = "_".join(["test", repo_rev, "inclusions_db.py"])
-      database_filepath = os.path.join(output_dir, "test", repo_rev, 
+      database_filepath = os.path.join(output_dir, "test", repo_rev,
                                        database_name)
       assert os.path.isfile(database_filepath)
 
       inclusions_db = (
-        inclusions_database.read_inclusions_db_from_disk(database_filepath))
+          inclusions_database.read_inclusions_db_from_disk(database_filepath))
 
       self.assertEqual(inclusions_db["config"], EXPECTED_TEST_CONFIG)
 
-      self.assertEqual(inclusions_db["included_files_to_including_files"], 
+      self.assertEqual(inclusions_db["included_files_to_including_files"],
                        EXPECTED_INCLUDED_FILES_TO_INCLUDING_FILES)
-      self.assertEqual(inclusions_db["including_files_to_included_files"], 
+      self.assertEqual(inclusions_db["including_files_to_included_files"],
                        EXPECTED_INCLUDING_FILES_TO_INCLUDED_FILES)
 
       self.assertEqual(inclusions_db["repo_rev"], repo_rev)

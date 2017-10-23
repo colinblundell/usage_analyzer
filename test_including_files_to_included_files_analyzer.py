@@ -8,6 +8,7 @@ import inclusions_config
 import inclusions_database
 from including_files_to_included_files_analyzer import IncludingFilesToIncludedFilesAnalyzer
 
+
 class TestGenerateIncludingFilesToIncludedFilesAnalyzer(unittest.TestCase):
   # Creates an IncludingFilesToIncludedFilesAnalyzer instance that operates on
   # the test config associated with these tests and uses
@@ -20,59 +21,64 @@ class TestGenerateIncludingFilesToIncludedFilesAnalyzer(unittest.TestCase):
 
       repo_rev = git_utils.get_usage_analyzer_repo_revision()
       database_name = "_".join(["test", repo_rev, "inclusions_db.py"])
-      database_filepath = os.path.join(output_dir, "test", repo_rev, 
+      database_filepath = os.path.join(output_dir, "test", repo_rev,
                                        database_name)
       assert os.path.isfile(database_filepath)
 
       analyzer = IncludingFilesToIncludedFilesAnalyzer(database_filepath,
-        including_file_filters)
+                                                       including_file_filters)
     return analyzer
 
   def test_generate_global_analysis_for_filters_default_filters(self):
+
     def key_partition_function(filename):
       return os.path.dirname(filename)
 
     analyzer = self.create_analyzer([])
-    expected_output = {"total" : 3, "bar" : 2, "bar/baz" : 1}
-    output = analyzer.generate_global_analysis_for_filters(key_partition_function)
+    expected_output = {"total": 3, "bar": 2, "bar/baz": 1}
+    output = analyzer.generate_global_analysis_for_filters(
+        key_partition_function)
     self.assertEqual(expected_output, output)
 
   def test_generate_global_analysis_for_filters_construction_filter(self):
+
     def key_partition_function(filename):
       return os.path.dirname(filename)
 
     analyzer = self.create_analyzer([r"bar/baz.*"])
-    expected_output = {"total" : 2, "bar" : 2}
-    output = analyzer.generate_global_analysis_for_filters(key_partition_function)
+    expected_output = {"total": 2, "bar": 2}
+    output = analyzer.generate_global_analysis_for_filters(
+        key_partition_function)
     self.assertEqual(expected_output, output)
 
   def test_generate_global_analysis_for_filters_multiple_filters(self):
+
     def key_partition_function(filename):
       return os.path.dirname(filename)
 
     analyzer = self.create_analyzer([r"bar/baz.*"])
-    expected_output = {"total" : 0}
-    output = analyzer.generate_global_analysis_for_filters(key_partition_function,
-      filters=["bar/bar\..*"])
+    expected_output = {"total": 0}
+    output = analyzer.generate_global_analysis_for_filters(
+        key_partition_function, filters=["bar/bar\..*"])
     self.assertEqual(expected_output, output)
 
   def test_generate_global_analysis(self):
+
     def key_partition_function(filename):
       return os.path.dirname(filename)
 
     analyzer = self.create_analyzer([])
-    expected_all_inclusions = {"total" : 3, "bar" : 2, "bar/baz" : 1}
-    expected_prod_inclusions = {"total" : 3, "bar" : 2, "bar/baz" : 1}
-    expected_prod_non_factory_inclusions = {"total" : 2, "bar" : 2}
-    expected_output = [
-      ["all", expected_all_inclusions],
-      ["prod", expected_prod_inclusions],
-      ["prod non-factory", expected_prod_non_factory_inclusions]
-    ]
+    expected_all_inclusions = {"total": 3, "bar": 2, "bar/baz": 1}
+    expected_prod_inclusions = {"total": 3, "bar": 2, "bar/baz": 1}
+    expected_prod_non_factory_inclusions = {"total": 2, "bar": 2}
+    expected_output = [["all", expected_all_inclusions], [
+        "prod", expected_prod_inclusions
+    ], ["prod non-factory", expected_prod_non_factory_inclusions]]
     output = analyzer.generate_global_analysis(key_partition_function)
     self.assertEqual(expected_output, output)
 
   def test_generate_global_analysis_as_csv(self):
+
     def key_partition_function(filename):
       return os.path.dirname(filename)
 

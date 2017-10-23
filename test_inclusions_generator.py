@@ -4,7 +4,9 @@ import unittest
 import inclusions_generator
 from test_utils import *
 
+
 class TestInclusionsGenerator(unittest.TestCase):
+
   def test_map_including_files_to_included_files_basic(self):
     generator = inclusions_generator.InclusionsGenerator(BASIC_TEST_CONFIG)
     inclusions = generator.map_including_files_to_included_files()

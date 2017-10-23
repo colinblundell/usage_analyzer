@@ -2,6 +2,7 @@ import inclusions_config
 import subprocess
 import sys
 
+
 # Class that analyzes a repository to generate information about the inclusions
 # of a given set of files within that repository.
 class InclusionsGenerator:
@@ -14,9 +15,11 @@ class InclusionsGenerator:
   # root), returns the list of files that include |included_file| in the repo.
   def find_including_files_for_file(self, included_file):
     inclusion_string = '\'include "\'' + included_file
-    including_files = subprocess.Popen("git grep -l " + inclusion_string,
-                                       shell=True, stdout=subprocess.PIPE,
-                                       cwd=self.config["evaluated_repo_root"]).stdout.read()
+    including_files = subprocess.Popen(
+        "git grep -l " + inclusion_string,
+        shell=True,
+        stdout=subprocess.PIPE,
+        cwd=self.config["evaluated_repo_root"]).stdout.read()
     return including_files.splitlines()
 
   # Generates the mapping of including files to included files for the total set
@@ -45,9 +48,9 @@ class InclusionsGenerator:
     included_files_to_including_files = {}
 
     including_files_to_included_files = (
-      self.map_including_files_to_included_files())
+        self.map_including_files_to_included_files())
     for including_file, included_files in (
-      including_files_to_included_files.items()):
+        including_files_to_included_files.items()):
 
       for included_file in included_files:
         if included_file not in included_files_to_including_files:
@@ -56,4 +59,3 @@ class InclusionsGenerator:
         included_files_to_including_files[included_file].append(including_file)
 
     return included_files_to_including_files
-

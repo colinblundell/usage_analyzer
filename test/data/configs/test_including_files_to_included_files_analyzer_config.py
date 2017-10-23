@@ -1,5 +1,5 @@
 {
-  "name": "test",
-  "repo_root" : "test/test_repo",
-  "included_files" : ["foo/foo.h", "bar/core.h"]
+    "name": "test",
+    "repo_root": "test/test_repo",
+    "included_files": ["foo/foo.h", "bar/core.h"]
 }

@@ -5,13 +5,16 @@ import sys
 from including_files_to_included_files_analyzer import IncludingFilesToIncludedFilesAnalyzer
 import signin_analysis_lib
 
+
 def generate_analysis(database_filename):
-  analyzer = (IncludingFilesToIncludedFilesAnalyzer(database_filename,
-    signin_analysis_lib.INCLUDING_FILE_FILTERS))
+  analyzer = (
+      IncludingFilesToIncludedFilesAnalyzer(
+          database_filename, signin_analysis_lib.INCLUDING_FILE_FILTERS))
   output_csv = analyzer.generate_global_analysis_as_csv(
-    signin_analysis_lib.filename_to_signin_client, "feature")
+      signin_analysis_lib.filename_to_signin_client, "feature")
   print output_csv
   print
+
 
 if __name__ == '__main__':
   database_filename = sys.argv[1]
