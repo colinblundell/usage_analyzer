@@ -7,26 +7,26 @@ import test_utils
 
 class TestInclusionsGenerator(unittest.TestCase):
 
-  def test_map_including_to_included_basic(self):
+  def test_MapIncludingToIncludedBasic(self):
     generator = inclusions_generator.InclusionsGenerator(
         test_utils.BASIC_TEST_CONFIG)
-    inclusions = generator.map_including_to_included()
-    test_utils.verify_basic_including_to_included(self, inclusions)
+    inclusions = generator.MapIncludingToIncluded()
+    test_utils.VerifyBasicIncludingToIncluded(self, inclusions)
 
-  def test_map_included_to_including_basic(self):
+  def test_MapIncludedToIncludingBasic(self):
     generator = inclusions_generator.InclusionsGenerator(
         test_utils.BASIC_TEST_CONFIG)
-    inclusions = generator.map_included_to_including()
-    test_utils.verify_basic_included_to_including(self, inclusions)
+    inclusions = generator.MapIncludedToIncluding()
+    test_utils.VerifyBasicIncludedToIncluding(self, inclusions)
 
-  def test_map_including_to_included_complex(self):
+  def test_MapIncludingToIncludedComplex(self):
     generator = inclusions_generator.InclusionsGenerator(
         test_utils.COMPLEX_TEST_CONFIG)
-    inclusions = generator.map_including_to_included()
-    test_utils.verify_complex_including_to_included(self, inclusions)
+    inclusions = generator.MapIncludingToIncluded()
+    test_utils.VerifyComplexIncludingToIncluded(self, inclusions)
 
-  def test_map_included_to_including_complex(self):
+  def test_MapIncludedToIncludingComplex(self):
     generator = inclusions_generator.InclusionsGenerator(
         test_utils.COMPLEX_TEST_CONFIG)
-    inclusions = generator.map_included_to_including()
-    test_utils.verify_complex_included_to_including(self, inclusions)
+    inclusions = generator.MapIncludedToIncluding()
+    test_utils.VerifyComplexIncludedToIncluding(self, inclusions)

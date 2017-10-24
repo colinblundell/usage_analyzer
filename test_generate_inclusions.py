@@ -15,7 +15,7 @@ EXPECTED_TEST_CONFIG = {
     'included_files': ['foo/foo.h', 'bar/bar.h'],
     'repo_root': 'test/test_repo'
 }
-inclusions_config.evaluate_config(EXPECTED_TEST_CONFIG)
+inclusions_config.EvaluateConfig(EXPECTED_TEST_CONFIG)
 
 EXPECTED_INCLUDED_FILES_TO_INCLUDING_FILES = {
     'bar/bar.h': ['foo/foo.h'],
@@ -37,14 +37,14 @@ class TestGenerateInclusions(unittest.TestCase):
       config_filename = "./test/data/configs/test.py"
       generate_inclusions.generate_inclusions(config_filename, output_dir)
 
-      repo_rev = git_utils.get_usage_analyzer_repo_revision()
+      repo_rev = git_utils.GetUsageAnalyzerRepoRevision()
       database_name = "_".join(["test", repo_rev, "inclusions_db.py"])
       database_filepath = os.path.join(output_dir, "test", repo_rev,
                                        database_name)
       assert os.path.isfile(database_filepath)
 
       inclusions_db = (
-          inclusions_database.read_inclusions_db_from_disk(database_filepath))
+          inclusions_database.ReadInclusionsDbFromDisk(database_filepath))
 
       self.assertEqual(inclusions_db["config"], EXPECTED_TEST_CONFIG)
 

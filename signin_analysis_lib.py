@@ -46,7 +46,7 @@ CLIENTS = [
 
 
 # Maps a filename into the signin client that it belongs to.
-def filename_to_signin_client(filename):
+def FilenameToSigninClient(filename):
   for client in CLIENTS:
     if client in filename:
       return client

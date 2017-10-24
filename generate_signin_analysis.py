@@ -6,16 +6,16 @@ from including_to_included_analyzer import IncludingToIncludedAnalyzer
 import signin_analysis_lib
 
 
-def generate_analysis(database_filename):
+def GenerateAnalysis(database_filename):
   analyzer = (
       IncludingToIncludedAnalyzer(database_filename,
                                   signin_analysis_lib.INCLUDING_FILE_FILTERS))
-  output_csv = analyzer.generate_global_analysis_as_csv(
-      signin_analysis_lib.filename_to_signin_client, "feature")
+  output_csv = analyzer.GenerateGlobalAnalysisAsCsv(
+      signin_analysis_lib.FilenameToSigninClient, "feature")
   print output_csv
   print
 
 
 if __name__ == '__main__':
   database_path = sys.argv[1]
-  generate_analysis(database_path)
+  GenerateAnalysis(database_path)

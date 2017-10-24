@@ -23,7 +23,7 @@ CONFIG_TEMPLATE = {
 
 
 # Validates a config's format and the fact that it has been evaluated.
-def validate_config(config):
+def ValidateConfig(config):
   assert "name" in config
   assert type(config["name"]) == str
   assert "repo_root" in config
@@ -35,7 +35,7 @@ def validate_config(config):
 
 
 # Evaluates |config| in-place, following the evaluation rules mentioned above.
-def evaluate_config(config, chromium_root=""):
+def EvaluateConfig(config, chromium_root=""):
   if (config["repo_root"] == "CHROMIUM_ROOT"):
     assert chromium_root != ""
     config["evaluated_repo_root"] = chromium_root
@@ -44,9 +44,9 @@ def evaluate_config(config, chromium_root=""):
 
 
 # Evaluates a config from |config_filename| and returns it.
-def read_config_from_file(config_filename, chromium_root):
+def ReadConfigFromFile(config_filename, chromium_root):
   with open(config_filename, 'r') as config_file:
     config = ast.literal_eval(config_file.read())
-  evaluate_config(config, chromium_root)
-  validate_config(config)
+  EvaluateConfig(config, chromium_root)
+  ValidateConfig(config)
   return config

@@ -29,10 +29,10 @@ DATABASE_TEMPLATE = {
 
 
 # Generates an inclusions database from the given inclusions config.
-def generate_inclusions_database(config):
+def GenerateInclusionsDatabase(config):
   generator = inclusions_generator.InclusionsGenerator(config)
-  including_to_included = (generator.map_including_to_included())
-  included_to_including = (generator.map_included_to_including())
+  including_to_included = (generator.MapIncludingToIncluded())
+  included_to_including = (generator.MapIncludedToIncluding())
 
   inclusions_db = {}
   inclusions_db["config"] = config
@@ -40,10 +40,10 @@ def generate_inclusions_database(config):
   now = datetime.datetime.utcnow()
   inclusions_db["timestamp (UTC)"] = str(now)
 
-  repo_rev = git_utils.get_repo_revision(config["evaluated_repo_root"])
+  repo_rev = git_utils.GetRepoRevision(config["evaluated_repo_root"])
   inclusions_db["repo_rev"] = repo_rev
 
-  usage_analyzer_rev = git_utils.get_usage_analyzer_repo_revision()
+  usage_analyzer_rev = git_utils.GetUsageAnalyzerRepoRevision()
   inclusions_db["usage_analyzer_rev"] = usage_analyzer_rev
 
   inclusions_db["included_to_including"] = (included_to_including)
@@ -57,7 +57,7 @@ def generate_inclusions_database(config):
 # with the following filename:
 # <config_name>_<repo_rev>_inclusions_db.py.
 # Warns the user if the above directory already exists.
-def write_inclusions_db_to_disk(inclusions_db, output_dir):
+def WriteInclusionsDbToDisk(inclusions_db, output_dir):
   config_name = inclusions_db["config"]["name"]
   repo_rev = inclusions_db["repo_rev"]
   dirname = os.path.join(output_dir, config_name, repo_rev)
@@ -82,7 +82,7 @@ def write_inclusions_db_to_disk(inclusions_db, output_dir):
 
 
 # Reads the given database in from disk.
-def read_inclusions_db_from_disk(database_filepath):
+def ReadInclusionsDbFromDisk(database_filepath):
   with open(database_filepath, "r") as database_file:
     database = ast.literal_eval(database_file.read())
   return database
@@ -91,11 +91,11 @@ def read_inclusions_db_from_disk(database_filepath):
 # Takes in an inclusions database and returns
 # an including_to_included dictionary that has no included files as
 # keys.
-def filter_out_included_files_as_keys(inclusions_db):
+def FilterOutIncludedFilesAsKeys(inclusions_db):
   included_files = inclusions_db["config"]["included_files"]
-  included_files_regexes = [common_utils.root_regex(f) for f in included_files]
+  included_files_regexes = [common_utils.RootRegex(f) for f in included_files]
 
-  output_dict = common_utils.dict_filter_keys_matching_regex(
+  output_dict = common_utils.DictFilterKeysMatchingRegex(
       inclusions_db["including_to_included"], included_files_regexes)
 
   return output_dict
