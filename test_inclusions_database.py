@@ -62,3 +62,23 @@ class TestInclusionsDatabase(unittest.TestCase):
         "foo/foo.h": ["bar/bar.h"]
     }
     self.assertEqual(expected_output, output)
+
+  def test_FilterOutIncludedFilesAsValuesSimple(self):
+    db = inclusions_database.GenerateInclusionsDatabase(
+        test_utils.BASIC_TEST_CONFIG)
+
+    output = inclusions_database.FilterOutIncludedFilesAsValues(db)
+    expected_output = {"foo/foo.h": ["bar/bar.h", "bar/core.h"]}
+    self.assertEqual(expected_output, output)
+
+  def test_FilterOutIncludedFilesAsValuesComplex(self):
+    db = inclusions_database.GenerateInclusionsDatabase(
+        test_utils.COMPLEX_TEST_CONFIG)
+
+    output = inclusions_database.FilterOutIncludedFilesAsValues(db)
+    expected_output = {
+        "bar/bar.h": ["foo/foo.h"],
+        "bar/core.h": ["bar/baz/bar_core_factory.h"]
+    }
+
+    self.assertEqual(expected_output, output)

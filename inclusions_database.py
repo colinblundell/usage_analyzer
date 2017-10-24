@@ -99,3 +99,16 @@ def FilterOutIncludedFilesAsKeys(inclusions_db):
       inclusions_db["including_to_included"], included_files_regexes)
 
   return output_dict
+
+
+# Takes in an inclusions database and returns
+# an included_to_including dictionary that has no included files as
+# values.
+def FilterOutIncludedFilesAsValues(inclusions_db):
+  included_files = inclusions_db["config"]["included_files"]
+  included_files_regexes = [common_utils.RootRegex(f) for f in included_files]
+
+  output_dict = common_utils.DictFilterValuesMatchingRegex(
+      inclusions_db["included_to_including"], included_files_regexes)
+
+  return output_dict
