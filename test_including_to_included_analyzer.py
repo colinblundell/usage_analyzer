@@ -30,6 +30,14 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
                                              including_file_filters)
     return analyzer
 
+  def test_GenerateAnalysis(self):
+    analyzer = self.CreateAnalyzer([])
+    expected_output = {"total": 3,
+                       "bar/bar.h": 2,
+                       "bar/baz/bar_core_factory.h": 1}
+    output = analyzer.GenerateAnalysis()
+    self.assertEqual(expected_output, output)
+
   def test_GenerateGlobalAnalysisForFiltersDefaultFilters(self):
 
     def KeyPartitionFunction(filename):
