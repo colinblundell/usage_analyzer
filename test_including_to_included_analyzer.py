@@ -34,15 +34,16 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     analyzer = self.CreateAnalyzer([])
 
     # Test with a filter that allows all including files.
-    expected_output = {"total": 3,
-                       "bar/bar.h": 2,
-                       "bar/baz/bar_core_factory.h": 1}
+    expected_output = {
+        "total": 3,
+        "bar/bar.h": 2,
+        "bar/baz/bar_core_factory.h": 1
+    }
     output = analyzer.GenerateAnalysis(lambda k: True)
     self.assertEqual(expected_output, output)
-    
+
     # Test with a filter that allows only "bar/bar.h".
-    expected_output = {"total": 2,
-                       "bar/bar.h": 2}
+    expected_output = {"total": 2, "bar/bar.h": 2}
     output = analyzer.GenerateAnalysis(lambda k: k == "bar/bar.h")
     self.assertEqual(expected_output, output)
 

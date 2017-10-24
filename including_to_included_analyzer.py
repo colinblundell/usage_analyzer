@@ -36,14 +36,15 @@ class IncludingToIncludedAnalyzer:
   # Returns a dictionary mapping filtered including files to # of includes,
   # augmented with an entry for the total.
   def GenerateAnalysis(self, key_filter_function):
-    keys = [k for k in self.including_file_dict.keys() if key_filter_function(k)]
+    keys = [
+        k for k in self.including_file_dict.keys() if key_filter_function(k)
+    ]
     output_dict = {}
     for key in keys:
       output_dict[key] = self.including_file_dict[key]
     output_dict = common_utils.DictListValuesToSums(output_dict)
     output_dict = common_utils.DictWithTotal(output_dict)
     return output_dict
-
 
   # Generates a global analysis of |self.including_file_dict| and |filters| as
   # follows:
