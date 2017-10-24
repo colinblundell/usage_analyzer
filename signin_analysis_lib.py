@@ -52,3 +52,8 @@ def FilenameToSigninClient(filename):
       return client
 
   return os.path.dirname(filename)
+
+# Returns a boolean indicating whether |filename| belongs
+# to |client|.
+def InClient(filename, client):
+  return FilenameToSigninClient(filename) == client

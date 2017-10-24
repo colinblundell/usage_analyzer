@@ -31,10 +31,16 @@ class IncludingToIncludedAnalyzer:
 
     self.including_file_dict = including_file_dict
 
-  # Generates a dictionary mapping including files to # of includes,
+  # Takes in a filtering function that maps strings to booleans to specify whether
+  # the corresponding including files should be included in the analyses.
+  # Returns a dictionary mapping filtered including files to # of includes,
   # augmented with an entry for the total.
-  def GenerateAnalysis(self):
-    output_dict = common_utils.DictListValuesToSums(self.including_file_dict)
+  def GenerateAnalysis(self, key_filter_function):
+    keys = [k for k in self.including_file_dict.keys() if key_filter_function(k)]
+    output_dict = {}
+    for key in keys:
+      output_dict[key] = self.including_file_dict[key]
+    output_dict = common_utils.DictListValuesToSums(output_dict)
     output_dict = common_utils.DictWithTotal(output_dict)
     return output_dict
 
