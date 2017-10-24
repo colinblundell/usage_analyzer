@@ -24,14 +24,12 @@ class IncludedToIncludingAnalyzer:
     self.inclusions_db = inclusions_database.ReadInclusionsDbFromDisk(
         database_filename)
 
-    self.included_file_dict = self.inclusions_db["included_to_including"]
-    # TODO: Maybe this function should move to this class?
-    #included_file_dict = inclusions_database.FilterOutIncludedFilesAsKeys(
-    #    self.inclusions_db)
-    #included_file_dict = common_utils.DictFilterKeysMatchingRegex(
-    #    included_file_dict, including_files_filters)
+    included_file_dict = inclusions_database.FilterOutIncludedFilesAsValues(
+        self.inclusions_db)
+    included_file_dict = common_utils.DictFilterValuesMatchingRegex(
+        included_file_dict, including_files_filters)
 
-    #self.included_file_dict = included_file_dict
+    self.included_file_dict = included_file_dict
 
   # Returns a dictionary mapping included files to # of includes,
   # augmented with an entry for the total.
