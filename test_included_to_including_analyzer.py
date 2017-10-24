@@ -29,10 +29,18 @@ class TestGenerateIncludedToIncludingAnalyzer(unittest.TestCase):
                                              including_file_filters)
     return analyzer
 
-  def test_GenerateAnalysis(self):
+  def test_GenerateAnalysisDefaultFilter(self):
+    # Test with a filter that allows all including files.
     analyzer = self.CreateAnalyzer([])
 
-    # Test with a filter that allows all including files.
     expected_output = {"total": 3, "foo/foo.h": 1, "bar/core.h": 2}
+    output = analyzer.GenerateAnalysis()
+    self.assertEqual(expected_output, output)
+
+  def test_GenerateAnalysisCustomFilter(self):
+    # Test with a filter that filters out bar/bar.*.
+    analyzer = self.CreateAnalyzer(["bar/bar\..*"])
+
+    expected_output = {"total": 1, "foo/foo.h": 0, "bar/core.h": 1}
     output = analyzer.GenerateAnalysis()
     self.assertEqual(expected_output, output)
