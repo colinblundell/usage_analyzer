@@ -36,5 +36,6 @@ class IncludedToIncludingAnalyzer:
   # Returns a dictionary mapping included files to # of includes,
   # augmented with an entry for the total.
   def GenerateAnalysis(self):
-    output_dict = {}
+    output_dict = common_utils.DictListValuesToSums(self.included_file_dict)
+    output_dict = common_utils.DictWithTotal(output_dict)
     return output_dict
