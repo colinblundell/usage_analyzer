@@ -130,6 +130,29 @@ def DictFilterKeysMatchingRegex(dictionary, regex_list):
   return output_dict
 
 
+# Takes in a dictionary whose values are list of strings. Returns a dictionary
+# that is equivalent to the original except that the values have been pruned
+# such that strings matching any regex in |regex_list| have been removed.
+def DictFilterValuesMatchingRegex(dictionary, regex_list):
+  output_dict = {}
+  patterns = [re.compile(regex) for regex in regex_list]
+
+  for key, value_list in dictionary.iteritems():
+
+    output_dict[key] = []
+    for value in value_list:
+      preserve = True
+      for pattern in patterns:
+        if pattern.match(value):
+          preserve = False
+          break
+
+      if preserve:
+        output_dict[key].append(value)
+
+  return output_dict
+
+
 # Takes in a dictionary whose keys are strings and a function that goes from
 # string -> string. Returns a dictionary whose keys are outputs of the partition
 # function and whose values are the lists of keys from |dictionary| that the
