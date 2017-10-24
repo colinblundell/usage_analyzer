@@ -37,8 +37,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
 
     analyzer = self.CreateAnalyzer([])
     expected_output = {"total": 3, "bar": 2, "bar/baz": 1}
-    output = analyzer.GenerateGlobalAnalysisForFilters(
-        KeyPartitionFunction)
+    output = analyzer.GenerateGlobalAnalysisForFilters(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
   def test_GenerateGlobalAnalysisForFiltersConstructionFilter(self):
@@ -48,8 +47,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
 
     analyzer = self.CreateAnalyzer([r"bar/baz.*"])
     expected_output = {"total": 2, "bar": 2}
-    output = analyzer.GenerateGlobalAnalysisForFilters(
-        KeyPartitionFunction)
+    output = analyzer.GenerateGlobalAnalysisForFilters(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
   def test_GenerateGlobalAnalysisForFiltersMultipleFilters(self):
@@ -89,5 +87,5 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_output += "bar,2,2,2\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
     output = analyzer.GenerateGlobalAnalysisAsCsv(KeyPartitionFunction,
-                                                      "key name")
+                                                  "key name")
     self.assertEqual(expected_output, output)

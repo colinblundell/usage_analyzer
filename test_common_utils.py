@@ -86,8 +86,7 @@ class TestCommonUtils(unittest.TestCase):
     }
     test_regexes = [r"foo\..*", r"bad/.*"]
     expected_output = {"bar.h": ["baz.h", "qux.h"]}
-    output = common_utils.DictFilterKeysMatchingRegex(
-        test_dict, test_regexes)
+    output = common_utils.DictFilterKeysMatchingRegex(test_dict, test_regexes)
     self.assertEqual(expected_output, output)
 
   def test_DictPartitionKeys(self):
@@ -114,6 +113,5 @@ class TestCommonUtils(unittest.TestCase):
         "bar": ["bar.h"],
         "bad": ["bad/bad.h"]
     }
-    output = common_utils.DictPartitionKeys(test_dict,
-                                              test_PartitionFunction)
+    output = common_utils.DictPartitionKeys(test_dict, test_PartitionFunction)
     self.assertEqual(expected_output, output)

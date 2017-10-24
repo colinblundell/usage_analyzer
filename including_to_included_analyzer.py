@@ -40,20 +40,18 @@ class IncludingToIncludedAnalyzer:
   # Augments the dictionary with the total number of inclusions.
   # Returns the produced dictionary.
   # Note that by default, |filters| is [], i.e., no custom filters are applied.
-  def GenerateGlobalAnalysisForFilters(self,
-                                           KeyPartitionFunction,
-                                           filters=None):
+  def GenerateGlobalAnalysisForFilters(self, KeyPartitionFunction,
+                                       filters=None):
     if filters is None:
       filters = []
     including_file_dict = common_utils.DictFilterKeysMatchingRegex(
         self.including_file_dict, filters)
 
     feature_groups = common_utils.DictPartitionKeys(including_file_dict,
-                                                      KeyPartitionFunction)
+                                                    KeyPartitionFunction)
 
     feature_dict = {}
-    including_file_dict = common_utils.DictListValuesToSums(
-        including_file_dict)
+    including_file_dict = common_utils.DictListValuesToSums(including_file_dict)
     for feature, including_files in feature_groups.items():
       feature_dict[feature] = 0
       for including_file in including_files:
@@ -85,14 +83,12 @@ class IncludingToIncludedAnalyzer:
   # Generates a global analysis as described above and returns a string
   # representing that global analysis in CSV format. |key_header_name| is
   # used in the CSV's header as the name for the column of keys.
-  def GenerateGlobalAnalysisAsCsv(self, KeyPartitionFunction,
-                                      key_header_name):
+  def GenerateGlobalAnalysisAsCsv(self, KeyPartitionFunction, key_header_name):
     global_analysis = self.GenerateGlobalAnalysis(KeyPartitionFunction)
     presentation_order, feature_dicts = zip(*global_analysis)
     key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
     feature_dicts = common_utils.DictsWithMissingEntriesFilled(
         feature_dicts, key_order, 0)
     field_names = [key_header_name] + list(presentation_order)
-    output_csv = common_utils.DictsToCsv(feature_dicts, field_names,
-                                           key_order)
+    output_csv = common_utils.DictsToCsv(feature_dicts, field_names, key_order)
     return output_csv
