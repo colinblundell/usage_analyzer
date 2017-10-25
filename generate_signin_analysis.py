@@ -20,14 +20,19 @@ def GenerateAnalyses(database_filename):
 
   features_num_inclusions_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "num_inclusions", signin_analysis_lib.FilenameToSigninClient, "feature")
-  features_num_inclusions_filename = os.path.join(output_dir, "features_num_inclusions.txt")
+  features_num_inclusions_filename = os.path.join(output_dir,
+                                                  "features_num_inclusions.txt")
   with open(features_num_inclusions_filename, "w") as f:
     f.write(features_num_inclusions_csv)
 
   features_num_including_files_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
-      "group_size", signin_analysis_lib.FilenameToSigninClient, "feature",
-                                                                                   key_order=including_analyzer.GroupsOrderedByNumInclusions(signin_analysis_lib.FilenameToSigninClient))
-  features_num_including_files_filename = os.path.join(output_dir, "features_num_including_files.txt")
+      "group_size",
+      signin_analysis_lib.FilenameToSigninClient,
+      "feature",
+      key_order=including_analyzer.GroupsOrderedByNumInclusions(
+          signin_analysis_lib.FilenameToSigninClient))
+  features_num_including_files_filename = os.path.join(
+      output_dir, "features_num_including_files.txt")
   with open(features_num_including_files_filename, "w") as f:
     f.write(features_num_including_files_csv)
 

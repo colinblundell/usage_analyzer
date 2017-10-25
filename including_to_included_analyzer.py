@@ -126,7 +126,7 @@ class IncludingToIncludedAnalyzer:
   # feature (in descending order).
   def GroupsOrderedByNumInclusions(self, key_partition_function):
     feature_dict = self.GenerateGroupNumInclusionsForFilters(
-       key_partition_function)
+        key_partition_function)
     group_order = common_utils.DictKeysSortedByValue(feature_dict)
     return group_order
 
@@ -156,8 +156,11 @@ class IncludingToIncludedAnalyzer:
   # Possible analyses are "num_inclusions" and "group_size".
   # If |key_order| is not specified, keys will be presented in the order of
   # their values in the first dictionary.
-  def GenerateGroupAnalysisAsCsv(self, analysis_type, key_partition_function,
-                                 key_header_name, key_order=None):
+  def GenerateGroupAnalysisAsCsv(self,
+                                 analysis_type,
+                                 key_partition_function,
+                                 key_header_name,
+                                 key_order=None):
     analysis_types = {
         "num_inclusions": self.GenerateGroupNumInclusions,
         "group_size": self.GenerateGroupSizes,
