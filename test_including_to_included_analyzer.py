@@ -177,3 +177,18 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     output = analyzer.GenerateGroupAnalysisAsCsv(
         "group_size", KeyPartitionFunction, "key name")
     self.assertEqual(expected_output, output)
+
+  def test_GenerateGroupSizesAnalysisAsCsvCustomKeyOrder(self):
+
+    def KeyPartitionFunction(filename):
+      return os.path.dirname(filename)
+
+    analyzer = self.CreateAnalyzer([])
+    key_order = ["total", "bar", "bar/baz"]
+    expected_output = "key name,all,prod,prod non-factory\r\n"
+    expected_output += "total,2,2,1\r\n"
+    expected_output += "bar,1,1,1\r\n"
+    expected_output += "bar/baz,1,1,0\r\n"
+    output = analyzer.GenerateGroupAnalysisAsCsv(
+        "group_size", KeyPartitionFunction, "key name", key_order=key_order)
+    self.assertEqual(expected_output, output)
