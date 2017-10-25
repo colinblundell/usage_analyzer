@@ -15,7 +15,7 @@ INCLUDING_FILE_FILTERS = [
 CLIENTS = [
     "ios/web_view/internal/signin",
     "arc/auth",
-    "login",
+    "chrome/browser/chromeos/login",
     "sync",
     "signin",
     "history",

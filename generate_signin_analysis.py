@@ -9,6 +9,8 @@ import common_utils
 import signin_analysis_lib
 
 
+individual_feature_analyses = ["signin", "login"]
+
 def GenerateAnalyses(database_filename):
   output_dir = os.path.join(os.path.dirname(database_filename), "analyses")
   if not os.path.exists(output_dir):
@@ -36,15 +38,16 @@ def GenerateAnalyses(database_filename):
   with open(features_num_including_files_filename, "w") as f:
     f.write(features_num_including_files_csv)
 
-  signin_analysis = including_analyzer.GenerateNumInclusionsForFilterFunction(
-      lambda f: signin_analysis_lib.InClient(f, "signin"))
-  signin_analysis_csv = common_utils.DictToCsv(
-      signin_analysis, ["file", "num inclusions"],
-      common_utils.DictKeysSortedByValue(signin_analysis))
-  signin_analysis_filename = os.path.join(output_dir,
-                                          "signin_feature_analysis.txt")
-  with open(signin_analysis_filename, "w") as f:
-    f.write(signin_analysis_csv)
+  for feature in individual_feature_analyses:
+    feature_analysis = including_analyzer.GenerateNumInclusionsForFilterFunction(
+        lambda f: signin_analysis_lib.InClient(f, feature))
+    feature_analysis_csv = common_utils.DictToCsv(
+        feature_analysis, ["file", "num inclusions"],
+        common_utils.DictKeysSortedByValue(feature_analysis))
+    feature_analysis_filename = os.path.join(output_dir,
+                                            feature + "_feature_analysis.txt")
+    with open(feature_analysis_filename, "w") as f:
+      f.write(feature_analysis_csv)
 
   included_analyzer = (
       IncludedToIncludingAnalyzer(database_filename,
