@@ -75,6 +75,32 @@ class IncludingToIncludedAnalyzer:
     feature_dict = common_utils.DictWithTotal(feature_dict)
     return feature_dict
 
+  # Generates a global analysis of |self.including_file_dict| and |filters| as
+  # follows:
+  # Filters |self.including_file_dict| by |filters|.
+  # Partitions including files into features based on |key_partition_function|.
+  # Produces a dictionary whose keys are features and whose values are the
+  # number of including files within those features.
+  # Augments the dictionary with the total number of including files.
+  # Returns the produced dictionary.
+  # Note that by default, |filters| is [], i.e., no custom filters are applied.
+  def GenerateGroupSizesForFilters(self, key_partition_function,
+                                   filters=None):
+    if filters is None:
+      filters = []
+    including_file_dict = common_utils.DictFilterKeysMatchingRegex(
+        self.including_file_dict, filters)
+
+    feature_groups = common_utils.DictPartitionKeys(including_file_dict,
+                                                    key_partition_function)
+
+    feature_dict = {}
+    for feature, including_files in feature_groups.items():
+      feature_dict[feature] = len(including_files)
+
+    feature_dict = common_utils.DictWithTotal(feature_dict)
+    return feature_dict
+
   # Generates a global analysis of |self.including_file_dict| as follows:
   # Partitions including files into features based on |key_partition_function|.
   # Produces global analyses for:

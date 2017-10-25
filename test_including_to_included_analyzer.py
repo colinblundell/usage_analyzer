@@ -78,6 +78,37 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
         KeyPartitionFunction, filters=["bar/bar\..*"])
     self.assertEqual(expected_output, output)
 
+  def test_GenerateGroupSizesForFiltersDefaultFilters(self):
+
+    def KeyPartitionFunction(filename):
+      return os.path.dirname(filename)
+
+    analyzer = self.CreateAnalyzer([])
+    expected_output = {"total": 2, "bar": 1, "bar/baz": 1}
+    output = analyzer.GenerateGroupSizesForFilters(KeyPartitionFunction)
+    self.assertEqual(expected_output, output)
+
+  def test_GenerateGroupSizesForFiltersConstructionFilter(self):
+
+    def KeyPartitionFunction(filename):
+      return os.path.dirname(filename)
+
+    analyzer = self.CreateAnalyzer([r"bar/baz.*"])
+    expected_output = {"total": 1, "bar": 1}
+    output = analyzer.GenerateGroupSizesForFilters(KeyPartitionFunction)
+    self.assertEqual(expected_output, output)
+
+  def test_GenerateGroupSizesForFiltersMultipleFilters(self):
+
+    def KeyPartitionFunction(filename):
+      return os.path.dirname(filename)
+
+    analyzer = self.CreateAnalyzer([r"bar/baz.*"])
+    expected_output = {"total": 0}
+    output = analyzer.GenerateGroupSizesForFilters(
+        KeyPartitionFunction, filters=["bar/bar\..*"])
+    self.assertEqual(expected_output, output)
+
   def test_GenerateGlobalAnalysis(self):
 
     def KeyPartitionFunction(filename):
