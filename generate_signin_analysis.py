@@ -8,8 +8,8 @@ from including_to_included_analyzer import IncludingToIncludedAnalyzer
 import common_utils
 import signin_analysis_lib
 
-
 individual_feature_analyses = ["signin", "login"]
+
 
 def GenerateAnalyses(database_filename):
   output_dir = os.path.join(os.path.dirname(database_filename), "analyses")
@@ -45,7 +45,7 @@ def GenerateAnalyses(database_filename):
         feature_analysis, ["file", "num inclusions"],
         common_utils.DictKeysSortedByValue(feature_analysis))
     feature_analysis_filename = os.path.join(output_dir,
-                                            feature + "_feature_analysis.txt")
+                                             feature + "_feature_analysis.txt")
     with open(feature_analysis_filename, "w") as f:
       f.write(feature_analysis_csv)
 
