@@ -101,7 +101,7 @@ class IncludingToIncludedAnalyzer:
     feature_dict = common_utils.DictWithTotal(feature_dict)
     return feature_dict
 
-  # Generates a global analysis of |self.including_file_dict| as follows:
+  # Generates an analysis of |self.including_file_dict| as follows:
   # Partitions including files into features based on |key_partition_function|.
   # Produces global analyses for:
   # (1) all inclusions
@@ -141,12 +141,20 @@ class IncludingToIncludedAnalyzer:
       feature_dicts.append([name, feature_dict])
     return feature_dicts
 
-  # Generates an analysis as described above and returns a string
-  # representing that global analysis in CSV format. |key_header_name| is
-  # used in the CSV's header as the name for the column of keys.
-  def GenerateGroupNumInclusionsAsCsv(self, key_partition_function,
-                                      key_header_name):
-    global_analysis = self.GenerateGroupNumInclusions(key_partition_function)
+  # Generates a global analysis and returns a string representing that global
+  # analysis in CSV format. |key_header_name| is used in the CSV's header as the
+  # name for the column of keys.
+  # Possible analyses are "num_inclusions" and "group_size".
+  def GenerateGroupAnalysisAsCsv(self,
+                                 analysis_type,
+                                 key_partition_function,
+                                 key_header_name):
+    analysis_types = {
+      "num_inclusions" : self.GenerateGroupNumInclusions,
+      "group_size" : self.GenerateGroupSizes,
+    }
+    analysis_function = analysis_types[analysis_type]
+    global_analysis = analysis_function(key_partition_function)
     presentation_order, feature_dicts = zip(*global_analysis)
     key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
     feature_dicts = common_utils.DictsWithMissingEntriesFilled(
