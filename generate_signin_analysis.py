@@ -37,7 +37,8 @@ def GenerateNumInclusionsForFilterFunction(database_filename):
   included_analyzer = (
       IncludedToIncludingAnalyzer(database_filename,
                                   signin_analysis_lib.INCLUDING_FILE_FILTERS))
-  included_files_analysis = included_analyzer.GenerateNumInclusionsForFilterFunction()
+  included_files_analysis = included_analyzer.GenerateNumInclusionsForFilterFunction(
+  )
   included_files_analysis_csv = common_utils.DictToCsv(
       included_files_analysis, ["file", "num inclusions"],
       common_utils.DictKeysSortedByValue(included_files_analysis))

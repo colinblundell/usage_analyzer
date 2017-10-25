@@ -56,8 +56,8 @@ class IncludingToIncludedAnalyzer:
   # Returns the produced dictionary.
   # Note that by default, |filters| is [], i.e., no custom filters are applied.
   def GenerateGroupNumInclusionsForFilters(self,
-                                       key_partition_function,
-                                       filters=None):
+                                           key_partition_function,
+                                           filters=None):
     if filters is None:
       filters = []
     including_file_dict = common_utils.DictFilterKeysMatchingRegex(
@@ -145,7 +145,7 @@ class IncludingToIncludedAnalyzer:
   # representing that global analysis in CSV format. |key_header_name| is
   # used in the CSV's header as the name for the column of keys.
   def GenerateGroupNumInclusionsAsCsv(self, key_partition_function,
-                                  key_header_name):
+                                      key_header_name):
     global_analysis = self.GenerateGroupNumInclusions(key_partition_function)
     presentation_order, feature_dicts = zip(*global_analysis)
     key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])

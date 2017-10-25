@@ -44,7 +44,8 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
 
     # Test with a filter that allows only "bar/bar.h".
     expected_output = {"total": 2, "bar/bar.h": 2}
-    output = analyzer.GenerateNumInclusionsForFilterFunction(lambda k: k == "bar/bar.h")
+    output = analyzer.GenerateNumInclusionsForFilterFunction(
+        lambda k: k == "bar/bar.h")
     self.assertEqual(expected_output, output)
 
   def test_GenerateGroupNumInclusionsForFiltersDefaultFilters(self):
@@ -150,5 +151,5 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_output += "bar,2,2,2\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
     output = analyzer.GenerateGroupNumInclusionsAsCsv(KeyPartitionFunction,
-                                                  "key name")
+                                                      "key name")
     self.assertEqual(expected_output, output)
