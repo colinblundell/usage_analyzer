@@ -55,7 +55,8 @@ class IncludingToIncludedAnalyzer:
   # Augments the dictionary with the total number of inclusions.
   # Returns the produced dictionary.
   # Note that by default, |filters| is [], i.e., no custom filters are applied.
-  def GenerateGlobalAnalysisForFilters(self, key_partition_function,
+  def GenerateGlobalAnalysisForFilters(self,
+                                       key_partition_function,
                                        filters=None):
     if filters is None:
       filters = []
@@ -84,8 +85,7 @@ class IncludingToIncludedAnalyzer:
   # Augments the dictionary with the total number of including files.
   # Returns the produced dictionary.
   # Note that by default, |filters| is [], i.e., no custom filters are applied.
-  def GenerateGroupSizesForFilters(self, key_partition_function,
-                                   filters=None):
+  def GenerateGroupSizesForFilters(self, key_partition_function, filters=None):
     if filters is None:
       filters = []
     including_file_dict = common_utils.DictFilterKeysMatchingRegex(
@@ -121,10 +121,31 @@ class IncludingToIncludedAnalyzer:
       feature_dicts.append([name, feature_dict])
     return feature_dicts
 
+  # Generates group sizes of |self.including_file_dict| as follows:
+  # Partitions including files into features based on |key_partition_function|.
+  # Produces group sizes for:
+  # (1) all including files
+  # (2) all including prod files
+  # (3) all including non-factory prod files
+  # Returns a list of pairs where the first element is an identifier for the
+  # analysis and the second element is the dictionary representing the analysis
+  # itself.
+  def GenerateGroupSizes(self, key_partition_function):
+    feature_dicts = []
+    including_files_filters = [["all", []], ["prod", PROD_FILTERS],
+                               ["prod non-factory", PROD_NON_FACTORY_FILTERS]]
+
+    for name, filters in including_files_filters:
+      feature_dict = self.GenerateGroupSizesForFilters(
+          key_partition_function, filters=filters)
+      feature_dicts.append([name, feature_dict])
+    return feature_dicts
+
   # Generates a global analysis as described above and returns a string
   # representing that global analysis in CSV format. |key_header_name| is
   # used in the CSV's header as the name for the column of keys.
-  def GenerateGlobalAnalysisAsCsv(self, key_partition_function, key_header_name):
+  def GenerateGlobalAnalysisAsCsv(self, key_partition_function,
+                                  key_header_name):
     global_analysis = self.GenerateGlobalAnalysis(key_partition_function)
     presentation_order, feature_dicts = zip(*global_analysis)
     key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])

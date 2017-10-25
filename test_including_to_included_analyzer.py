@@ -124,6 +124,21 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     output = analyzer.GenerateGlobalAnalysis(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
+  def test_GenerateGroupSizes(self):
+
+    def KeyPartitionFunction(filename):
+      return os.path.dirname(filename)
+
+    analyzer = self.CreateAnalyzer([])
+    expected_all_including_files = {"total": 2, "bar": 1, "bar/baz": 1}
+    expected_prod_including_files = {"total": 2, "bar": 1, "bar/baz": 1}
+    expected_prod_non_factory_including_files = {"total": 1, "bar": 1}
+    expected_output = [["all", expected_all_including_files], [
+        "prod", expected_prod_including_files
+    ], ["prod non-factory", expected_prod_non_factory_including_files]]
+    output = analyzer.GenerateGroupSizes(KeyPartitionFunction)
+    self.assertEqual(expected_output, output)
+
   def test_GenerateGlobalAnalysisAsCsv(self):
 
     def KeyPartitionFunction(filename):
