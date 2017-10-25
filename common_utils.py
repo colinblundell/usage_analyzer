@@ -165,11 +165,11 @@ def DictFilterValuesMatchingRegex(dictionary, regex_list):
 # string -> string. Returns a dictionary whose keys are outputs of the partition
 # function and whose values are the lists of keys from |dictionary| that the
 # partition function mapped to that output.
-def DictPartitionKeys(dictionary, KeyPartitionFunction):
+def DictPartitionKeys(dictionary, key_partition_function):
   output_dict = {}
 
   for key in dictionary.keys():
-    partition = KeyPartitionFunction(key)
+    partition = key_partition_function(key)
     if partition not in output_dict:
       output_dict[partition] = []
     output_dict[partition].append(key)
