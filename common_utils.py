@@ -27,6 +27,14 @@ def RootRegex(filepath):
   return output
 
 
+# Takes in a string and returns a string specifying a regular expression that
+# matches the input string's root with a "_unittest" suffix and any extension.
+def UnittestRegex(filepath):
+  root = os.path.splitext(filepath)[0]
+  output = root + r"_unittest\..*"
+  return output
+
+
 # Returns a string that represents |dictionary| in CSV form. |field_names| is
 # written as the header, followed by rows of key->value maps in the order
 # given by |key_order|.

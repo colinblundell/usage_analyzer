@@ -12,6 +12,12 @@ class TestCommonUtils(unittest.TestCase):
     output = common_utils.RootRegex(test_filepath)
     self.assertEqual(expected_output, output)
 
+  def test_UnittestRegex(self):
+    test_filepath = "foo/bar.h"
+    expected_output = r"foo/bar_unittest\..*"
+    output = common_utils.UnittestRegex(test_filepath)
+    self.assertEqual(expected_output, output)
+
   def test_DictToCsv(self):
     test_dict = {"key1": "val1", "key2": "val2", "key3": "val3"}
     field_names = ["name", "value"]

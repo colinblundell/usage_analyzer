@@ -88,15 +88,21 @@ def ReadInclusionsDbFromDisk(database_filepath):
   return database
 
 
+def IncludedFilesRegexes(inclusions_db):
+  included_files = inclusions_db["config"]["included_files"]
+  root_regexes = [common_utils.RootRegex(f) for f in included_files]
+  test_regexes = [common_utils.UnittestRegex(f) for f in included_files]
+  included_files_regexes = root_regexes + test_regexes
+  return included_files_regexes
+
+
 # Takes in an inclusions database and returns
 # an including_to_included dictionary that has no included files as
 # keys.
 def FilterOutIncludedFilesAsKeys(inclusions_db):
-  included_files = inclusions_db["config"]["included_files"]
-  included_files_regexes = [common_utils.RootRegex(f) for f in included_files]
-
   output_dict = common_utils.DictFilterKeysMatchingRegex(
-      inclusions_db["including_to_included"], included_files_regexes)
+      inclusions_db["including_to_included"],
+      IncludedFilesRegexes(inclusions_db))
 
   return output_dict
 
@@ -105,10 +111,8 @@ def FilterOutIncludedFilesAsKeys(inclusions_db):
 # an included_to_including dictionary that has no included files as
 # values.
 def FilterOutIncludedFilesAsValues(inclusions_db):
-  included_files = inclusions_db["config"]["included_files"]
-  included_files_regexes = [common_utils.RootRegex(f) for f in included_files]
-
   output_dict = common_utils.DictFilterValuesMatchingRegex(
-      inclusions_db["included_to_including"], included_files_regexes)
+      inclusions_db["included_to_including"],
+      IncludedFilesRegexes(inclusions_db))
 
   return output_dict

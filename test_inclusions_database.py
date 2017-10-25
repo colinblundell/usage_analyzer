@@ -8,6 +8,18 @@ import test_utils
 
 class TestInclusionsDatabase(unittest.TestCase):
 
+  def test_IncludedFilesRegexes(self):
+    test_db = inclusions_database.GenerateInclusionsDatabase(
+        test_utils.COMPLEX_TEST_CONFIG)
+    expected_included_files_regexes = [
+        r"bar/bar\..*",
+        r"bar/core\..*",
+        r"bar/bar_unittest\..*",
+        r"bar/core_unittest\..*",
+    ]
+    included_files_regexes = inclusions_database.IncludedFilesRegexes(test_db)
+    self.assertEqual(expected_included_files_regexes, included_files_regexes)
+
   def test_GenerateInclusionsDatabaseSimple(self):
     output_db = inclusions_database.GenerateInclusionsDatabase(
         test_utils.BASIC_TEST_CONFIG)
