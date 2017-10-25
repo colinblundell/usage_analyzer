@@ -145,8 +145,10 @@ class IncludingToIncludedAnalyzer:
   # analysis in CSV format. |key_header_name| is used in the CSV's header as the
   # name for the column of keys.
   # Possible analyses are "num_inclusions" and "group_size".
+  # If |key_order| is not specified, keys will be presented in the order of
+  # their values in the first dictionary.
   def GenerateGroupAnalysisAsCsv(self, analysis_type, key_partition_function,
-                                 key_header_name):
+                                 key_header_name, key_order=None):
     analysis_types = {
         "num_inclusions": self.GenerateGroupNumInclusions,
         "group_size": self.GenerateGroupSizes,
@@ -154,7 +156,8 @@ class IncludingToIncludedAnalyzer:
     analysis_function = analysis_types[analysis_type]
     global_analysis = analysis_function(key_partition_function)
     presentation_order, feature_dicts = zip(*global_analysis)
-    key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
+    if key_order == None:
+      key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
     feature_dicts = common_utils.DictsWithMissingEntriesFilled(
         feature_dicts, key_order, 0)
     field_names = [key_header_name] + list(presentation_order)
