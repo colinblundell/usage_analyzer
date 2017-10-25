@@ -19,13 +19,14 @@ inclusions_config.EvaluateConfig(EXPECTED_TEST_CONFIG)
 
 EXPECTED_INCLUDED_FILES_TO_INCLUDING_FILES = {
     'bar/bar.h': ['foo/foo.h'],
-    'foo/foo.h': ['foo/foo.cc', 'bar/bar.h', 'bar/core.h']
+    'foo/foo.h': ['foo/foo_unittest.cc', 'foo/foo.cc', 'bar/bar.h', 'bar/core.h']
 }
 
 EXPECTED_INCLUDING_FILES_TO_INCLUDED_FILES = {
     'bar/bar.h': ['foo/foo.h'],
     'bar/core.h': ['foo/foo.h'],
     'foo/foo.cc': ['foo/foo.h'],
+    'foo/foo_unittest.cc': ['foo/foo.h'],
     'foo/foo.h': ['bar/bar.h']
 }
 
