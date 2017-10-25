@@ -36,11 +36,10 @@ CLIENTS = [
     "cryptauth",
     "first_run",
     "bookmarks",
-    "extensions/api/identity",
+    "chrome/browser/extensions/api/identity",
     "webui",
     "ios/chrome/browser/ui",
     "chrome/browser/ui",
-    "chrome/browser/extensions",
     "extensions",
 ]
 
