@@ -121,6 +121,15 @@ class IncludingToIncludedAnalyzer:
       feature_dicts.append([name, feature_dict])
     return feature_dicts
 
+  # Partitions including files into features based on |key_partition_function|.
+  # Returns these features ordered by the number of inclusions within each
+  # feature (in descending order).
+  def GroupsOrderedByNumInclusions(self, key_partition_function):
+    feature_dict = self.GenerateGroupNumInclusionsForFilters(
+       key_partition_function)
+    group_order = common_utils.DictKeysSortedByValue(feature_dict)
+    return group_order
+
   # Generates group sizes of |self.including_file_dict| as follows:
   # Partitions including files into features based on |key_partition_function|.
   # Produces group sizes for:

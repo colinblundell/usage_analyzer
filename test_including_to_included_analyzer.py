@@ -125,6 +125,16 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     output = analyzer.GenerateGroupNumInclusions(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
+  def test_GenerateGroupsOrderedByNumInclusions(self):
+
+    def KeyPartitionFunction(filename):
+      return os.path.dirname(filename)
+
+    analyzer = self.CreateAnalyzer([])
+    expected_output = ["total", "bar", "bar/baz"]
+    output = analyzer.GroupsOrderedByNumInclusions(KeyPartitionFunction)
+    self.assertEqual(expected_output, output)
+
   def test_GenerateGroupSizes(self):
 
     def KeyPartitionFunction(filename):
