@@ -33,9 +33,9 @@ class IncludingToIncludedAnalyzer:
 
   # Takes in a filtering function that maps strings to booleans to specify
   # whether the corresponding including files should be included in the
-  # analyses. Returns a dictionary mapping filtered including files to # of
+  # analysis. Returns a dictionary mapping filtered including files to # of
   # includes, augmented with an entry for the total.
-  def GenerateAnalysis(self, key_filter_function):
+  def GenerateNumInclusionsForFilterFunction(self, key_filter_function):
     keys = [
         k for k in self.including_file_dict.keys() if key_filter_function(k)
     ]
@@ -46,7 +46,7 @@ class IncludingToIncludedAnalyzer:
     output_dict = common_utils.DictWithTotal(output_dict)
     return output_dict
 
-  # Generates a global analysis of |self.including_file_dict| and |filters| as
+  # Generates an analysis of |self.including_file_dict| and |filters| as
   # follows:
   # Filters |self.including_file_dict| by |filters|.
   # Partitions including files into features based on |key_partition_function|.
@@ -55,7 +55,7 @@ class IncludingToIncludedAnalyzer:
   # Augments the dictionary with the total number of inclusions.
   # Returns the produced dictionary.
   # Note that by default, |filters| is [], i.e., no custom filters are applied.
-  def GenerateGlobalAnalysisForFilters(self,
+  def GenerateGroupNumInclusionsForFilters(self,
                                        key_partition_function,
                                        filters=None):
     if filters is None:
@@ -76,7 +76,7 @@ class IncludingToIncludedAnalyzer:
     feature_dict = common_utils.DictWithTotal(feature_dict)
     return feature_dict
 
-  # Generates a global analysis of |self.including_file_dict| and |filters| as
+  # Generates an analysis of |self.including_file_dict| and |filters| as
   # follows:
   # Filters |self.including_file_dict| by |filters|.
   # Partitions including files into features based on |key_partition_function|.
@@ -110,13 +110,13 @@ class IncludingToIncludedAnalyzer:
   # Returns a list of pairs where the first element is an identifier for the
   # analysis and the second element is the dictionary representing the analysis
   # itself.
-  def GenerateGlobalAnalysis(self, key_partition_function):
+  def GenerateGroupNumInclusions(self, key_partition_function):
     feature_dicts = []
     including_files_filters = [["all", []], ["prod", PROD_FILTERS],
                                ["prod non-factory", PROD_NON_FACTORY_FILTERS]]
 
     for name, filters in including_files_filters:
-      feature_dict = self.GenerateGlobalAnalysisForFilters(
+      feature_dict = self.GenerateGroupNumInclusionsForFilters(
           key_partition_function, filters=filters)
       feature_dicts.append([name, feature_dict])
     return feature_dicts
@@ -141,12 +141,12 @@ class IncludingToIncludedAnalyzer:
       feature_dicts.append([name, feature_dict])
     return feature_dicts
 
-  # Generates a global analysis as described above and returns a string
+  # Generates an analysis as described above and returns a string
   # representing that global analysis in CSV format. |key_header_name| is
   # used in the CSV's header as the name for the column of keys.
-  def GenerateGlobalAnalysisAsCsv(self, key_partition_function,
+  def GenerateGroupNumInclusionsAsCsv(self, key_partition_function,
                                   key_header_name):
-    global_analysis = self.GenerateGlobalAnalysis(key_partition_function)
+    global_analysis = self.GenerateGroupNumInclusions(key_partition_function)
     presentation_order, feature_dicts = zip(*global_analysis)
     key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
     feature_dicts = common_utils.DictsWithMissingEntriesFilled(

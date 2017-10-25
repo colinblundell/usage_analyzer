@@ -30,7 +30,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
                                              including_file_filters)
     return analyzer
 
-  def test_GenerateAnalysis(self):
+  def test_GenerateNumInclusionsForFilterFunction(self):
     analyzer = self.CreateAnalyzer([])
 
     # Test with a filter that allows all including files.
@@ -39,42 +39,42 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
         "bar/bar.h": 2,
         "bar/baz/bar_core_factory.h": 1
     }
-    output = analyzer.GenerateAnalysis(lambda k: True)
+    output = analyzer.GenerateNumInclusionsForFilterFunction(lambda k: True)
     self.assertEqual(expected_output, output)
 
     # Test with a filter that allows only "bar/bar.h".
     expected_output = {"total": 2, "bar/bar.h": 2}
-    output = analyzer.GenerateAnalysis(lambda k: k == "bar/bar.h")
+    output = analyzer.GenerateNumInclusionsForFilterFunction(lambda k: k == "bar/bar.h")
     self.assertEqual(expected_output, output)
 
-  def test_GenerateGlobalAnalysisForFiltersDefaultFilters(self):
+  def test_GenerateGroupNumInclusionsForFiltersDefaultFilters(self):
 
     def KeyPartitionFunction(filename):
       return os.path.dirname(filename)
 
     analyzer = self.CreateAnalyzer([])
     expected_output = {"total": 3, "bar": 2, "bar/baz": 1}
-    output = analyzer.GenerateGlobalAnalysisForFilters(KeyPartitionFunction)
+    output = analyzer.GenerateGroupNumInclusionsForFilters(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
-  def test_GenerateGlobalAnalysisForFiltersConstructionFilter(self):
+  def test_GenerateGroupNumInclusionsForFiltersConstructionFilter(self):
 
     def KeyPartitionFunction(filename):
       return os.path.dirname(filename)
 
     analyzer = self.CreateAnalyzer([r"bar/baz.*"])
     expected_output = {"total": 2, "bar": 2}
-    output = analyzer.GenerateGlobalAnalysisForFilters(KeyPartitionFunction)
+    output = analyzer.GenerateGroupNumInclusionsForFilters(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
-  def test_GenerateGlobalAnalysisForFiltersMultipleFilters(self):
+  def test_GenerateGroupNumInclusionsForFiltersMultipleFilters(self):
 
     def KeyPartitionFunction(filename):
       return os.path.dirname(filename)
 
     analyzer = self.CreateAnalyzer([r"bar/baz.*"])
     expected_output = {"total": 0}
-    output = analyzer.GenerateGlobalAnalysisForFilters(
+    output = analyzer.GenerateGroupNumInclusionsForFilters(
         KeyPartitionFunction, filters=["bar/bar\..*"])
     self.assertEqual(expected_output, output)
 
@@ -109,7 +109,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
         KeyPartitionFunction, filters=["bar/bar\..*"])
     self.assertEqual(expected_output, output)
 
-  def test_GenerateGlobalAnalysis(self):
+  def test_GenerateGroupNumInclusions(self):
 
     def KeyPartitionFunction(filename):
       return os.path.dirname(filename)
@@ -121,7 +121,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_output = [["all", expected_all_inclusions], [
         "prod", expected_prod_inclusions
     ], ["prod non-factory", expected_prod_non_factory_inclusions]]
-    output = analyzer.GenerateGlobalAnalysis(KeyPartitionFunction)
+    output = analyzer.GenerateGroupNumInclusions(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
   def test_GenerateGroupSizes(self):
@@ -139,7 +139,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     output = analyzer.GenerateGroupSizes(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
-  def test_GenerateGlobalAnalysisAsCsv(self):
+  def test_GenerateGroupNumInclusionsAsCsv(self):
 
     def KeyPartitionFunction(filename):
       return os.path.dirname(filename)
@@ -149,6 +149,6 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_output += "total,3,3,2\r\n"
     expected_output += "bar,2,2,2\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
-    output = analyzer.GenerateGlobalAnalysisAsCsv(KeyPartitionFunction,
+    output = analyzer.GenerateGroupNumInclusionsAsCsv(KeyPartitionFunction,
                                                   "key name")
     self.assertEqual(expected_output, output)

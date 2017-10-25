@@ -9,7 +9,7 @@ import common_utils
 import signin_analysis_lib
 
 
-def GenerateAnalysis(database_filename):
+def GenerateNumInclusionsForFilterFunction(database_filename):
   output_dir = os.path.join(os.path.dirname(database_filename), "analyses")
   if not os.path.exists(output_dir):
     os.mkdir(output_dir)
@@ -18,13 +18,13 @@ def GenerateAnalysis(database_filename):
       IncludingToIncludedAnalyzer(database_filename,
                                   signin_analysis_lib.INCLUDING_FILE_FILTERS))
 
-  features_analysis_csv = including_analyzer.GenerateGlobalAnalysisAsCsv(
+  features_analysis_csv = including_analyzer.GenerateGroupNumInclusionsAsCsv(
       signin_analysis_lib.FilenameToSigninClient, "feature")
   features_analysis_filename = os.path.join(output_dir, "features_analysis.txt")
   with open(features_analysis_filename, "w") as f:
     f.write(features_analysis_csv)
 
-  signin_analysis = including_analyzer.GenerateAnalysis(
+  signin_analysis = including_analyzer.GenerateNumInclusionsForFilterFunction(
       lambda f: signin_analysis_lib.InClient(f, "signin"))
   signin_analysis_csv = common_utils.DictToCsv(
       signin_analysis, ["file", "num inclusions"],
@@ -37,7 +37,7 @@ def GenerateAnalysis(database_filename):
   included_analyzer = (
       IncludedToIncludingAnalyzer(database_filename,
                                   signin_analysis_lib.INCLUDING_FILE_FILTERS))
-  included_files_analysis = included_analyzer.GenerateAnalysis()
+  included_files_analysis = included_analyzer.GenerateNumInclusionsForFilterFunction()
   included_files_analysis_csv = common_utils.DictToCsv(
       included_files_analysis, ["file", "num inclusions"],
       common_utils.DictKeysSortedByValue(included_files_analysis))
@@ -49,4 +49,4 @@ def GenerateAnalysis(database_filename):
 
 if __name__ == '__main__':
   database_path = sys.argv[1]
-  GenerateAnalysis(database_path)
+  GenerateNumInclusionsForFilterFunction(database_path)
