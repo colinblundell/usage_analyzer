@@ -150,9 +150,8 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_output += "total,3,3,2\r\n"
     expected_output += "bar,2,2,2\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
-    output = analyzer.GenerateGroupAnalysisAsCsv("num_inclusions",
-                                                      KeyPartitionFunction,
-                                                      "key name")
+    output = analyzer.GenerateGroupAnalysisAsCsv(
+        "num_inclusions", KeyPartitionFunction, "key name")
     self.assertEqual(expected_output, output)
 
   def test_GenerateGroupSizesAnalysisAsCsv(self):
@@ -165,7 +164,6 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_output += "total,2,2,1\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
     expected_output += "bar,1,1,1\r\n"
-    output = analyzer.GenerateGroupAnalysisAsCsv("group_size",
-                                                      KeyPartitionFunction,
-                                                      "key name")
+    output = analyzer.GenerateGroupAnalysisAsCsv(
+        "group_size", KeyPartitionFunction, "key name")
     self.assertEqual(expected_output, output)

@@ -145,13 +145,11 @@ class IncludingToIncludedAnalyzer:
   # analysis in CSV format. |key_header_name| is used in the CSV's header as the
   # name for the column of keys.
   # Possible analyses are "num_inclusions" and "group_size".
-  def GenerateGroupAnalysisAsCsv(self,
-                                 analysis_type,
-                                 key_partition_function,
+  def GenerateGroupAnalysisAsCsv(self, analysis_type, key_partition_function,
                                  key_header_name):
     analysis_types = {
-      "num_inclusions" : self.GenerateGroupNumInclusions,
-      "group_size" : self.GenerateGroupSizes,
+        "num_inclusions": self.GenerateGroupNumInclusions,
+        "group_size": self.GenerateGroupSizes,
     }
     analysis_function = analysis_types[analysis_type]
     global_analysis = analysis_function(key_partition_function)
