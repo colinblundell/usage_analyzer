@@ -20,11 +20,10 @@ CLIENTS = [
     "signin",
     "history",
     "autofill",
-    "password",
+    "password_manager",
     "policy",
     "supervised_user",
     "gcm",
-    # NOTE: This must be below sync and gcm to avoid catching their driver dirs.
     "drive",
     "invalidation",
     "ntp_snippets",
@@ -36,19 +35,43 @@ CLIENTS = [
     "cryptauth",
     "first_run",
     "bookmarks",
+    "browsing_data",
     "chrome/browser/extensions/api/identity",
     "webui",
+    "autocomplete",
+    "feedback",
+    "browser_state",
+    "cloud_print",
+    "metrics",
+    "download",
+    "safe_browsing",
+    "drive_backend",
+    "gcm_driver",
+    "desktop_ios_promotion",
+    "search",
+    "toolbar",
+    "devtools",
+    "startup",
+    "app_list",
+    "ios/chrome/browser/ui/authentication",
+    "ios/chrome/browser/ui/signin_interaction",
     "ios/chrome/browser/ui",
     "chrome/browser/ui",
     "extensions",
+    "chrome/browser/android",
+    "chrome/browser/chromeos",
 ]
 
 
 # Maps a filename into the signin client that it belongs to.
 def FilenameToSigninClient(filename):
   for client in CLIENTS:
-    if client in filename:
-      return client
+    if client == "signin":
+      if "signin/" in filename:
+        return client
+    else:
+      if client + "/" in filename:
+        return client
 
   return os.path.dirname(filename)
 

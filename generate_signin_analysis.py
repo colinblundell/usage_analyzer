@@ -8,7 +8,7 @@ from including_to_included_analyzer import IncludingToIncludedAnalyzer
 import common_utils
 import signin_analysis_lib
 
-individual_feature_analyses = ["signin", "login"]
+individual_feature_analyses = ["signin"]
 
 
 def GenerateAnalyses(database_filename):
