@@ -8,6 +8,10 @@ import re
 import tempfile
 
 
+# TODO: Rename these? They're confusing because they're a little backwards, but
+# the way they're used in other files then becomes confusing if they're named
+# the other way.
+
 # Regexes that filter out test files, leaving only prod files.
 PROD_FILTERS = [".*fake.*", ".*test.*"]
 
