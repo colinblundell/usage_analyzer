@@ -8,6 +8,12 @@ import re
 import tempfile
 
 
+# Regexes that filter out test files, leaving only prod files.
+PROD_FILTERS = [".*fake.*", ".*test.*"]
+
+# Regexes that filter both test files and factories.
+PROD_NON_FACTORY_FILTERS = PROD_FILTERS + [".*_factory.*"]
+
 # Returns a freshly-created directory that gets automatically deleted after
 # usage.
 @contextlib.contextmanager

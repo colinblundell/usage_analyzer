@@ -5,12 +5,6 @@ import os
 import common_utils
 import inclusions_database
 
-# Regexes that filter out test files, leaving only prod files.
-PROD_FILTERS = [".*fake.*", ".*test.*"]
-
-# Regexes that filter both test files and factories.
-PROD_NON_FACTORY_FILTERS = PROD_FILTERS + [".*_factory.*"]
-
 
 # Class that can analyze the including_to_included dictionary of an
 # inclusions database.
@@ -112,8 +106,8 @@ class IncludingToIncludedAnalyzer:
   # itself.
   def GenerateGroupNumInclusions(self, key_partition_function):
     feature_dicts = []
-    including_files_filters = [["all", []], ["prod", PROD_FILTERS],
-                               ["prod non-factory", PROD_NON_FACTORY_FILTERS]]
+    including_files_filters = [["all", []], ["prod", common_utils.PROD_FILTERS],
+                               ["prod non-factory", common_utils.PROD_NON_FACTORY_FILTERS]]
 
     for name, filters in including_files_filters:
       feature_dict = self.GenerateGroupNumInclusionsForFilters(
@@ -141,8 +135,8 @@ class IncludingToIncludedAnalyzer:
   # itself.
   def GenerateGroupSizes(self, key_partition_function):
     feature_dicts = []
-    including_files_filters = [["all", []], ["prod", PROD_FILTERS],
-                               ["prod non-factory", PROD_NON_FACTORY_FILTERS]]
+    including_files_filters = [["all", []], ["prod", common_utils.PROD_FILTERS],
+                               ["prod non-factory", common_utils.PROD_NON_FACTORY_FILTERS]]
 
     for name, filters in including_files_filters:
       feature_dict = self.GenerateGroupSizesForFilters(
