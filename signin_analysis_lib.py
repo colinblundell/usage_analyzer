@@ -66,12 +66,8 @@ CLIENTS = [
 # Maps a filename into the signin client that it belongs to.
 def FilenameToSigninClient(filename):
   for client in CLIENTS:
-    if client == "signin":
-      if "signin/" in filename:
-        return client
-    else:
-      if client + "/" in filename:
-        return client
+    if client + "/" in filename:
+      return client
 
   return os.path.dirname(filename)
 

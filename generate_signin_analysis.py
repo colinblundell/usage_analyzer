@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import copy
 import os
 import sys
 
@@ -43,6 +44,7 @@ def GenerateAnalyses(database_filename):
         lambda f: signin_analysis_lib.InClient(f, feature))
     # Sort files in alphabetical order for the individual feature analysis to
     # group directories together.
+    including_files_order = copy.deepcopy(feature_analysis.keys())
     including_files_order.sort()
     feature_analysis_csv = common_utils.DictToCsv(
         feature_analysis, ["file", "num inclusions"], including_files_order)
