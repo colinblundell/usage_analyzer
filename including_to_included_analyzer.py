@@ -106,8 +106,9 @@ class IncludingToIncludedAnalyzer:
   # itself.
   def GenerateGroupNumInclusions(self, key_partition_function):
     feature_dicts = []
-    including_files_filters = [["all", []], ["prod", common_utils.PROD_FILTERS],
-                               ["prod non-factory", common_utils.PROD_NON_FACTORY_FILTERS]]
+    including_files_filters = [["all", []], [
+        "prod", common_utils.PROD_FILTERS
+    ], ["prod non-factory", common_utils.PROD_NON_FACTORY_FILTERS]]
 
     for name, filters in including_files_filters:
       feature_dict = self.GenerateGroupNumInclusionsForFilters(
@@ -135,8 +136,9 @@ class IncludingToIncludedAnalyzer:
   # itself.
   def GenerateGroupSizes(self, key_partition_function):
     feature_dicts = []
-    including_files_filters = [["all", []], ["prod", common_utils.PROD_FILTERS],
-                               ["prod non-factory", common_utils.PROD_NON_FACTORY_FILTERS]]
+    including_files_filters = [["all", []], [
+        "prod", common_utils.PROD_FILTERS
+    ], ["prod non-factory", common_utils.PROD_NON_FACTORY_FILTERS]]
 
     for name, filters in including_files_filters:
       feature_dict = self.GenerateGroupSizesForFilters(

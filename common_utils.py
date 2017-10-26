@@ -7,7 +7,6 @@ import shutil
 import re
 import tempfile
 
-
 # TODO: Rename these? They're confusing because they're a little backwards, but
 # the way they're used in other files then becomes confusing if they're named
 # the other way.
@@ -20,6 +19,7 @@ NON_FACTORY_FILTERS = [".*_factory.*"]
 
 # Regexes that filter both test files and factories.
 PROD_NON_FACTORY_FILTERS = PROD_FILTERS + NON_FACTORY_FILTERS
+
 
 # Returns a freshly-created directory that gets automatically deleted after
 # usage.
@@ -189,6 +189,7 @@ def DictPartitionKeys(dictionary, key_partition_function):
 
   return output_dict
 
+
 # Returns True if this string matches any of the regexes in |regex_list|.
 def MatchesOneOfRegexes(string, regex_list):
   patterns = [re.compile(regex) for regex in regex_list]
@@ -196,6 +197,7 @@ def MatchesOneOfRegexes(string, regex_list):
     if pattern.match(string):
       return True
   return False
+
 
 # Takes in a list of filenames and returns a list of filenames in the following
 # order:
@@ -207,7 +209,7 @@ def FilenamesSeparatedByProdStatus(filenames):
   prod_non_factory_files = []
   prod_factory_files = []
   test_files = []
-  
+
   for filename in filenames:
     if MatchesOneOfRegexes(filename, PROD_FILTERS):
       test_files.append(filename)

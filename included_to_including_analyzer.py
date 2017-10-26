@@ -10,7 +10,9 @@ import inclusions_database
 common_utils.PROD_FILTERS = [".*fake.*", ".*test.*"]
 
 # Regexes that filter both test files and factories.
-common_utils.PROD_NON_FACTORY_FILTERS = common_utils.PROD_FILTERS + [".*_factory.*"]
+common_utils.PROD_NON_FACTORY_FILTERS = common_utils.PROD_FILTERS + [
+    ".*_factory.*"
+]
 
 
 # Class that can analyze the included_to_including dictionary of an

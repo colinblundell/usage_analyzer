@@ -134,34 +134,34 @@ class TestCommonUtils(unittest.TestCase):
 
   def test_MatchesOneOfRegexes(self):
     test_regexes = ["..*foo", "bar.*"]
-    self.assertEqual(common_utils.MatchesOneOfRegexes("ab_foo", test_regexes),
-                     True)
-    self.assertEqual(common_utils.MatchesOneOfRegexes("foosh", test_regexes),
-                     False)
-    self.assertEqual(common_utils.MatchesOneOfRegexes("bar", test_regexes),
-                     True)
-    self.assertEqual(common_utils.MatchesOneOfRegexes("morebar", test_regexes),
-                     False)
+    self.assertEqual(
+        common_utils.MatchesOneOfRegexes("ab_foo", test_regexes), True)
+    self.assertEqual(
+        common_utils.MatchesOneOfRegexes("foosh", test_regexes), False)
+    self.assertEqual(
+        common_utils.MatchesOneOfRegexes("bar", test_regexes), True)
+    self.assertEqual(
+        common_utils.MatchesOneOfRegexes("morebar", test_regexes), False)
 
   def test_FilenamesSeparatedByProdStatus(self):
     filenames = [
-      "foo_factory.h",
-      "bar/bar_unittest.cc",
-      "foo.h",
-      "baz_unittest.cc",
-      "bar/bar.h",
-      "bar/bar_factory.cc",
-      "baz.cc",
+        "foo_factory.h",
+        "bar/bar_unittest.cc",
+        "foo.h",
+        "baz_unittest.cc",
+        "bar/bar.h",
+        "bar/bar_factory.cc",
+        "baz.cc",
     ]
 
     expected_output = [
-      "foo.h",
-      "bar/bar.h",
-      "baz.cc",
-      "foo_factory.h",
-      "bar/bar_factory.cc",
-      "bar/bar_unittest.cc",
-      "baz_unittest.cc",
+        "foo.h",
+        "bar/bar.h",
+        "baz.cc",
+        "foo_factory.h",
+        "bar/bar_factory.cc",
+        "bar/bar_unittest.cc",
+        "baz_unittest.cc",
     ]
 
     output = common_utils.FilenamesSeparatedByProdStatus(filenames)
