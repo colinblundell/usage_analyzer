@@ -41,9 +41,11 @@ def GenerateAnalyses(database_filename):
   for feature in individual_feature_analyses:
     feature_analysis = including_analyzer.GenerateNumInclusionsForFilterFunction(
         lambda f: signin_analysis_lib.InClient(f, feature))
+    # Sort files in alphabetical order for the individual feature analysis to
+    # group directories together.
+    including_files_order.sort()
     feature_analysis_csv = common_utils.DictToCsv(
-        feature_analysis, ["file", "num inclusions"],
-        common_utils.DictKeysSortedByValue(feature_analysis))
+        feature_analysis, ["file", "num inclusions"], including_files_order)
     feature_analysis_filename = os.path.join(output_dir,
                                              feature + "_feature_analysis.txt")
     with open(feature_analysis_filename, "w") as f:
