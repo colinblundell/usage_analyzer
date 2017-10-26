@@ -11,8 +11,11 @@ import tempfile
 # Regexes that filter out test files, leaving only prod files.
 PROD_FILTERS = [".*fake.*", ".*test.*"]
 
+# Regexes that filter factories.
+NON_FACTORY_FILTERS = [".*_factory.*"]
+
 # Regexes that filter both test files and factories.
-PROD_NON_FACTORY_FILTERS = PROD_FILTERS + [".*_factory.*"]
+PROD_NON_FACTORY_FILTERS = PROD_FILTERS + NON_FACTORY_FILTERS
 
 # Returns a freshly-created directory that gets automatically deleted after
 # usage.
@@ -181,3 +184,32 @@ def DictPartitionKeys(dictionary, key_partition_function):
     output_dict[partition].append(key)
 
   return output_dict
+
+# Returns True if this string matches any of the regexes in |regex_list|.
+def MatchesOneOfRegexes(string, regex_list):
+  patterns = [re.compile(regex) for regex in regex_list]
+  for pattern in patterns:
+    if pattern.match(string):
+      return True
+  return False
+
+# Takes in a list of filenames and returns a list of filenames in the following
+# order:
+# prod non-factory files
+# prod factory files
+# test files
+# Within each section of the list, files are in the order given in |filenames|.
+def FilenamesSeparatedByProdStatus(filenames):
+  prod_non_factory_files = []
+  prod_factory_files = []
+  test_files = []
+  
+  for filename in filenames:
+    if MatchesOneOfRegexes(filename, PROD_FILTERS):
+      test_files.append(filename)
+    elif MatchesOneOfRegexes(filename, PROD_NON_FACTORY_FILTERS):
+      prod_factory_files.append(filename)
+    else:
+      prod_non_factory_files.append(filename)
+
+  return prod_non_factory_files + prod_factory_files + test_files
