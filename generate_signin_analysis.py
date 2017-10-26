@@ -53,9 +53,10 @@ def GenerateAnalyses(database_filename):
       IncludedToIncludingAnalyzer(database_filename,
                                   signin_analysis_lib.INCLUDING_FILE_FILTERS))
   included_files_analysis = included_analyzer.GenerateAnalysis()
+  included_files_order = common_utils.DictKeysSortedByValue(included_files_analysis)
   included_files_analysis_csv = common_utils.DictToCsv(
       included_files_analysis, ["file", "num inclusions"],
-      common_utils.DictKeysSortedByValue(included_files_analysis))
+      included_files_order)
   included_files_analysis_filename = os.path.join(output_dir,
                                                   "included_files_analysis.txt")
   with open(included_files_analysis_filename, "w") as f:
