@@ -119,9 +119,9 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_all_inclusions = {"total": 3, "bar": 2, "bar/baz": 1}
     expected_prod_inclusions = {"total": 3, "bar": 2, "bar/baz": 1}
     expected_prod_non_factory_inclusions = {"total": 2, "bar": 2}
-    expected_output = [["all", expected_all_inclusions], [
-        "prod", expected_prod_inclusions
-    ], ["prod non-factory", expected_prod_non_factory_inclusions]]
+    expected_output = [["# inclusions", expected_all_inclusions], [
+        "from prod", expected_prod_inclusions
+    ], ["from prod non-factory", expected_prod_non_factory_inclusions]]
     output = analyzer.GenerateGroupNumInclusions(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
@@ -156,7 +156,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
       return os.path.dirname(filename)
 
     analyzer = self.CreateAnalyzer([])
-    expected_output = "key name,all,prod,prod non-factory\r\n"
+    expected_output = "key name,# inclusions,from prod,from prod non-factory\r\n"
     expected_output += "total,3,3,2\r\n"
     expected_output += "bar,2,2,2\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
