@@ -47,7 +47,7 @@ def GenerateAnalyses(database_filename):
     including_files_order = copy.deepcopy(feature_analysis.keys())
     including_files_order.sort()
     feature_analysis_csv = common_utils.DictToCsv(
-        feature_analysis, ["file", "num inclusions"], including_files_order)
+        feature_analysis, ["file", "# inclusions"], including_files_order)
     feature_analysis_filename = os.path.join(output_dir,
                                              feature + "_feature_analysis.txt")
     with open(feature_analysis_filename, "w") as f:
@@ -60,7 +60,7 @@ def GenerateAnalyses(database_filename):
   included_files_order = common_utils.DictKeysSortedByValue(
       included_files_analysis)
   included_files_analysis_csv = common_utils.DictToCsv(
-      included_files_analysis, ["file", "num inclusions"], included_files_order)
+      included_files_analysis, ["file", "# inclusions"], included_files_order)
   included_files_analysis_filename = os.path.join(output_dir,
                                                   "included_files_analysis.txt")
   with open(included_files_analysis_filename, "w") as f:
