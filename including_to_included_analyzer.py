@@ -136,7 +136,7 @@ class IncludingToIncludedAnalyzer:
   # itself.
   def GenerateGroupSizes(self, key_partition_function):
     feature_dicts = []
-    including_files_filters = [["all", []], [
+    including_files_filters = [["# including files", []], [
         "prod", common_utils.PROD_FILTERS
     ], ["prod non-factory", common_utils.PROD_NON_FACTORY_FILTERS]]
 

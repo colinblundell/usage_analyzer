@@ -144,7 +144,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_all_including_files = {"total": 2, "bar": 1, "bar/baz": 1}
     expected_prod_including_files = {"total": 2, "bar": 1, "bar/baz": 1}
     expected_prod_non_factory_including_files = {"total": 1, "bar": 1}
-    expected_output = [["all", expected_all_including_files], [
+    expected_output = [["# including files", expected_all_including_files], [
         "prod", expected_prod_including_files
     ], ["prod non-factory", expected_prod_non_factory_including_files]]
     output = analyzer.GenerateGroupSizes(KeyPartitionFunction)
@@ -170,7 +170,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
       return os.path.dirname(filename)
 
     analyzer = self.CreateAnalyzer([])
-    expected_output = "key name,all,prod,prod non-factory\r\n"
+    expected_output = "key name,# including files,prod,prod non-factory\r\n"
     expected_output += "total,2,2,1\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
     expected_output += "bar,1,1,1\r\n"
@@ -185,7 +185,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
 
     analyzer = self.CreateAnalyzer([])
     key_order = ["total", "bar", "bar/baz"]
-    expected_output = "key name,all,prod,prod non-factory\r\n"
+    expected_output = "key name,# including files,prod,prod non-factory\r\n"
     expected_output += "total,2,2,1\r\n"
     expected_output += "bar,1,1,1\r\n"
     expected_output += "bar/baz,1,1,0\r\n"
