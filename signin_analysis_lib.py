@@ -9,7 +9,7 @@ INCLUDING_FILE_FILTERS = [
     "^services/identity/.*",
 ]
 
-# Set of signin clients specified by filename. Each of these clients captures 
+# Set of signin clients specified by filename. Each of these clients captures
 # all files that:
 # (a) are not captured earlier in the list or in the above list and
 # (b) have the client name somewhere in their filepath.
@@ -40,7 +40,7 @@ FILENAME_CLIENTS = [
     "oauth2_token_service_observer_bridge",
 ]
 
-# Set of signin clients specified by directory. Each of these clients captures 
+# Set of signin clients specified by directory. Each of these clients captures
 # all files that:
 # (a) are not captured earlier in the list or in the above list and
 # (b) have the client name as a directory somewhere in their filepath.
