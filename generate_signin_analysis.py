@@ -10,6 +10,7 @@ from including_to_included_analyzer import IncludingToIncludedAnalyzer
 import common_utils
 import signin_analysis_lib
 
+
 def GenerateAnalyses(database_filename):
   output_dir = os.path.join(os.path.dirname(database_filename), "analyses")
   if not os.path.exists(output_dir):
@@ -26,8 +27,8 @@ def GenerateAnalyses(database_filename):
   with open(features_num_inclusions_filename, "w") as f:
     f.write(features_num_inclusions_csv)
 
-  feature_list=including_analyzer.GroupsOrderedByNumInclusions(
-    signin_analysis_lib.FilenameToSigninClient)
+  feature_list = including_analyzer.GroupsOrderedByNumInclusions(
+      signin_analysis_lib.FilenameToSigninClient)
   features_num_including_files_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "group_size",
       signin_analysis_lib.FilenameToSigninClient,
