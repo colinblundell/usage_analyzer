@@ -2,15 +2,13 @@
 
 import copy
 import os
+import shutil
 import sys
 
 from included_to_including_analyzer import IncludedToIncludingAnalyzer
 from including_to_included_analyzer import IncludingToIncludedAnalyzer
 import common_utils
 import signin_analysis_lib
-
-individual_feature_analyses = ["signin"]
-
 
 def GenerateAnalyses(database_filename):
   output_dir = os.path.join(os.path.dirname(database_filename), "analyses")
@@ -28,18 +26,23 @@ def GenerateAnalyses(database_filename):
   with open(features_num_inclusions_filename, "w") as f:
     f.write(features_num_inclusions_csv)
 
+  feature_list=including_analyzer.GroupsOrderedByNumInclusions(
+    signin_analysis_lib.FilenameToSigninClient)
   features_num_including_files_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "group_size",
       signin_analysis_lib.FilenameToSigninClient,
       "feature",
-      key_order=including_analyzer.GroupsOrderedByNumInclusions(
-          signin_analysis_lib.FilenameToSigninClient))
+      key_order=feature_list)
   features_num_including_files_filename = os.path.join(
       output_dir, "features_num_including_files.txt")
   with open(features_num_including_files_filename, "w") as f:
     f.write(features_num_including_files_csv)
 
-  for feature in individual_feature_analyses:
+  features_analyses_dir = os.path.join(output_dir, "features")
+  if os.path.exists(features_analyses_dir):
+    shutil.rmtree(features_analyses_dir)
+  os.mkdir(features_analyses_dir)
+  for feature in feature_list:
     feature_analysis = including_analyzer.GenerateNumInclusionsForFilterFunction(
         lambda f: signin_analysis_lib.InClient(f, feature))
     # Sort files in alphabetical order for the individual feature analysis to
@@ -48,8 +51,8 @@ def GenerateAnalyses(database_filename):
     including_files_order.sort()
     feature_analysis_csv = common_utils.DictToCsv(
         feature_analysis, ["file", "# inclusions"], including_files_order)
-    feature_analysis_filename = os.path.join(output_dir,
-                                             feature + "_feature_analysis.txt")
+    feature_analysis_filename = os.path.join(features_analyses_dir,
+                                             feature.replace("/", "_") + ".txt")
     with open(feature_analysis_filename, "w") as f:
       f.write(feature_analysis_csv)
 
