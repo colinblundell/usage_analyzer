@@ -20,6 +20,20 @@ def GenerateAnalyses(database_filename):
       IncludingToIncludedAnalyzer(database_filename,
                                   signin_analysis_lib.INCLUDING_FILE_FILTERS))
 
+  features_num_inclusions = including_analyzer.GenerateGroupNumInclusions(
+      signin_analysis_lib.FilenameToSigninClient)
+  date = "11/25/2017"
+  num_test_inclusions = 2
+  num_prod_factory_inclusions = 3
+  num_prod_non_factory_inclusions = 5
+  progress_over_time_input = "%s,%d,%d,%d\n" % (date, num_test_inclusions,
+                                                num_prod_factory_inclusions,
+                                                num_prod_non_factory_inclusions)
+  progress_over_time_input_filename = os.path.join(
+      output_dir, "progress_over_time_input.txt")
+  with open(progress_over_time_input_filename, "w") as f:
+    f.write(progress_over_time_input)
+
   features_num_inclusions_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "num_inclusions", signin_analysis_lib.FilenameToSigninClient, "feature")
   features_num_inclusions_filename = os.path.join(output_dir,
