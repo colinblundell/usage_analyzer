@@ -22,13 +22,22 @@ def GenerateAnalyses(database_filename):
 
   features_num_inclusions = including_analyzer.GenerateGroupNumInclusions(
       signin_analysis_lib.FilenameToSigninClient)
+  for name, analysis in features_num_inclusions:
+    if name == "# inclusions":
+      total_inclusions = analysis["total"]
+    elif name == "from prod":
+      prod_inclusions = analysis["total"]
+    elif name == "from prod non-factory":
+      prod_non_factory_inclusions = analysis["total"]
+    else:
+      assert 0
+
   date = "11/25/2017"
-  num_test_inclusions = 2
-  num_prod_factory_inclusions = 3
-  num_prod_non_factory_inclusions = 5
-  progress_over_time_input = "%s,%d,%d,%d\n" % (date, num_test_inclusions,
-                                                num_prod_factory_inclusions,
-                                                num_prod_non_factory_inclusions)
+  test_inclusions = total_inclusions - prod_inclusions
+  prod_factory_inclusions = prod_inclusions - prod_non_factory_inclusions
+  progress_over_time_input = "%s,%d,%d,%d\n" % (date, test_inclusions,
+                                                prod_factory_inclusions,
+                                                prod_non_factory_inclusions)
   progress_over_time_input_filename = os.path.join(
       output_dir, "progress_over_time_input.txt")
   with open(progress_over_time_input_filename, "w") as f:
