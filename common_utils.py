@@ -83,6 +83,21 @@ def DictsToCsv(dictionaries, field_names, key_order):
   return output.getvalue()
 
 
+
+# Takes in a dictionary and a value.
+# Returns a dictionary that's equivalent to the original but with all
+# keys that have the given value removed.
+# |keys_to_keep| is a list of keys that are preserved even if their value
+# matches |value_to_remove|.
+def DictWithValueRemoved(dictionary, value_to_remove,
+                         keys_to_keep=[]):
+  output = {}
+  for key, value in dictionary.iteritems():
+    if value == value_to_remove and key not in keys_to_keep:
+      continue
+    output[key] = value
+  return output
+
 # Takes in a dictionary, a list of keys, and a default value.
 # Returns a dictionary that's equivalent to the original but with all
 # missing keys filled with the default value.

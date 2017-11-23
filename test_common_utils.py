@@ -41,11 +41,17 @@ class TestCommonUtils(unittest.TestCase):
     output = common_utils.DictsToCsv(test_dicts, field_names, key_order)
     self.assertEqual(expected_output, output)
 
-  def test_DictWithMissingEntriesFilled(self):
+  def test_DictWithValueRemoved(self):
     test_dict = {"key2": 5}
     keys = ["key1", "key2", "key3"]
     expected_output = {"key1": 0, "key2": 5, "key3": 0}
     output = common_utils.DictWithMissingEntriesFilled(test_dict, keys, 0)
+    self.assertEqual(expected_output, output)
+
+  def test_DictWithMissingEntriesFilled(self):
+    test_dict = {"key1": 0, "key2": 5, "key3": -1, "key4": 0, "key5" : 5}
+    expected_output = {"key2": 5, "key3": -1, "key4": 0, "key5": 5}
+    output = common_utils.DictWithValueRemoved(test_dict, 0, keys_to_keep=["key4"])
     self.assertEqual(expected_output, output)
 
   def test_DictsWithMissingEntriesFilled(self):

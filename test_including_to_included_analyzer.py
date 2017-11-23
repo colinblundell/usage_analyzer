@@ -198,5 +198,13 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     def KeyPartitionFunction(filename):
       return os.path.dirname(filename)
 
+    expected_all_inclusions = {"total": 0, "baz": 1, "bar": 1, "qux": -2}
+    expected_prod_inclusions = {"total": 1, "baz": 1, "bar": 1, "qux": -1}
+    expected_prod_non_factory_inclusions = {"total": 2, "baz": 1, "bar": 1}
+    expected_output = [["# inclusions", expected_all_inclusions], [
+        "from prod", expected_prod_inclusions
+    ], ["from prod non-factory", expected_prod_non_factory_inclusions]]
+
     output = ComputeGroupNumInclusionsDeltaBetween("./test/data/databases/fake_999999_inclusions_db.py", "./test/data/databases/fake_aaaaaaa_inclusions_db.py", KeyPartitionFunction)
-    print output
+
+    self.assertEqual(expected_output, output)
