@@ -105,6 +105,25 @@ def DictsWithMissingEntriesFilled(dictionaries, keys, default_value):
   return output
 
 
+# Takes in two dictionaries mapping strings to numbers and returns a dictionary
+# representing the difference. Specifically, for a given key k:
+# if k is in dict1 and dict2, diff[k] = dict2[k] - dict1[k]
+# if k is in dict1 but not dict2, diff[k] = 0 - dict1[k]
+# if k is in dict2 but not dict1, diff[k] = dict2[k]
+def DifferenceBetweenDicts(dict1, dict2):
+  diff_dict = {}
+
+  for k, v in dict2.iteritems():
+    diff = v
+    if k in dict1:
+      diff -= dict1[k]
+    diff_dict[k] = diff
+
+  for k in set(dict1.keys()) - set(dict2.keys()):
+    diff_dict[k] = -(dict1[k])
+
+  return diff_dict
+
 # Takes in a dictionary whose values are lists and returns a dictionary whose
 # values are the lengths of the source lists.
 def DictListValuesToSums(dictionary):

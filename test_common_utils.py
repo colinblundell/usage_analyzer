@@ -65,6 +65,13 @@ class TestCommonUtils(unittest.TestCase):
         [test_dict_a, test_dict_b], keys, 0)
     self.assertEqual(expected_output, output)
 
+  def test_DifferenceBetweenDicts(self):
+    test_dict_1 = {"key1": 2, "key2": 5, "key4": 3}
+    test_dict_2 = {"key1": 3, "key3": 8, "key4": 3}
+    expected_output = {"key1" : 1, "key2": -5, "key3": 8, "key4": 0}
+    output = common_utils.DifferenceBetweenDicts(test_dict_1, test_dict_2)
+    self.assertEqual(expected_output, output)
+
   def test_DictListValuesToSums(self):
     test_dict = {"key1": [1, 2, 3, 4], "key2": [], "key3": [1]}
     expected_output = {"key1": 4, "key2": 0, "key3": 1}
