@@ -177,5 +177,20 @@ class IncludingToIncludedAnalyzer:
 # |database1_filename| and |database2_filename|. Returns this delta in the same
 # format as IncludingToIncludedAnalyzer.GenerateGroupNumInclusions().
 def ComputeGroupNumInclusionsDeltaBetween(database1_filename, 
-                                          database2_filename):
-  return {}
+                                          database2_filename,
+                                          key_partition_function):
+  analyzer1 = IncludingToIncludedAnalyzer(database1_filename, [])
+  analyzer2 = IncludingToIncludedAnalyzer(database2_filename, [])
+  group_analysis1 = analyzer1.GenerateGroupNumInclusions(key_partition_function)
+  group_analysis2 = analyzer2.GenerateGroupNumInclusions(key_partition_function)
+  diff_analysis = []
+
+  for i in range(len(group_analysis1)):
+    name = group_analysis1[i][0]
+    assert name == group_analysis2[i][0]
+    dict1 = group_analysis1[i][1]
+    dict2 = group_analysis2[i][1]
+    diff = common_utils.DifferenceBetweenDicts(dict1, dict2)
+    diff_analysis.append([name, diff])
+
+  return diff_analysis
