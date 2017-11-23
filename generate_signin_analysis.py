@@ -32,7 +32,7 @@ def GenerateAnalyses(database_filename):
     else:
       assert 0
 
-  date = "11/25/2017"
+  date = including_analyzer.inclusions_db["repo_commit_date"]
   test_inclusions = total_inclusions - prod_inclusions
   prod_factory_inclusions = prod_inclusions - prod_non_factory_inclusions
   progress_over_time_input = "%s,%d,%d,%d\n" % (date, test_inclusions,

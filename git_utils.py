@@ -22,7 +22,8 @@ def GetRepoCommitDate(repo_root):
       shell=True,
       stdout=subprocess.PIPE,
       cwd=repo_root).stdout.read()
-  return commit_date
+  # Strip off the trailing newline.
+  return commit_date.strip()
 
 
 # Returns the shortrev of HEAD of the usage analyzer repo (i.e., this repo).

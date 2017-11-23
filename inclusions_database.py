@@ -23,6 +23,10 @@ DATABASE_TEMPLATE = {
     # The revision of the repo that was analyzed (i.e., the repo
     # specified by the configuration's |evaluated_repo_root| field).
     "repo_rev": "short-rev",
+    # The commit date of the repo that was analyzed (i.e., the repo
+    # specified by the configuration's |evaluated_repo_root| field).
+    # In YYYY/MM/DD form.
+    "repo_commit_date": "short-commit-date",
     # The time at which this database was generated.
     "timestamp (UTC)": "timestamp",
 }
@@ -42,6 +46,9 @@ def GenerateInclusionsDatabase(config):
 
   repo_rev = git_utils.GetRepoRevision(config["evaluated_repo_root"])
   inclusions_db["repo_rev"] = repo_rev
+
+  repo_commit_date = git_utils.GetRepoCommitDate(config["evaluated_repo_root"])
+  inclusions_db["repo_commit_date"] = repo_commit_date
 
   usage_analyzer_rev = git_utils.GetUsageAnalyzerRepoRevision()
   inclusions_db["usage_analyzer_rev"] = usage_analyzer_rev
