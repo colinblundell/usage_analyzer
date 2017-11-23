@@ -171,3 +171,11 @@ class IncludingToIncludedAnalyzer:
     field_names = [key_header_name] + list(presentation_order)
     output_csv = common_utils.DictsToCsv(feature_dicts, field_names, key_order)
     return output_csv
+
+
+# Computes the delta between the group num inclusions analyses for
+# |database1_filename| and |database2_filename|. Returns this delta in the same
+# format as IncludingToIncludedAnalyzer.GenerateGroupNumInclusions().
+def ComputeGroupNumInclusionsDeltaBetween(database1_filename, 
+                                          database2_filename):
+  return {}

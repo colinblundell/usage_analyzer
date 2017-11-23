@@ -7,6 +7,7 @@ import git_utils
 import inclusions_config
 import inclusions_database
 from including_to_included_analyzer import IncludingToIncludedAnalyzer
+from including_to_included_analyzer import ComputeGroupNumInclusionsDeltaBetween
 
 
 class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
@@ -192,3 +193,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     output = analyzer.GenerateGroupAnalysisAsCsv(
         "group_size", KeyPartitionFunction, "key name", key_order=key_order)
     self.assertEqual(expected_output, output)
+
+  def test_ComputeGroupNumInclusionsDeltaBetween(self):
+    output = ComputeGroupNumInclusionsDeltaBetween("./test/data/databases/fake_999999_inclusions_db.py", "./test/data/databases/fake_aaaaaaa_inclusions_db.py")
+    print output
