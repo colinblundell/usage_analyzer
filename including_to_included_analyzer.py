@@ -205,7 +205,6 @@ def ComputeGroupNumInclusionsDeltaBetween(
     dict2 = group_analysis2[i][1]
     diff = common_utils.DifferenceBetweenDicts(dict1, dict2)
     diff = common_utils.DictWithValueRemoved(diff, 0, keys_to_keep=["total"])
-    print diff
     diff_analysis.append([name, diff])
 
   return diff_analysis
