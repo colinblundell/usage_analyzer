@@ -146,6 +146,21 @@ class IncludingToIncludedAnalyzer:
       feature_dicts.append([name, feature_dict])
     return feature_dicts
 
+  # Takes in a global analysis and returns a string representing that global
+  # analysis in CSV format. |key_header_name| is used in the CSV's header as the
+  # name for the column of keys.
+  # If |key_order| is not specified, keys will be presented in the order of
+  # their values in the first dictionary.
+  def GenerateCsvFromGroupAnalysis(self, analysis, key_header_name, key_order):
+    presentation_order, feature_dicts = zip(*analysis)
+    if key_order == None:
+      key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
+    feature_dicts = common_utils.DictsWithMissingEntriesFilled(
+        feature_dicts, key_order, 0)
+    field_names = [key_header_name] + list(presentation_order)
+    output_csv = common_utils.DictsToCsv(feature_dicts, field_names, key_order)
+    return output_csv
+
   # Generates a global analysis and returns a string representing that global
   # analysis in CSV format. |key_header_name| is used in the CSV's header as the
   # name for the column of keys.
@@ -163,14 +178,8 @@ class IncludingToIncludedAnalyzer:
     }
     analysis_function = analysis_types[analysis_type]
     global_analysis = analysis_function(key_partition_function)
-    presentation_order, feature_dicts = zip(*global_analysis)
-    if key_order == None:
-      key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
-    feature_dicts = common_utils.DictsWithMissingEntriesFilled(
-        feature_dicts, key_order, 0)
-    field_names = [key_header_name] + list(presentation_order)
-    output_csv = common_utils.DictsToCsv(feature_dicts, field_names, key_order)
-    return output_csv
+    return self.GenerateCsvFromGroupAnalysis(global_analysis, key_header_name, key_order)
+
 
 
 # Computes the delta between the group num inclusions analyses for
