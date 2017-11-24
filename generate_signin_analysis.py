@@ -7,6 +7,7 @@ import sys
 
 from included_to_including_analyzer import IncludedToIncludingAnalyzer
 from including_to_included_analyzer import IncludingToIncludedAnalyzer
+from including_to_included_analyzer import ComputeGroupNumInclusionsDeltaBetween
 import common_utils
 import signin_analysis_lib
 
@@ -19,6 +20,8 @@ def GenerateAnalyses(database_filename):
   including_analyzer = (
       IncludingToIncludedAnalyzer(database_filename,
                                   signin_analysis_lib.INCLUDING_FILE_FILTERS))
+
+  # Generate progress-over-time input.
 
   features_num_inclusions = including_analyzer.GenerateGroupNumInclusions(
       signin_analysis_lib.FilenameToSigninClient)
@@ -43,6 +46,29 @@ def GenerateAnalyses(database_filename):
   with open(progress_over_time_input_filename, "w") as f:
     f.write(progress_over_time_input)
 
+  # Generate delta from last state.
+  
+  # TODO: Compute these for real.
+  analyses_base_dir = os.path.dirname(os.path.dirname(database_filename))
+  previous_database_filename = os.path.join(analyses_base_dir,
+                                            "97fabdbe4aa7/signin_97fabdbe4aa7_inclusions_db.py")
+  last_commit_date = "2017-10-20"
+
+  delta_since_last_state = ComputeGroupNumInclusionsDeltaBetween(previous_database_filename,
+                                                                                                database_filename,
+                                                                                                signin_analysis_lib.FilenameToSigninClient)
+  delta_since_last_state_csv = including_analyzer.GenerateCsvFromGroupAnalysis(delta_since_last_state, 
+      "feature",
+      key_order=feature_list)
+  delta_since_last_state_filename = os.path.join(
+      output_dir, "delta_since_%s.txt" % last_commit_date)
+  with open(delta_since_last_state_filename, "w") as f:
+    f.write(delta_since_last_state_csv)
+
+  # Generate detailed breakdowns of current state.
+  feature_list = including_analyzer.GroupsOrderedByNumInclusions(
+      signin_analysis_lib.FilenameToSigninClient)
+
   features_num_inclusions_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "num_inclusions", signin_analysis_lib.FilenameToSigninClient, "feature")
   features_num_inclusions_filename = os.path.join(output_dir,
@@ -50,13 +76,10 @@ def GenerateAnalyses(database_filename):
   with open(features_num_inclusions_filename, "w") as f:
     f.write(features_num_inclusions_csv)
 
-  feature_list = including_analyzer.GroupsOrderedByNumInclusions(
-      signin_analysis_lib.FilenameToSigninClient)
   features_num_including_files_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "group_size",
       signin_analysis_lib.FilenameToSigninClient,
-      "feature",
-      key_order=feature_list)
+      "feature")
   features_num_including_files_filename = os.path.join(
       output_dir, "features_num_including_files.txt")
   with open(features_num_including_files_filename, "w") as f:
