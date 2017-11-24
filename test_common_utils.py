@@ -49,9 +49,10 @@ class TestCommonUtils(unittest.TestCase):
     self.assertEqual(expected_output, output)
 
   def test_DictWithMissingEntriesFilled(self):
-    test_dict = {"key1": 0, "key2": 5, "key3": -1, "key4": 0, "key5" : 5}
+    test_dict = {"key1": 0, "key2": 5, "key3": -1, "key4": 0, "key5": 5}
     expected_output = {"key2": 5, "key3": -1, "key4": 0, "key5": 5}
-    output = common_utils.DictWithValueRemoved(test_dict, 0, keys_to_keep=["key4"])
+    output = common_utils.DictWithValueRemoved(
+        test_dict, 0, keys_to_keep=["key4"])
     self.assertEqual(expected_output, output)
 
   def test_DictsWithMissingEntriesFilled(self):
@@ -74,7 +75,7 @@ class TestCommonUtils(unittest.TestCase):
   def test_DifferenceBetweenDicts(self):
     test_dict_1 = {"key1": 2, "key2": 5, "key4": 3}
     test_dict_2 = {"key1": 3, "key3": 8, "key4": 3}
-    expected_output = {"key1" : 1, "key2": -5, "key3": 8, "key4": 0}
+    expected_output = {"key1": 1, "key2": -5, "key3": 8, "key4": 0}
     output = common_utils.DifferenceBetweenDicts(test_dict_1, test_dict_2)
     self.assertEqual(expected_output, output)
 

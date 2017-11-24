@@ -9,6 +9,7 @@ from included_to_including_analyzer import IncludedToIncludingAnalyzer
 from including_to_included_analyzer import IncludingToIncludedAnalyzer
 from including_to_included_analyzer import ComputeGroupNumInclusionsDeltaBetween
 import common_utils
+import inclusions_database
 import signin_analysis_lib
 
 
@@ -47,21 +48,20 @@ def GenerateAnalyses(database_filename):
     f.write(progress_over_time_input)
 
   # Generate delta from last state.
-  
-  # TODO: Compute these for real.
-  analyses_base_dir = os.path.dirname(os.path.dirname(database_filename))
-  previous_database_filename = os.path.join(analyses_base_dir,
-                                            "97fabdbe4aa7/signin_97fabdbe4aa7_inclusions_db.py")
-  last_commit_date = "2017-10-20"
 
-  delta_since_last_state = ComputeGroupNumInclusionsDeltaBetween(previous_database_filename,
-                                                                                                database_filename,
-                                                                                                signin_analysis_lib.FilenameToSigninClient)
-  delta_since_last_state_csv = including_analyzer.GenerateCsvFromGroupAnalysis(delta_since_last_state, 
-      "feature",
-      key_order=feature_list)
+  # TODO: Compute these for real.
+  previous_database_filename = inclusions_database.FindMostRecentDbBefore(
+      database_filename)
+  previous_database_commit_date = inclusions_database.GetRepoCommitDateFromInclusionsDbFilename(
+      previous_database_filename)
+
+  delta_since_last_state = ComputeGroupNumInclusionsDeltaBetween(
+      previous_database_filename, database_filename,
+      signin_analysis_lib.FilenameToSigninClient)
+  delta_since_last_state_csv = including_analyzer.GenerateCsvFromGroupAnalysis(
+      delta_since_last_state, "feature")
   delta_since_last_state_filename = os.path.join(
-      output_dir, "delta_since_%s.txt" % last_commit_date)
+      output_dir, "delta_since_%s.txt" % previous_database_commit_date)
   with open(delta_since_last_state_filename, "w") as f:
     f.write(delta_since_last_state_csv)
 
@@ -79,7 +79,8 @@ def GenerateAnalyses(database_filename):
   features_num_including_files_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "group_size",
       signin_analysis_lib.FilenameToSigninClient,
-      "feature")
+      "feature",
+      key_order=feature_list)
   features_num_including_files_filename = os.path.join(
       output_dir, "features_num_including_files.txt")
   with open(features_num_including_files_filename, "w") as f:

@@ -151,7 +151,10 @@ class IncludingToIncludedAnalyzer:
   # name for the column of keys.
   # If |key_order| is not specified, keys will be presented in the order of
   # their values in the first dictionary.
-  def GenerateCsvFromGroupAnalysis(self, analysis, key_header_name, key_order):
+  def GenerateCsvFromGroupAnalysis(self,
+                                   analysis,
+                                   key_header_name,
+                                   key_order=None):
     presentation_order, feature_dicts = zip(*analysis)
     if key_order == None:
       key_order = common_utils.DictKeysSortedByValue(feature_dicts[0])
@@ -178,8 +181,8 @@ class IncludingToIncludedAnalyzer:
     }
     analysis_function = analysis_types[analysis_type]
     global_analysis = analysis_function(key_partition_function)
-    return self.GenerateCsvFromGroupAnalysis(global_analysis, key_header_name, key_order)
-
+    return self.GenerateCsvFromGroupAnalysis(global_analysis, key_header_name,
+                                             key_order)
 
 
 # Computes the delta between the group num inclusions analyses for
@@ -187,9 +190,8 @@ class IncludingToIncludedAnalyzer:
 # format as IncludingToIncludedAnalyzer.GenerateGroupNumInclusions(). A key is
 # present in each of the returned dictionaries only if its value is non-zero in
 # that dictionary.
-def ComputeGroupNumInclusionsDeltaBetween(database1_filename, 
-                                          database2_filename,
-                                          key_partition_function):
+def ComputeGroupNumInclusionsDeltaBetween(
+    database1_filename, database2_filename, key_partition_function):
   analyzer1 = IncludingToIncludedAnalyzer(database1_filename, [])
   analyzer2 = IncludingToIncludedAnalyzer(database2_filename, [])
   group_analysis1 = analyzer1.GenerateGroupNumInclusions(key_partition_function)
@@ -203,6 +205,7 @@ def ComputeGroupNumInclusionsDeltaBetween(database1_filename,
     dict2 = group_analysis2[i][1]
     diff = common_utils.DifferenceBetweenDicts(dict1, dict2)
     diff = common_utils.DictWithValueRemoved(diff, 0, keys_to_keep=["total"])
+    print diff
     diff_analysis.append([name, diff])
 
   return diff_analysis

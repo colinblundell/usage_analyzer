@@ -3,6 +3,7 @@
 
 import ast
 import datetime
+import glob
 import os
 import pprint
 import sys
@@ -123,3 +124,34 @@ def FilterOutIncludedFilesAsValues(inclusions_db):
       IncludedFilesRegexes(inclusions_db))
 
   return output_dict
+
+
+# Takes in a filepath to an inclusions database and returns the repo commit date
+# for the databes.
+def GetRepoCommitDateFromInclusionsDbFilename(database_filepath):
+  db = ReadInclusionsDbFromDisk(database_filepath)
+  return db["repo_commit_date"]
+
+
+# Given |database_filepath|, returns the filepath of the database in the same
+# analysis that was generated most recently prior to the generation of the
+# database in |database_filepath|. "The same analysis" here refers to all
+# database residing in peer directories of the parent directory of
+# |database_filepath|.
+def FindMostRecentDbBefore(database_filepath):
+  target_repo_commit_date = GetRepoCommitDateFromInclusionsDbFilename(
+      database_filepath)
+  most_recent_db_path = None
+  most_recent_db_commit_date = None
+  base_dir = os.path.dirname(os.path.dirname(database_filepath))
+  for peer_db_filepath in glob.glob("%s/*/*inclusions_db.py" % base_dir):
+    if peer_db_filepath == database_filepath:
+      continue
+    peer_repo_commit_date = GetRepoCommitDateFromInclusionsDbFilename(
+        peer_db_filepath)
+    if not most_recent_db_commit_date or (
+        (peer_repo_commit_date < target_repo_commit_date) and
+        (peer_repo_commit_date > most_recent_db_commit_date)):
+      most_recent_db_commit_date = peer_repo_commit_date
+      most_recent_db_path = peer_db_filepath
+  return most_recent_db_path

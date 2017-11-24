@@ -195,6 +195,7 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     self.assertEqual(expected_output, output)
 
   def test_ComputeGroupNumInclusionsDeltaBetween(self):
+
     def KeyPartitionFunction(filename):
       return os.path.dirname(filename)
 
@@ -205,6 +206,9 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
         "from prod", expected_prod_inclusions
     ], ["from prod non-factory", expected_prod_non_factory_inclusions]]
 
-    output = ComputeGroupNumInclusionsDeltaBetween("./test/data/databases/fake_999999_inclusions_db.py", "./test/data/databases/fake_aaaaaaa_inclusions_db.py", KeyPartitionFunction)
+    output = ComputeGroupNumInclusionsDeltaBetween(
+        "./test/data/databases/fake_999999_inclusions_db.py",
+        "./test/data/databases/fake_aaaaaaa_inclusions_db.py",
+        KeyPartitionFunction)
 
     self.assertEqual(expected_output, output)
