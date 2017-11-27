@@ -57,9 +57,12 @@ def GenerateAnalyses(database_filename):
 
   delta_since_last_state = ComputeGroupNumInclusionsDeltaBetween(
       previous_database_filename, database_filename,
-      signin_analysis_lib.FilenameToSigninClient)
+                                            lambda filename: filename)
+  changed_files = delta_since_last_state[0][1].keys()
+  key_order = copy.deepcopy(changed_files)
+  key_order.sort()
   delta_since_last_state_csv = including_analyzer.GenerateCsvFromGroupAnalysis(
-      delta_since_last_state, "feature")
+      delta_since_last_state, "feature", key_order=key_order)
   delta_since_last_state_filename = os.path.join(
       output_dir, "delta_since_%s.txt" % previous_database_commit_date)
   with open(delta_since_last_state_filename, "w") as f:
