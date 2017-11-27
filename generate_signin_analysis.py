@@ -49,7 +49,6 @@ def GenerateAnalyses(database_filename):
 
   # Generate delta from last state.
 
-  # TODO: Compute these for real.
   previous_database_filename = inclusions_database.FindMostRecentDbBefore(
       database_filename)
   previous_database_commit_date = inclusions_database.GetRepoCommitDateFromInclusionsDbFilename(
@@ -61,6 +60,22 @@ def GenerateAnalyses(database_filename):
   changed_files = delta_since_last_state[0][1].keys()
   key_order = copy.deepcopy(changed_files)
   key_order.sort()
+
+  # Generate the status of each of the dependencies that has changed (i.e., is
+  # it a new dependency, an ongoing dependency, or a completed dependency), and
+  # append it to the analysis.
+  changed_files_status = {}
+  prev_db = inclusions_database.ReadInclusionsDbFromDisk(previous_database_filename)
+  for filename in key_order:
+    if filename not in prev_db["including_to_included"]:
+      status = "New"
+    elif filename not in including_analyzer.including_file_dict:
+      status = "Completed"
+    else:
+      status = "Ongoing"
+    changed_files_status[filename] = status
+  delta_since_last_state.append(["Dependency status", changed_files_status])
+
   delta_since_last_state_csv = including_analyzer.GenerateCsvFromGroupAnalysis(
       delta_since_last_state, "feature", key_order=key_order)
   delta_since_last_state_filename = os.path.join(
