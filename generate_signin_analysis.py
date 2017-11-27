@@ -55,8 +55,7 @@ def GenerateAnalyses(database_filename):
       previous_database_filename)
 
   delta_since_last_state = ComputeGroupNumInclusionsDeltaBetween(
-      previous_database_filename, database_filename,
-                                            lambda filename: filename)
+      previous_database_filename, database_filename, lambda filename: filename)
   changed_files = delta_since_last_state[0][1].keys()
   key_order = copy.deepcopy(changed_files)
   key_order.sort()
@@ -65,7 +64,8 @@ def GenerateAnalyses(database_filename):
   # it a new dependency, an ongoing dependency, or a completed dependency), and
   # append it to the analysis.
   changed_files_status = {}
-  prev_db = inclusions_database.ReadInclusionsDbFromDisk(previous_database_filename)
+  prev_db = inclusions_database.ReadInclusionsDbFromDisk(
+      previous_database_filename)
   for filename in key_order:
     if filename not in prev_db["including_to_included"]:
       status = "New"
