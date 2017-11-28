@@ -1,7 +1,6 @@
 # Definition of inclusions database dictionaries and facilities to
 # operate on them (move them to/from disk, generate databases, ...).
 
-import ast
 import datetime
 import glob
 import os
@@ -91,9 +90,7 @@ def WriteInclusionsDbToDisk(inclusions_db, output_dir):
 
 # Reads the given database in from disk.
 def ReadInclusionsDbFromDisk(database_filepath):
-  with open(database_filepath, "r") as database_file:
-    database = ast.literal_eval(database_file.read())
-  return database
+  return common_utils.EvaluateLiteralFromDisk(database_filepath)
 
 
 def IncludedFilesRegexes(inclusions_db):

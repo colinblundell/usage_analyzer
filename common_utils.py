@@ -1,3 +1,4 @@
+import ast
 import copy
 import csv
 import contextlib
@@ -253,3 +254,11 @@ def FilenamesSeparatedByProdStatus(filenames):
       prod_non_factory_files.append(filename)
 
   return prod_non_factory_files + prod_factory_files + test_files
+
+
+# Takes in a filepath and evaluates its contents as a Python literal.
+def EvaluateLiteralFromDisk(filepath):
+  with open(filepath, "r") as file_to_eval:
+    literal = ast.literal_eval(file_to_eval.read())
+  return literal
+
