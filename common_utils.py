@@ -261,4 +261,3 @@ def EvaluateLiteralFromDisk(filepath):
   with open(filepath, "r") as file_to_eval:
     literal = ast.literal_eval(file_to_eval.read())
   return literal
-
