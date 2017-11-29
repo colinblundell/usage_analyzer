@@ -34,15 +34,15 @@ def InitializeSummaryIfNecessary(summary):
 def UpdateSummary(summary, client_properties, client_value):
   InitializeSummaryIfNecessary(summary)
   if "test tasks" in client_properties:
-    summary["test tasks"] += 1
+    summary["test tasks"] += client_value
     if len(client_properties.keys()) == 1:
-      summary["test-only"] += 1
+      summary["test-only"] += client_value
 
   if "primary account sync access" in client_properties:
-    summary["primary account sync access"] += 1
+    summary["primary account sync access"] += client_value
     # TODO: Also check for only other key being "test tasks".
     if len(client_properties.keys()) == 1:
-      summary["only primary account sync access"] += 1
+      summary["only primary account sync access"] += client_value
 
 
 for client_name, client_properties in signin_clients.iteritems():
@@ -53,11 +53,11 @@ for client_name, client_properties in signin_clients.iteritems():
 # Display the results in CSV format suitable for outputting into a spreadsheet.
 total_num_clients = len(signin_clients.keys())
 total_num_inclusions = client_num_inclusions["total"]
-print "Characteristic, %% of %d clients, %% of %d clients weighted by size" % (
-    total_num_clients, total_num_inclusions)
+print "Characteristic, %% of %d clients, %% of clients weighted by size" % (
+    total_num_clients)
 for key in summary_keys:
   num_clients = summary_of_clients[key]
   num_inclusions = weighted_summary_of_clients[key]
-  percent_of_clients = float(num_clients) / float(total_num_clients)
-  percent_of_inclusions = float(num_inclusions) / float(total_num_inclusions)
-  print "%s,%.3f,%.3f" % (key, percent_of_clients, percent_of_inclusions)
+  percent_of_clients = float(num_clients) / float(total_num_clients) * 100.0
+  percent_of_inclusions = float(num_inclusions) / float(total_num_inclusions) * 100.0
+  print "%s,%.2f,%.2f" % (key, percent_of_clients, percent_of_inclusions)
