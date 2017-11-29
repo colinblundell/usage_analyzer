@@ -32,16 +32,20 @@ def InitializeSummaryIfNecessary(summary):
 
 
 def UpdateSummary(summary, client_properties, client_value):
+  num_client_properties = len(client_properties.keys())
   InitializeSummaryIfNecessary(summary)
+  has_test_tasks = False
   if "test tasks" in client_properties:
+    has_test_tasks = True
     summary["test tasks"] += client_value
     if len(client_properties.keys()) == 1:
       summary["test-only"] += client_value
 
   if "primary account sync access" in client_properties:
     summary["primary account sync access"] += client_value
-    # TODO: Also check for only other key being "test tasks".
-    if len(client_properties.keys()) == 1:
+
+    if num_client_properties == 1 or (num_client_properties == 2 and
+                                      has_test_tasks):
       summary["only primary account sync access"] += client_value
 
 
@@ -59,5 +63,6 @@ for key in summary_keys:
   num_clients = summary_of_clients[key]
   num_inclusions = weighted_summary_of_clients[key]
   percent_of_clients = float(num_clients) / float(total_num_clients) * 100.0
-  percent_of_inclusions = float(num_inclusions) / float(total_num_inclusions) * 100.0
+  percent_of_inclusions = float(num_inclusions) / float(
+      total_num_inclusions) * 100.0
   print "%s,%.2f,%.2f" % (key, percent_of_clients, percent_of_inclusions)
