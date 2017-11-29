@@ -13,7 +13,7 @@
         "primary account sync access": True,
         "primary account access token requestor": True,
         "signin/signout observer": True,
-        "test tasks" : True,
+        "test tasks": True,
     },
     "policy": {
         "primary account sync access": True,
@@ -153,7 +153,7 @@
         "test tasks": True,
     },
     "chrome/browser/android/signin": {
-        "identity service implementation?" : True,
+        "identity service implementation?": True,
         "Android-specific": True,
         "interacts with java": True,
     },
@@ -197,8 +197,8 @@
         "test tasks": True,
     },
     "child_account_info": {
-      "all accounts access token requestor": True,
-      "interacts with java": True,
+        "all accounts access token requestor": True,
+        "interacts with java": True,
     },
     "first_run": {
         "primary account sync access": True,
@@ -223,7 +223,7 @@
     },
     "signin_status_metrics_provider": {
         "primary account sync access": True,
-        "needs further investigation" : True,
+        "needs further investigation": True,
     },
     "feedback": {
         "primary account access token requestor": True,
@@ -244,7 +244,7 @@
         "test tasks": True,
     },
     "gcm": {
-      "test tasks": True,
+        "test tasks": True,
     },
     "gcm_driver": {
         "maybe uses device identity": True,
@@ -259,7 +259,7 @@
         "iOS-specific": True,
     },
     "chrome/browser": {
-      "only dead includes?" : True,
+        "only dead includes?": True,
     },
     "account_consistency": {
         "signin/signout observer": True,
