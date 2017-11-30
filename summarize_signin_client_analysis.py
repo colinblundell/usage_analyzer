@@ -17,8 +17,34 @@ signin_clients = common_utils.EvaluateLiteralFromDisk(
 summary_keys = [
     "primary account sync access",
     "only primary account sync access",
+    "primary account access token requestor",
+    "only primary account access token requestor",
+    "only primary account",
+    "all accounts sync access",
+    "all accounts access token requestor",
+    "standard",
+    "signin/signout observer",
+    "token event observer",
+    "signin flow",
+    "signout flow",
+    "signin/signout flow",
+    "maybe uses device identity",
+    "iOS-specific",
     "test tasks",
     "test-only",
+]
+
+display_keys = [
+    "standard",
+    "primary account sync access",
+    "primary account access token requestor",
+    "all accounts sync access",
+    "all accounts access token requestor",
+    "signin/signout observer",
+    "token event observer",
+    "signin/signout flow",
+    "maybe uses device identity",
+    "test tasks",
 ]
 
 summary_of_clients = {}
@@ -33,21 +59,29 @@ def InitializeSummaryIfNecessary(summary):
 
 def UpdateSummary(summary, client_properties, client_value):
   num_client_properties = len(client_properties.keys())
+  has_test_tasks = ("test_tasks" in client_properties)
   InitializeSummaryIfNecessary(summary)
-  has_test_tasks = False
-  if "test tasks" in client_properties:
-    has_test_tasks = True
-    summary["test tasks"] += client_value
-    if len(client_properties.keys()) == 1:
+
+  for key in summary_keys:
+    if key in client_properties:
+      summary[key] += client_value
+
+  if "signin flow" in client_properties or "signout flow" in client_properties:
+    summary["signin/signout flow"] += client_value
+
+  if num_client_properties == 1 or (num_client_properties == 2 and
+                                    has_test_tasks):
+    if "test tasks" in client_properties:
       summary["test-only"] += client_value
-
-  if "primary account sync access" in client_properties:
-    summary["primary account sync access"] += client_value
-
-    if num_client_properties == 1 or (num_client_properties == 2 and
-                                      has_test_tasks):
+    if "primary account sync access" in client_properties:
       summary["only primary account sync access"] += client_value
+    if "primary account access token requestor" in client_properties:
+      summary["only primary account access token requestor"] += client_value
 
+  is_problematic = "signin flow" in client_properties or "signout flow" in client_properties or "maybe uses device identity" in client_properties or "iOS-specific" in client_properties or "update credentials" in client_properties
+  #is_problematic = "signin flow" in client_properties or "signout flow" in client_properties
+  if not is_problematic:
+    summary["standard"] += client_value
 
 for client_name, client_properties in signin_clients.iteritems():
   UpdateSummary(summary_of_clients, client_properties, 1)
@@ -59,10 +93,10 @@ total_num_clients = len(signin_clients.keys())
 total_num_inclusions = client_num_inclusions["total"]
 print "Characteristic, %% of %d clients, %% of clients weighted by size" % (
     total_num_clients)
-for key in summary_keys:
+for key in display_keys:
   num_clients = summary_of_clients[key]
   num_inclusions = weighted_summary_of_clients[key]
   percent_of_clients = float(num_clients) / float(total_num_clients) * 100.0
   percent_of_inclusions = float(num_inclusions) / float(
       total_num_inclusions) * 100.0
-  print "%s,%.2f,%.2f" % (key, percent_of_clients, percent_of_inclusions)
+  print "%s,%.0f,%.0f" % (key, percent_of_clients, percent_of_inclusions)
