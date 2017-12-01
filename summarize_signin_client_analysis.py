@@ -16,7 +16,7 @@ signin_clients = common_utils.EvaluateLiteralFromDisk(
 
 summary_keys = [
     "primary account sync access",
-    "only primary account sync access",
+    "primary account sync access only",
     "primary account access token requestor",
     "only primary account access token requestor",
     "only primary account",
@@ -27,12 +27,14 @@ summary_keys = [
     "primary account only",
     "signin/signout observer",
     "token event observer",
+    "all accounts updates observer",
     "signin flow",
     "signout flow",
     "signin/signout flow",
     "maybe uses device identity",
     "iOS SSO",
     "interacts with java",
+    "interacts with platform provider",
     "test tasks",
     "problematic",
     "test-only",
@@ -40,21 +42,24 @@ summary_keys = [
 
 display_keys = [
     "test tasks",
-    "only primary account sync access",
+    "test-only",
     "primary account sync access",
     "primary account access token requestor",
-    "signin/signout observer",
-    "token event observer",
+    "signin/signout flow",
+    #"signin/signout observer",
+    #"token event observer",
     "primary account only",
     "primary account read-only",
+    "primary account sync access only",
     "all accounts sync access",
     "all accounts access token requestor",
-    "any account read-only",
-    "signin/signout flow",
-    "iOS SSO",
-    "interacts with java",
+    "all accounts updates observer",
+    #"any account read-only",
     "maybe uses device identity",
-    "problematic",
+    #"iOS SSO",
+    #"interacts with java",
+    "interacts with platform provider",
+    #"problematic",
 ]
 
 summary_of_clients = {}
@@ -68,35 +73,56 @@ def InitializeSummaryIfNecessary(summary):
 
 
 def UpdateSummary(summary, client_properties, client_value):
-  num_client_properties = len(client_properties.keys())
-  has_test_tasks = ("test_tasks" in client_properties)
   InitializeSummaryIfNecessary(summary)
 
   for key in summary_keys:
     if key in client_properties:
       summary[key] += client_value
 
-  if "signin flow" in client_properties or "signout flow" in client_properties:
+  # Calculate composed analyses.
+  num_client_properties = len(client_properties.keys())
+  has_test_tasks = ("test tasks" in client_properties)
+  test_only = has_test_tasks and (num_client_properties == 1)
+  device_identity = ("maybe uses device identity" in client_properties)
+  all_accounts = ("all accounts sync access" in client_properties or "all accounts access token requestor" in client_properties or "all accounts updates observer" in client_properties)
+  ios_sso = ("iOS SSO" in client_properties)
+  interacts_with_java = ("interacts with java" in client_properties)
+  interacts_with_platform_provider = ios_sso or interacts_with_java
+  signin_signout_flow = ("signin flow" in client_properties or "signout flow" in client_properties)
+
+  if signin_signout_flow:
     summary["signin/signout flow"] += client_value
+
+  if test_only:
+    summary["test-only"] += client_value
+  
+  if interacts_with_platform_provider:
+    summary["interacts with platform provider"] += client_value
 
   if num_client_properties == 1 or (num_client_properties == 2 and
                                     has_test_tasks):
-    if "test tasks" in client_properties:
-      summary["test-only"] += client_value
     if "primary account sync access" in client_properties:
-      summary["only primary account sync access"] += client_value
+      summary["primary account sync access only"] += client_value
     if "primary account access token requestor" in client_properties:
       summary["only primary account access token requestor"] += client_value
 
-  is_problematic = "signin flow" in client_properties or "signout flow" in client_properties or "maybe uses device identity" in client_properties or "iOS SSO" in client_properties or "update credentials" in client_properties or "interacts with java" in client_properties
-  if not is_problematic:
-    summary["any account read-only"] += client_value
-  else:
-    summary["problematic"] += client_value
+  primary_account_only = not (device_identity or all_accounts or interacts_with_platform_provider)
+  primary_account_read_only = primary_account_only and not signin_signout_flow
 
-  primary_account_only = not (is_problematic or "all accounts sync access" in client_properties or "all accounts access token requestor" in client_properties or "all accounts updates observer" in client_properties)
   if primary_account_only:
+    summary["primary account only"] += client_value
+  if primary_account_read_only:
     summary["primary account read-only"] += client_value
+
+  #is_problematic = "signin flow" in client_properties or "signout flow" in client_properties or "maybe uses device identity" in client_properties or "iOS SSO" in client_properties or "update credentials" in client_properties or "interacts with java" in client_properties
+  #if not is_problematic:
+  #  summary["any account read-only"] += client_value
+  #else:
+  #  summary["problematic"] += client_value
+
+  #primary_account_only = not (is_problematic or "all accounts sync access" in client_properties or "all accounts access token requestor" in client_properties or "all accounts updates observer" in client_properties)
+  #if primary_account_only:
+  #  summary["primary account read-only"] += client_value
 
 for client_name, client_properties in signin_clients.iteritems():
   UpdateSummary(summary_of_clients, client_properties, 1)
