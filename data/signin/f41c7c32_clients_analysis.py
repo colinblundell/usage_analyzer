@@ -27,7 +27,7 @@
         "primary account access token requestor": True,
         "signout flow": True,
         "signin/signout observer": True,
-        "all accounts updates observer": True,
+        "all accounts signin/signout observer": True,
         "all accounts sync access": True,
         "token event observer": True,
         "test tasks": True,
@@ -84,7 +84,7 @@
     },
     "chrome/browser/ui/webui/signin": {
         "primary account sync access": True,
-        "all accounts updates observer": True,
+        "all accounts signin/signout observer": True,
         "signin flow": True,
         "test tasks": True,
     },
