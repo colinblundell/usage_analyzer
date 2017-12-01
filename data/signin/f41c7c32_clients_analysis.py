@@ -283,7 +283,7 @@
         "signout flow": True,
     },
     "devtools": {
-    "only dead includes?" : True,
+        "only dead includes?": True,
     },
     "ios/chrome/browser/ui/signin_interaction": {
         "primary account sync access": True,
@@ -340,7 +340,7 @@
         "prefs registration": True,
     },
     "signin_capability": {
-    "only dead includes?" : True,
+        "only dead includes?": True,
     },
     "refresh_token_annotation_request": {
         "all accounts access token requestor": True,

@@ -90,13 +90,18 @@ def UpdateSummary(summary, client_properties, client_value):
   has_test_tasks = ("test tasks" in client_properties)
   test_only = has_test_tasks and (num_client_properties == 1)
   device_identity = ("maybe uses device identity" in client_properties)
-  all_accounts = ("all accounts sync access" in client_properties or "all accounts access token requestor" in client_properties or "all accounts updates observer" in client_properties)
+  all_accounts = ("all accounts sync access" in client_properties or
+                  "all accounts access token requestor" in client_properties or
+                  "all accounts updates observer" in client_properties)
   ios_sso = ("iOS SSO" in client_properties)
   interacts_with_java = ("interacts with java" in client_properties)
   interacts_with_platform_provider = ios_sso or interacts_with_java
-  signin_signout_flow = ("signin flow" in client_properties or "signout flow" in client_properties)
-  identity_service_impl = ("identity service implementation?" in client_properties)
-  primary_account_only = not (device_identity or all_accounts or ios_sso or identity_service_impl)
+  signin_signout_flow = ("signin flow" in client_properties or
+                         "signout flow" in client_properties)
+  identity_service_impl = (
+      "identity service implementation?" in client_properties)
+  primary_account_only = not (device_identity or all_accounts or ios_sso or
+                              identity_service_impl)
   primary_account_read_only = primary_account_only and not signin_signout_flow
   is_problematic = all_accounts or ios_sso or device_identity or identity_service_impl
 
@@ -105,7 +110,7 @@ def UpdateSummary(summary, client_properties, client_value):
 
   if test_only:
     summary["test-only"] += client_value
-  
+
   if all_accounts:
     summary["interacts with all accounts"] += client_value
 
@@ -134,6 +139,7 @@ def UpdateSummary(summary, client_properties, client_value):
   #primary_account_only = not (is_problematic or "all accounts sync access" in client_properties or "all accounts access token requestor" in client_properties or "all accounts updates observer" in client_properties)
   #if primary_account_only:
   #  summary["primary account read-only"] += client_value
+
 
 for client_name, client_properties in signin_clients.iteritems():
   UpdateSummary(summary_of_clients, client_properties, 1)
