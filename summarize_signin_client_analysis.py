@@ -18,11 +18,13 @@ summary_keys = [
     "primary account sync access",
     "primary account sync access only",
     "primary account access token requestor",
+    "deferred",
     "only primary account access token requestor",
     "only primary account",
     "primary account read-only",
     "all accounts sync access",
     "all accounts access token requestor",
+    "interacts with all accounts",
     "any account read-only",
     "primary account only",
     "signin/signout observer",
@@ -32,6 +34,7 @@ summary_keys = [
     "signout flow",
     "signin/signout flow",
     "maybe uses device identity",
+    "identity service implementation?",
     "iOS SSO",
     "interacts with java",
     "interacts with platform provider",
@@ -41,25 +44,28 @@ summary_keys = [
 ]
 
 display_keys = [
-    "test tasks",
-    "test-only",
+    #"deferred",
+    #"test-only",
+    "primary account sync access only",
     "primary account sync access",
     "primary account access token requestor",
+    "primary account read-only",
     "signin/signout flow",
     #"signin/signout observer",
     #"token event observer",
     "primary account only",
-    "primary account read-only",
-    "primary account sync access only",
-    "all accounts sync access",
-    "all accounts access token requestor",
-    "all accounts updates observer",
+    #"test tasks",
+    #"all accounts sync access",
+    #"all accounts access token requestor",
+    #"all accounts updates observer",
+    #"problematic",
+    "interacts with all accounts",
     #"any account read-only",
     "maybe uses device identity",
-    #"iOS SSO",
+    "iOS SSO",
     #"interacts with java",
-    "interacts with platform provider",
-    #"problematic",
+    #"interacts with platform provider",
+    "identity service implementation?",
 ]
 
 summary_of_clients = {}
@@ -89,6 +95,10 @@ def UpdateSummary(summary, client_properties, client_value):
   interacts_with_java = ("interacts with java" in client_properties)
   interacts_with_platform_provider = ios_sso or interacts_with_java
   signin_signout_flow = ("signin flow" in client_properties or "signout flow" in client_properties)
+  identity_service_impl = ("identity service implementation?" in client_properties)
+  primary_account_only = not (device_identity or all_accounts or ios_sso or identity_service_impl)
+  primary_account_read_only = primary_account_only and not signin_signout_flow
+  is_problematic = all_accounts or ios_sso or device_identity or identity_service_impl
 
   if signin_signout_flow:
     summary["signin/signout flow"] += client_value
@@ -96,6 +106,9 @@ def UpdateSummary(summary, client_properties, client_value):
   if test_only:
     summary["test-only"] += client_value
   
+  if all_accounts:
+    summary["interacts with all accounts"] += client_value
+
   if interacts_with_platform_provider:
     summary["interacts with platform provider"] += client_value
 
@@ -106,19 +119,17 @@ def UpdateSummary(summary, client_properties, client_value):
     if "primary account access token requestor" in client_properties:
       summary["only primary account access token requestor"] += client_value
 
-  primary_account_only = not (device_identity or all_accounts or interacts_with_platform_provider)
-  primary_account_read_only = primary_account_only and not signin_signout_flow
-
   if primary_account_only:
     summary["primary account only"] += client_value
   if primary_account_read_only:
     summary["primary account read-only"] += client_value
 
+  if is_problematic:
+    summary["problematic"] += client_value
+
   #is_problematic = "signin flow" in client_properties or "signout flow" in client_properties or "maybe uses device identity" in client_properties or "iOS SSO" in client_properties or "update credentials" in client_properties or "interacts with java" in client_properties
   #if not is_problematic:
   #  summary["any account read-only"] += client_value
-  #else:
-  #  summary["problematic"] += client_value
 
   #primary_account_only = not (is_problematic or "all accounts sync access" in client_properties or "all accounts access token requestor" in client_properties or "all accounts updates observer" in client_properties)
   #if primary_account_only:

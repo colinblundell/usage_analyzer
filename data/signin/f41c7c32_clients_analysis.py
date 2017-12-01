@@ -33,7 +33,7 @@
         "test tasks": True,
     },
     "supervised_user": {
-        "not analyzed": True,
+        "deferred": True,
     },
     "extensions": {
         "primary account sync access": True,
@@ -117,6 +117,7 @@
         "signin flow": True,
         "signout flow": True,
         "iOS SSO": True,
+        "identity service implementation?": True,
         "test tasks": True,
     },
     "history": {
@@ -291,7 +292,7 @@
         "iOS SSO": True,
     },
     "account_info_fetcher": {
-        "identity service impl": True,
+        "identity service impl?": True,
     },
     "ios/chrome/browser/ui": {
         "primary account sync access": True,
