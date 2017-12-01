@@ -20,31 +20,41 @@ summary_keys = [
     "primary account access token requestor",
     "only primary account access token requestor",
     "only primary account",
+    "primary account read-only",
     "all accounts sync access",
     "all accounts access token requestor",
-    "standard",
+    "any account read-only",
+    "primary account only",
     "signin/signout observer",
     "token event observer",
     "signin flow",
     "signout flow",
     "signin/signout flow",
     "maybe uses device identity",
-    "iOS-specific",
+    "iOS SSO",
+    "interacts with java",
     "test tasks",
+    "problematic",
     "test-only",
 ]
 
 display_keys = [
-    "standard",
+    "test tasks",
+    "only primary account sync access",
     "primary account sync access",
     "primary account access token requestor",
-    "all accounts sync access",
-    "all accounts access token requestor",
     "signin/signout observer",
     "token event observer",
+    "primary account only",
+    "primary account read-only",
+    "all accounts sync access",
+    "all accounts access token requestor",
+    "any account read-only",
     "signin/signout flow",
+    "iOS SSO",
+    "interacts with java",
     "maybe uses device identity",
-    "test tasks",
+    "problematic",
 ]
 
 summary_of_clients = {}
@@ -78,10 +88,15 @@ def UpdateSummary(summary, client_properties, client_value):
     if "primary account access token requestor" in client_properties:
       summary["only primary account access token requestor"] += client_value
 
-  is_problematic = "signin flow" in client_properties or "signout flow" in client_properties or "maybe uses device identity" in client_properties or "iOS-specific" in client_properties or "update credentials" in client_properties
-  #is_problematic = "signin flow" in client_properties or "signout flow" in client_properties
+  is_problematic = "signin flow" in client_properties or "signout flow" in client_properties or "maybe uses device identity" in client_properties or "iOS SSO" in client_properties or "update credentials" in client_properties or "interacts with java" in client_properties
   if not is_problematic:
-    summary["standard"] += client_value
+    summary["any account read-only"] += client_value
+  else:
+    summary["problematic"] += client_value
+
+  primary_account_only = not (is_problematic or "all accounts sync access" in client_properties or "all accounts access token requestor" in client_properties or "all accounts updates observer" in client_properties)
+  if primary_account_only:
+    summary["primary account read-only"] += client_value
 
 for client_name, client_properties in signin_clients.iteritems():
   UpdateSummary(summary_of_clients, client_properties, 1)

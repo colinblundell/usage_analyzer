@@ -116,7 +116,7 @@
         "primary account sync access": True,
         "signin flow": True,
         "signout flow": True,
-        "iOS-specific": True,
+        "iOS SSO": True,
         "test tasks": True,
     },
     "history": {
@@ -154,7 +154,6 @@
     },
     "chrome/browser/android/signin": {
         "identity service implementation?": True,
-        "Android-specific": True,
         "interacts with java": True,
     },
     "signin_tracker": {
@@ -178,7 +177,7 @@
     "ios/chrome/browser/ui/authentication": {
         "primary account sync access": True,
         "all accounts sync access": True,
-        "iOS-specific": True,
+        "iOS SSO": True,
     },
     "arc/auth": {
         "primary account sync access": True,
@@ -256,7 +255,7 @@
     },
     "browser_state": {
         "primary account sync access": True,
-        "iOS-specific": True,
+        "iOS SSO": True,
     },
     "chrome/browser": {
         "only dead includes?": True,
@@ -274,15 +273,22 @@
         "test tasks": True,
         "checks shared prefs": True,
     },
+    "signin_global_error": {
+        "primary account sync access": True,
+        "test tasks": True,
+    },
     "force_signin": {
         "primary account access token requestor": True,
         "signout flow": True,
+    },
+    "devtools": {
+    "only dead includes?" : True,
     },
     "ios/chrome/browser/ui/signin_interaction": {
         "primary account sync access": True,
         "test tasks": True,
         "signin flow": True,
-        "iOS-specific": True,
+        "iOS SSO": True,
     },
     "account_info_fetcher": {
         "identity service impl": True,
@@ -331,6 +337,9 @@
     },
     "ios/web_view/internal/app": {
         "prefs registration": True,
+    },
+    "signin_capability": {
+    "only dead includes?" : True,
     },
     "refresh_token_annotation_request": {
         "all accounts access token requestor": True,
