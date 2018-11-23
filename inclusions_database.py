@@ -146,9 +146,11 @@ def FindMostRecentDbBefore(database_filepath):
       continue
     peer_repo_commit_date = GetRepoCommitDateFromInclusionsDbFilename(
         peer_db_filepath)
-    if not most_recent_db_commit_date or (
-        (peer_repo_commit_date < target_repo_commit_date) and
-        (peer_repo_commit_date > most_recent_db_commit_date)):
+    if (peer_repo_commit_date < target_repo_commit_date and
+        peer_repo_commit_date > most_recent_db_commit_date):
       most_recent_db_commit_date = peer_repo_commit_date
       most_recent_db_path = peer_db_filepath
+  if most_recent_db_path == None:
+    most_recent_db_path = database_filepath
+
   return most_recent_db_path

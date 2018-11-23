@@ -10,15 +10,14 @@ import inclusions_config
 import inclusions_database
 
 
-def generate_inclusions(config_filename, output_dir):
-  # TODO: Parameterize this.
-  chromium_root = os.path.join(os.environ["HOME"], "chromium", "src")
+def generate_inclusions(chromium_root, config_filename, output_dir):
   config = inclusions_config.ReadConfigFromFile(config_filename, chromium_root)
   inclusions_db = inclusions_database.GenerateInclusionsDatabase(config)
   inclusions_database.WriteInclusionsDbToDisk(inclusions_db, output_dir)
 
 
 if __name__ == '__main__':
-  config_path = sys.argv[1]
-  output_path = sys.argv[2]
-  generate_inclusions(config_path, output_path)
+  chromium_path = sys.argv[1]
+  config_path = sys.argv[2]
+  output_path = sys.argv[3]
+  generate_inclusions(chromium_path, config_path, output_path)
