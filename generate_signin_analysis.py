@@ -89,8 +89,8 @@ def GenerateAnalyses(database_filename):
 
   features_num_inclusions_csv = including_analyzer.GenerateGroupAnalysisAsCsv(
       "num_inclusions", signin_analysis_lib.FilenameToSigninClient, "feature")
-  features_num_inclusions_filename = os.path.join(output_dir,
-                                                  "features_num_inclusions.txt")
+  features_num_inclusions_filename = os.path.join(
+      output_dir, "features_num_inclusions.txt")
   with open(features_num_inclusions_filename, "w") as f:
     f.write(features_num_inclusions_csv)
 
@@ -130,8 +130,8 @@ def GenerateAnalyses(database_filename):
       included_files_analysis)
   included_files_analysis_csv = common_utils.DictToCsv(
       included_files_analysis, ["file", "# inclusions"], included_files_order)
-  included_files_analysis_filename = os.path.join(output_dir,
-                                                  "included_files_analysis.txt")
+  included_files_analysis_filename = os.path.join(
+      output_dir, "included_files_analysis.txt")
   with open(included_files_analysis_filename, "w") as f:
     f.write(included_files_analysis_csv)
 

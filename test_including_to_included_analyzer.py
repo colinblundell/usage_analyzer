@@ -19,7 +19,8 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
       # TODO: Should I have a test database that I read off disk?
       config_filename = (
           "./test/data/configs/test_including_to_included_analyzer_config.py")
-      generate_inclusions.generate_inclusions(config_filename, output_dir)
+      generate_inclusions.generate_inclusions("dummy", config_filename,
+                                              output_dir)
 
       repo_rev = git_utils.GetUsageAnalyzerRepoRevision()
       database_name = "_".join(["test", repo_rev, "inclusions_db.py"])
@@ -120,9 +121,12 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_all_inclusions = {"total": 3, "bar": 2, "bar/baz": 1}
     expected_prod_inclusions = {"total": 3, "bar": 2, "bar/baz": 1}
     expected_prod_non_factory_inclusions = {"total": 2, "bar": 2}
-    expected_output = [["# inclusions", expected_all_inclusions], [
-        "from prod", expected_prod_inclusions
-    ], ["from prod non-factory", expected_prod_non_factory_inclusions]]
+    expected_output = [["# inclusions", expected_all_inclusions],
+                       ["from prod", expected_prod_inclusions],
+                       [
+                           "from prod non-factory",
+                           expected_prod_non_factory_inclusions
+                       ]]
     output = analyzer.GenerateGroupNumInclusions(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
@@ -145,9 +149,12 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_all_including_files = {"total": 2, "bar": 1, "bar/baz": 1}
     expected_prod_including_files = {"total": 2, "bar": 1, "bar/baz": 1}
     expected_prod_non_factory_including_files = {"total": 1, "bar": 1}
-    expected_output = [["# including files", expected_all_including_files], [
-        "prod", expected_prod_including_files
-    ], ["prod non-factory", expected_prod_non_factory_including_files]]
+    expected_output = [["# including files", expected_all_including_files],
+                       ["prod", expected_prod_including_files],
+                       [
+                           "prod non-factory",
+                           expected_prod_non_factory_including_files
+                       ]]
     output = analyzer.GenerateGroupSizes(KeyPartitionFunction)
     self.assertEqual(expected_output, output)
 
@@ -202,9 +209,12 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
     expected_all_inclusions = {"total": 0, "baz": 1, "bar": 1, "qux": -2}
     expected_prod_inclusions = {"total": 1, "baz": 1, "bar": 1, "qux": -1}
     expected_prod_non_factory_inclusions = {"total": 2, "baz": 1, "bar": 1}
-    expected_output = [["# inclusions", expected_all_inclusions], [
-        "from prod", expected_prod_inclusions
-    ], ["from prod non-factory", expected_prod_non_factory_inclusions]]
+    expected_output = [["# inclusions", expected_all_inclusions],
+                       ["from prod", expected_prod_inclusions],
+                       [
+                           "from prod non-factory",
+                           expected_prod_non_factory_inclusions
+                       ]]
 
     output = ComputeGroupNumInclusionsDeltaBetween(
         "./test/data/databases/fake_999999_inclusions_db.py",

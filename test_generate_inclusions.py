@@ -38,7 +38,8 @@ class TestGenerateInclusions(unittest.TestCase):
   def test_generate_inclusions(self):
     with common_utils.TemporaryDirectory() as output_dir:
       config_filename = "./test/data/configs/test.py"
-      generate_inclusions.generate_inclusions(config_filename, output_dir)
+      generate_inclusions.generate_inclusions("dummy", config_filename,
+                                              output_dir)
 
       repo_rev = git_utils.GetUsageAnalyzerRepoRevision()
       database_name = "_".join(["test", repo_rev, "inclusions_db.py"])

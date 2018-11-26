@@ -17,7 +17,8 @@ class TestGenerateIncludedToIncludingAnalyzer(unittest.TestCase):
       # TODO: Should I have a test database that I read off disk?
       config_filename = (
           "./test/data/configs/test_included_to_including_analyzer_config.py")
-      generate_inclusions.generate_inclusions(config_filename, output_dir)
+      generate_inclusions.generate_inclusions("dummy", config_filename,
+                                              output_dir)
 
       repo_rev = git_utils.GetUsageAnalyzerRepoRevision()
       database_name = "_".join(["test", repo_rev, "inclusions_db.py"])
