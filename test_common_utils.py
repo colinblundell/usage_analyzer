@@ -97,6 +97,21 @@ class TestCommonUtils(unittest.TestCase):
     output = common_utils.DictWithTotal(test_dict)
     self.assertEqual(expected_output, output)
 
+  def test_DictPreserveOnlySpecifiedKeys(self):
+    test_dict = {
+        "foo.h": ["bar.h"],
+        "foo.cc": ["foo.h", "bar.h"],
+        "bar.h": ["baz.h", "qux.h"],
+        "bad/bad.h": ["baz.h", "foo.h"]
+    }
+    keys_to_preserve = ["foo.h", "bad/bad.h"]
+    expected_output = {
+        "foo.h": ["bar.h"],
+        "bad/bad.h": ["baz.h", "foo.h"]
+    }
+    output = common_utils.DictPreserveOnlySpecifiedKeys(test_dict, keys_to_preserve)
+    self.assertEqual(expected_output, output)
+
   def test_DictFilterKeysMatchingRegex(self):
     test_dict = {
         "foo.h": ["bar.h"],

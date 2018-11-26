@@ -165,6 +165,19 @@ def DictWithTotal(dictionary):
   return output_dict
 
 
+# Takes in a dictionary whose keys are strings and a list of strings. Returns a 
+# dictionary that is equivalent to the original except all keys not within
+# |keys_to_preserve| have been removed.
+def DictPreserveOnlySpecifiedKeys(dictionary, keys_to_preserve):
+  output_dict = {}
+
+  for key in dictionary.keys():
+    if key in keys_to_preserve:
+      output_dict[key] = dictionary[key]
+
+  return output_dict
+
+
 # Takes in a dictionary whose keys are strings. Returns a dictionary that is
 # equivalent to the original except that keys matching any regex in
 # |regex_list| have been removed.
