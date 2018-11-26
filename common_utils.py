@@ -165,7 +165,7 @@ def DictWithTotal(dictionary):
   return output_dict
 
 
-# Takes in a dictionary whose keys are strings and a list of strings. Returns a 
+# Takes in a dictionary whose keys are strings and a list of strings. Returns a
 # dictionary that is equivalent to the original except all keys not within
 # |keys_to_preserve| have been removed.
 def DictPreserveOnlySpecifiedKeys(dictionary, keys_to_preserve):
@@ -178,7 +178,7 @@ def DictPreserveOnlySpecifiedKeys(dictionary, keys_to_preserve):
   return output_dict
 
 
-# Takes in a dictionary whose values are lists of strings and a list of strings. Returns a 
+# Takes in a dictionary whose values are lists of strings and a list of strings. Returns a
 # dictionary that is equivalent to the original except all values not within
 # |values_to_preserve| have been removed.
 def DictPreserveOnlySpecifiedValues(dictionary, values_to_preserve):
