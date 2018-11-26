@@ -32,8 +32,11 @@ DATABASE_TEMPLATE = {
 }
 
 
-# Generates an inclusions database from the given inclusions config.
-def GenerateInclusionsDatabase(config):
+# Generates an inclusions database from the given inclusions config. if
+# |included_files_to_limit_to| is specified, the inclusions database is filtered
+# to have only the values in |included_files_to_limit_to| as values in
+# |including_to_included| and as keys in |included_to_including|.
+def GenerateInclusionsDatabase(config, included_files_to_limit_to=None):
   generator = inclusions_generator.InclusionsGenerator(config)
   including_to_included = (generator.MapIncludingToIncluded())
   included_to_including = (generator.MapIncludedToIncluding())
