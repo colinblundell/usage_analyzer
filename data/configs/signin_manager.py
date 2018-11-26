@@ -1,9 +1,7 @@
 {
     "name":
         "signin_manager",
-    "repo_root":
-        "CHROMIUM_ROOT",
-    "included_files": [
+    "included_files_to_limit_to": [
         "components/signin/core/browser/signin_manager.cc",
         "components/signin/core/browser/signin_manager.h",
         "components/signin/core/browser/signin_manager_base.cc",

@@ -42,8 +42,10 @@ def GenerateInclusionsDatabase(config, included_files_to_limit_to=None):
   included_to_including = (generator.MapIncludedToIncluding())
 
   if included_files_to_limit_to:
-    including_to_included = common_utils.DictPreserveOnlySpecifiedValues(including_to_included, included_files_to_limit_to)
-    included_to_including = common_utils.DictPreserveOnlySpecifiedKeys(included_to_including, included_files_to_limit_to)
+    including_to_included = common_utils.DictPreserveOnlySpecifiedValues(
+        including_to_included, included_files_to_limit_to)
+    included_to_including = common_utils.DictPreserveOnlySpecifiedKeys(
+        included_to_including, included_files_to_limit_to)
 
   inclusions_db = {}
   inclusions_db["config"] = config

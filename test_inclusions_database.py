@@ -40,7 +40,9 @@ class TestInclusionsDatabase(unittest.TestCase):
 
   def test_GenerateInclusionsDatabaseSimpleWithLimitedIncludes(self):
     output_db = inclusions_database.GenerateInclusionsDatabase(
-        test_utils.BASIC_TEST_CONFIG, included_files_to_limit_to=test_utils.BASIC_TEST_INCLUDED_FILES_TO_LIMIT_TO)
+        test_utils.BASIC_TEST_CONFIG,
+        included_files_to_limit_to=test_utils
+        .BASIC_TEST_INCLUDED_FILES_TO_LIMIT_TO)
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
@@ -76,7 +78,8 @@ class TestInclusionsDatabase(unittest.TestCase):
 
   def test_GenerateInclusionsDatabaseComplexWithLimitedIncludes(self):
     output_db = inclusions_database.GenerateInclusionsDatabase(
-        test_utils.COMPLEX_TEST_CONFIG, test_utils.COMPLEX_TEST_INCLUDED_FILES_TO_LIMIT_TO)
+        test_utils.COMPLEX_TEST_CONFIG,
+        test_utils.COMPLEX_TEST_INCLUDED_FILES_TO_LIMIT_TO)
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)

@@ -13,10 +13,18 @@ import inclusions_database
 import signin_analysis_lib
 
 
-def GenerateAnalyses(database_filename):
-  output_dir = os.path.join(os.path.dirname(database_filename), "analyses")
+def GenerateAnalyses(database_filename, included_files_to_limit_to_filename):
+  analyses_name = "total"
+  included_files_to_limit_to = None
+  if included_files_to_limit_to_filename:
+    included_files_to_limit_to_dict = common_utils.EvaluateLiteralFromDisk(included_files_to_limit_to_filename)
+    analyses_name = included_files_to_limit_to_dict["name"]
+    included_files_to_limit_to = included_files_to_limit_to_dict["included_files_to_limit_to"]
+
+
+  output_dir = os.path.join(os.path.dirname(database_filename), "analyses", analyses_name)
   if not os.path.exists(output_dir):
-    os.mkdir(output_dir)
+    os.makedirs(output_dir)
 
   including_analyzer = (
       IncludingToIncludedAnalyzer(database_filename,
@@ -138,4 +146,8 @@ def GenerateAnalyses(database_filename):
 
 if __name__ == '__main__':
   database_path = sys.argv[1]
-  GenerateAnalyses(database_path)
+  included_files_to_limit_to_path = None
+  if len(sys.argv) == 3:
+    included_files_to_limit_to_path = sys.argv[2]
+
+  GenerateAnalyses(database_path, included_files_to_limit_to_path)
