@@ -60,7 +60,7 @@ def VerifyBasicIncludedToIncludingWithLimitedIncludes(test_case,
                                                       included_to_including):
   # Nothing should have changed, as the set to limit to is equal to the original
   # |included_files| set.
-  VerifyBasicIncludedToIncluding(test_case, including_to_included)
+  VerifyBasicIncludedToIncluding(test_case, included_to_including)
 
 
 def VerifyComplexIncludingToIncluded(test_case, including_to_included):
@@ -75,6 +75,15 @@ def VerifyComplexIncludingToIncluded(test_case, including_to_included):
                         ["bar/bar.h", "bar/core.h"])
 
 
+def VerifyComplexIncludingToIncludedWithLimitedIncludes(test_case, including_to_included):
+  including_files = including_to_included.keys()
+  including_files.sort()
+  test_case.assertEqual(
+      including_files, ["foo/foo.h"])
+  test_case.assertEqual(including_to_included["foo/foo.h"],
+                        ["bar/bar.h"])
+
+
 def VerifyComplexIncludedToIncluding(test_case, included_to_including):
   test_case.assertIn("bar/bar.h", included_to_including)
   inclusions_of_bar = included_to_including["bar/bar.h"]
@@ -87,3 +96,11 @@ def VerifyComplexIncludedToIncluding(test_case, included_to_including):
   test_case.assertEqual(
       inclusions_of_core,
       ["bar/bar.h", "bar/baz/bar_core_factory.h", "foo/foo.h"])
+
+
+def VerifyComplexIncludedToIncludingWithLimitedIncludes(test_case, included_to_including):
+  test_case.assertEqual(1, len(included_to_including))
+  test_case.assertIn("bar/bar.h", included_to_including)
+  inclusions_of_bar = included_to_including["bar/bar.h"]
+  inclusions_of_bar.sort()
+  test_case.assertEqual(inclusions_of_bar, ["foo/foo.h"])

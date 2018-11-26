@@ -38,6 +38,24 @@ class TestInclusionsDatabase(unittest.TestCase):
     test_utils.VerifyBasicIncludingToIncluded(
         self, output_db["including_to_included"])
 
+  def test_GenerateInclusionsDatabaseSimpleWithLimitedIncludes(self):
+    output_db = inclusions_database.GenerateInclusionsDatabase(
+        test_utils.BASIC_TEST_CONFIG, included_files_to_limit_to=test_utils.BASIC_TEST_INCLUDED_FILES_TO_LIMIT_TO)
+
+    self.assertIn("timestamp (UTC)", output_db)
+    self.assertIn("repo_rev", output_db)
+    self.assertEqual(output_db["repo_rev"],
+                     git_utils.GetUsageAnalyzerRepoRevision())
+    self.assertIn("usage_analyzer_rev", output_db)
+    self.assertEqual(output_db["usage_analyzer_rev"],
+                     git_utils.GetUsageAnalyzerRepoRevision())
+    self.assertIn("config", output_db)
+    self.assertEqual(output_db["config"], test_utils.BASIC_TEST_CONFIG)
+    test_utils.VerifyBasicIncludedToIncludingWithLimitedIncludes(
+        self, output_db["included_to_including"])
+    test_utils.VerifyBasicIncludingToIncludedWithLimitedIncludes(
+        self, output_db["including_to_included"])
+
   def test_GenerateInclusionsDatabaseComplex(self):
     output_db = inclusions_database.GenerateInclusionsDatabase(
         test_utils.COMPLEX_TEST_CONFIG)
@@ -56,9 +74,9 @@ class TestInclusionsDatabase(unittest.TestCase):
     test_utils.VerifyComplexIncludingToIncluded(
         self, output_db["including_to_included"])
 
-  def test_GenerateInclusionsDatabaseSimpleWithLimitedIncludes(self):
+  def test_GenerateInclusionsDatabaseComplexWithLimitedIncludes(self):
     output_db = inclusions_database.GenerateInclusionsDatabase(
-        test_utils.BASIC_TEST_CONFIG)
+        test_utils.COMPLEX_TEST_CONFIG, test_utils.COMPLEX_TEST_INCLUDED_FILES_TO_LIMIT_TO)
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
@@ -68,10 +86,10 @@ class TestInclusionsDatabase(unittest.TestCase):
     self.assertEqual(output_db["usage_analyzer_rev"],
                      git_utils.GetUsageAnalyzerRepoRevision())
     self.assertIn("config", output_db)
-    self.assertEqual(output_db["config"], test_utils.BASIC_TEST_CONFIG)
-    test_utils.VerifyBasicIncludedToIncluding(
+    self.assertEqual(output_db["config"], test_utils.COMPLEX_TEST_CONFIG)
+    test_utils.VerifyComplexIncludedToIncludingWithLimitedIncludes(
         self, output_db["included_to_including"])
-    test_utils.VerifyBasicIncludingToIncluded(
+    test_utils.VerifyComplexIncludingToIncludedWithLimitedIncludes(
         self, output_db["including_to_included"])
 
   def test_FilterOutIncludedFilesAsKeysSimple(self):
