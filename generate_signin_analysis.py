@@ -17,12 +17,14 @@ def GenerateAnalyses(database_filename, included_files_to_limit_to_filename):
   analyses_name = "total"
   included_files_to_limit_to = None
   if included_files_to_limit_to_filename:
-    included_files_to_limit_to_dict = common_utils.EvaluateLiteralFromDisk(included_files_to_limit_to_filename)
+    included_files_to_limit_to_dict = common_utils.EvaluateLiteralFromDisk(
+        included_files_to_limit_to_filename)
     analyses_name = included_files_to_limit_to_dict["name"]
-    included_files_to_limit_to = included_files_to_limit_to_dict["included_files_to_limit_to"]
+    included_files_to_limit_to = included_files_to_limit_to_dict[
+        "included_files_to_limit_to"]
 
-
-  output_dir = os.path.join(os.path.dirname(database_filename), "analyses", analyses_name)
+  output_dir = os.path.join(
+      os.path.dirname(database_filename), "analyses", analyses_name)
   if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
