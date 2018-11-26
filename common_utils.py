@@ -178,6 +178,21 @@ def DictPreserveOnlySpecifiedKeys(dictionary, keys_to_preserve):
   return output_dict
 
 
+# Takes in a dictionary whose values are lists of strings and a list of strings. Returns a 
+# dictionary that is equivalent to the original except all values not within
+# |values_to_preserve| have been removed.
+def DictPreserveOnlySpecifiedValues(dictionary, values_to_preserve):
+  output_dict = {}
+
+  for key, value in dictionary.iteritems():
+    filtered_value = [v for v in value if v in values_to_preserve]
+    if not filtered_value:
+      continue
+    output_dict[key] = filtered_value
+
+  return output_dict
+
+
 # Takes in a dictionary whose keys are strings. Returns a dictionary that is
 # equivalent to the original except that keys matching any regex in
 # |regex_list| have been removed.
