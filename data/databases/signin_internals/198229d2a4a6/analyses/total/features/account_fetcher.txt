@@ -1,0 +1,8 @@
+file,# inclusions
+chrome/browser/signin/account_fetcher_service_factory.cc,4
+chrome/browser/signin/fake_account_fetcher_service_builder.cc,4
+components/signin/core/browser/account_fetcher_service.cc,2
+components/signin/core/browser/fake_account_fetcher_service.cc,2
+ios/chrome/browser/signin/account_fetcher_service_factory.cc,3
+ios/web_view/internal/signin/web_view_account_fetcher_service_factory.mm,1
+total,16

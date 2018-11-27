@@ -1,0 +1,21 @@
+file,# inclusions
+chrome/browser/signin/chrome_device_id_helper.cc,1
+chrome/browser/signin/chrome_signin_helper.cc,2
+chrome/browser/signin/identity_manager_factory.cc,5
+chrome/browser/signin/identity_test_environment_profile_adaptor.cc,7
+chrome/browser/signin/mutable_profile_oauth2_token_service_delegate.cc,1
+chrome/browser/signin/mutable_profile_oauth2_token_service_delegate.h,3
+chrome/browser/signin/mutable_profile_oauth2_token_service_delegate_unittest.cc,5
+chrome/browser/signin/oauth2_token_service_delegate_android.cc,1
+chrome/browser/signin/oauth2_token_service_delegate_android.h,2
+chrome/browser/signin/test_signin_client_builder.cc,1
+components/signin/core/browser/fake_auth_status_provider.h,1
+components/signin/core/browser/signin_investigator_unittest.cc,1
+components/signin/ios/browser/merge_session_observer_bridge.h,1
+components/signin/ios/browser/profile_oauth2_token_service_ios_delegate.h,1
+components/signin/ios/browser/profile_oauth2_token_service_ios_delegate.mm,2
+components/signin/ios/browser/profile_oauth2_token_service_ios_delegate_unittest.mm,4
+ios/chrome/browser/signin/identity_manager_factory.cc,5
+ios/chrome/browser/signin/identity_service_creator.cc,4
+ios/chrome/browser/signin/signin_client_factory.cc,2
+total,49

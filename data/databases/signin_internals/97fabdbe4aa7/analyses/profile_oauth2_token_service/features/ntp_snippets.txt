@@ -1,0 +1,10 @@
+file,# inclusions
+chrome/browser/ntp_snippets/content_suggestions_service_factory.cc,2
+chrome/browser/ntp_snippets/contextual_content_suggestions_service_factory.cc,2
+components/ntp_snippets/breaking_news/subscription_manager_impl_unittest.cc,1
+components/ntp_snippets/contextual/contextual_suggestions_fetcher_impl_unittest.cc,1
+components/ntp_snippets/remote/json_request.cc,1
+components/ntp_snippets/remote/remote_suggestions_fetcher_impl_unittest.cc,1
+components/ntp_snippets/remote/remote_suggestions_provider_impl_unittest.cc,1
+components/ntp_snippets/remote/test_utils.cc,1
+total,10

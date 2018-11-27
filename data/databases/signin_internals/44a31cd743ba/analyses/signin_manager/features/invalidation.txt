@@ -1,0 +1,4 @@
+file,# inclusions
+ios/chrome/browser/invalidation/ios_chrome_deprecated_profile_invalidation_provider_factory.mm,1
+ios/chrome/browser/invalidation/ios_chrome_profile_invalidation_provider_factory.mm,1
+total,2

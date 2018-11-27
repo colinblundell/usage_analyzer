@@ -1,0 +1,3 @@
+file,# inclusions
+ios/chrome/browser/signin/signin_capability.cc,2
+total,2

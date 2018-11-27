@@ -1,0 +1,15 @@
+file,# inclusions
+chrome/browser/ui/webui/settings/people_handler.cc,3
+chrome/browser/ui/webui/settings/people_handler.h,1
+chrome/browser/ui/webui/settings/people_handler_unittest.cc,3
+chrome/browser/ui/webui/settings/search_engines_handler.cc,2
+chrome/browser/ui/webui/settings/settings_clear_browsing_data_handler.cc,2
+chrome/browser/ui/webui/settings/settings_manage_profile_handler.cc,2
+ios/chrome/browser/ui/settings/accounts_collection_egtest.mm,2
+ios/chrome/browser/ui/settings/accounts_collection_view_controller.mm,2
+ios/chrome/browser/ui/settings/clear_browsing_data_collection_view_controller.mm,2
+ios/chrome/browser/ui/settings/clear_browsing_data_collection_view_controller_unittest.mm,3
+ios/chrome/browser/ui/settings/privacy_collection_view_controller.mm,1
+ios/chrome/browser/ui/settings/settings_collection_view_controller.mm,2
+ios/chrome/browser/ui/settings/signin_settings_egtest.mm,2
+total,27

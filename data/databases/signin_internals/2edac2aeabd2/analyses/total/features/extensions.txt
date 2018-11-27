@@ -1,0 +1,10 @@
+file,# inclusions
+chrome/browser/extensions/api/enterprise_platform_keys/enterprise_platform_keys_api_unittest.cc,2
+chrome/browser/extensions/api/enterprise_platform_keys_private/enterprise_platform_keys_private_api.cc,2
+chrome/browser/extensions/api/enterprise_platform_keys_private/enterprise_platform_keys_private_api_unittest.cc,2
+chrome/browser/extensions/api/signed_in_devices/signed_in_devices_manager_unittest.cc,2
+chrome/browser/extensions/extension_system_factory.cc,2
+chrome/browser/extensions/external_component_loader.cc,2
+chrome/browser/extensions/external_provider_impl_chromeos_unittest.cc,4
+chrome/browser/extensions/updater/chrome_extension_downloader_factory.cc,4
+total,20

@@ -1,0 +1,7 @@
+file,# inclusions
+ios/chrome/browser/ui/settings/accounts_collection_view_controller.mm,2
+ios/chrome/browser/ui/settings/clear_browsing_data_collection_view_controller_unittest.mm,2
+ios/chrome/browser/ui/settings/clear_browsing_data_manager_unittest.mm,2
+ios/chrome/browser/ui/settings/sync_encryption_passphrase_collection_view_controller.mm,2
+ios/chrome/browser/ui/settings/sync_settings_collection_view_controller.mm,2
+total,10

@@ -1,0 +1,7 @@
+file,# inclusions
+chrome/browser/browsing_data/browsing_data_remover_browsertest.cc,2
+chrome/browser/browsing_data/counters/browsing_data_counter_utils.cc,1
+chrome/browser/browsing_data/counters/browsing_data_counter_utils_browsertest.cc,2
+chrome/browser/extensions/api/browsing_data/browsing_data_api.cc,1
+chrome/browser/extensions/api/browsing_data/browsing_data_test.cc,2
+total,8

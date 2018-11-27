@@ -1,0 +1,18 @@
+file,# inclusions
+chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc,1
+chrome/browser/profiles/gaia_info_update_service.cc,1
+chrome/browser/profiles/gaia_info_update_service.h,1
+chrome/browser/profiles/gaia_info_update_service_factory.cc,1
+chrome/browser/profiles/gaia_info_update_service_unittest.cc,1
+chrome/browser/profiles/profile_downloader.cc,2
+chrome/browser/profiles/profile_impl.cc,2
+chrome/browser/profiles/profile_manager.cc,2
+chrome/browser/profiles/profile_window.cc,2
+chrome/browser/profiles/profile_window_browsertest.cc,1
+chrome/browser/ui/cocoa/profiles/profile_chooser_controller.mm,2
+chrome/browser/ui/cocoa/profiles/profile_chooser_controller_unittest.mm,2
+chrome/browser/ui/views/profiles/avatar_button.cc,2
+chrome/browser/ui/views/profiles/forced_reauthentication_dialog_view.cc,1
+chrome/browser/ui/views/profiles/forced_reauthentication_dialog_view_browsertest.cc,2
+chrome/browser/ui/views/profiles/profile_chooser_view.cc,2
+total,25

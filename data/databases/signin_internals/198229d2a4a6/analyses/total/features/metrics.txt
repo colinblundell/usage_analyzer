@@ -1,0 +1,7 @@
+file,# inclusions
+chrome/browser/metrics/desktop_session_duration/desktop_profile_session_durations_service.cc,1
+chrome/browser/metrics/desktop_session_duration/desktop_profile_session_durations_service.h,2
+chrome/browser/metrics/desktop_session_duration/desktop_profile_session_durations_service_factory.cc,2
+chrome/browser/metrics/desktop_session_duration/desktop_profile_session_durations_service_factory.h,1
+chrome/browser/metrics/ukm_browsertest.cc,2
+total,8

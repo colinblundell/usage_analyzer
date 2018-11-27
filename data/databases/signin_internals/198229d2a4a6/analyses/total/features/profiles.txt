@@ -1,0 +1,22 @@
+file,# inclusions
+chrome/browser/android/profiles/profile_downloader_android.cc,2
+chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc,3
+chrome/browser/profiles/gaia_info_update_service.cc,2
+chrome/browser/profiles/gaia_info_update_service.h,1
+chrome/browser/profiles/gaia_info_update_service_factory.cc,1
+chrome/browser/profiles/gaia_info_update_service_unittest.cc,4
+chrome/browser/profiles/profile_downloader.cc,7
+chrome/browser/profiles/profile_downloader.h,1
+chrome/browser/profiles/profile_downloader_unittest.cc,5
+chrome/browser/profiles/profile_impl.cc,4
+chrome/browser/profiles/profile_manager.cc,6
+chrome/browser/profiles/profile_window.cc,4
+chrome/browser/profiles/profile_window_browsertest.cc,1
+chrome/browser/profiles/profiles_state.cc,3
+chrome/browser/ui/cocoa/profiles/avatar_button_controller.mm,1
+chrome/browser/ui/views/profiles/avatar_button.cc,2
+chrome/browser/ui/views/profiles/avatar_toolbar_button.cc,2
+chrome/browser/ui/views/profiles/forced_reauthentication_dialog_view.cc,1
+chrome/browser/ui/views/profiles/forced_reauthentication_dialog_view_browsertest.cc,2
+chrome/browser/ui/views/profiles/profile_chooser_view.cc,10
+total,62

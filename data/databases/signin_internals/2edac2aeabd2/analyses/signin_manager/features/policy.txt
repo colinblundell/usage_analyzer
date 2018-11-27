@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/policy/cloud/cloud_policy_browsertest.cc,2
+chrome/browser/policy/cloud/cloud_policy_manager_browsertest.cc,2
+chrome/browser/policy/cloud/component_cloud_policy_browsertest.cc,2
+total,6

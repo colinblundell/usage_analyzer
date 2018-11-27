@@ -1,0 +1,10 @@
+file,# inclusions
+chrome/browser/safe_browsing/advanced_protection_status_manager.cc,1
+chrome/browser/safe_browsing/advanced_protection_status_manager.h,1
+chrome/browser/safe_browsing/advanced_protection_status_manager_factory.cc,2
+chrome/browser/safe_browsing/advanced_protection_status_manager_unittest.cc,7
+chrome/browser/safe_browsing/chrome_password_protection_service.cc,4
+chrome/browser/safe_browsing/chrome_password_protection_service_browsertest.cc,4
+chrome/browser/safe_browsing/chrome_password_protection_service_unittest.cc,10
+chrome/browser/safe_browsing/safe_browsing_blocking_page_unittest.cc,2
+total,31

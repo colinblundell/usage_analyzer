@@ -1,0 +1,4 @@
+file,# inclusions
+chrome/browser/ui/search/search_tab_helper.cc,2
+chrome/browser/ui/search/search_tab_helper_unittest.cc,2
+total,4

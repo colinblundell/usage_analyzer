@@ -1,0 +1,7 @@
+file,# inclusions
+chrome/browser/invalidation/profile_invalidation_provider_factory.cc,4
+components/invalidation/impl/fake_invalidation_service.h,1
+components/invalidation/impl/gcm_invalidation_bridge.cc,2
+components/invalidation/impl/gcm_invalidation_bridge_unittest.cc,1
+ios/chrome/browser/invalidation/ios_chrome_profile_invalidation_provider_factory.mm,2
+total,10

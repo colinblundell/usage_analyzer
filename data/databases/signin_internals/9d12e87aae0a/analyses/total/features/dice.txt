@@ -1,0 +1,10 @@
+file,# inclusions
+chrome/browser/signin/dice_browsertest.cc,6
+chrome/browser/signin/dice_response_handler.cc,8
+chrome/browser/signin/dice_response_handler_unittest.cc,6
+chrome/browser/signin/process_dice_header_delegate_impl.cc,1
+chrome/browser/signin/process_dice_header_delegate_impl_unittest.cc,4
+chrome/browser/ui/views/sync/dice_bubble_sync_promo_view.cc,2
+chrome/browser/ui/webui/signin/dice_turn_sync_on_helper.cc,5
+chrome/browser/ui/webui/signin/dice_turn_sync_on_helper_unittest.cc,8
+total,40

@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/gcm/gcm_profile_service_factory.cc,3
+chrome/browser/gcm/gcm_profile_service_unittest.cc,3
+ios/chrome/browser/gcm/ios_chrome_gcm_profile_service_factory.cc,3
+total,9

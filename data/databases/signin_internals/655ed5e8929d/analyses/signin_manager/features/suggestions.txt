@@ -1,0 +1,6 @@
+file,# inclusions
+chrome/browser/search/suggestions/suggestions_service_factory.cc,2
+components/suggestions/suggestions_service_impl.cc,1
+components/suggestions/suggestions_service_impl_unittest.cc,1
+ios/chrome/browser/suggestions/suggestions_service_factory.mm,2
+total,6

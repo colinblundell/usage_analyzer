@@ -1,0 +1,19 @@
+file,# inclusions
+chrome/browser/ntp_snippets/content_suggestions_service_factory.cc,4
+chrome/browser/ntp_snippets/contextual_content_suggestions_service_factory.cc,4
+components/ntp_snippets/breaking_news/subscription_manager_impl.cc,1
+components/ntp_snippets/breaking_news/subscription_manager_impl.h,1
+components/ntp_snippets/breaking_news/subscription_manager_impl_unittest.cc,3
+components/ntp_snippets/content_suggestions_service.h,1
+components/ntp_snippets/contextual/contextual_suggestions_fetcher_impl_unittest.cc,2
+components/ntp_snippets/remote/json_request.cc,3
+components/ntp_snippets/remote/remote_suggestions_fetcher_impl.cc,1
+components/ntp_snippets/remote/remote_suggestions_fetcher_impl_unittest.cc,2
+components/ntp_snippets/remote/remote_suggestions_provider_impl_unittest.cc,2
+components/ntp_snippets/remote/remote_suggestions_status_service_impl.cc,1
+components/ntp_snippets/remote/remote_suggestions_status_service_impl_unittest.cc,3
+components/ntp_snippets/remote/test_utils.cc,3
+components/ntp_snippets/remote/test_utils.h,1
+ios/chrome/browser/ntp_snippets/ios_chrome_content_suggestions_service_factory.cc,1
+ios/chrome/browser/ntp_snippets/ios_chrome_content_suggestions_service_factory_util.cc,2
+total,35

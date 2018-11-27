@@ -1,0 +1,3 @@
+file,# inclusions
+chrome/browser/apps/platform_apps/api/sync_file_system/sync_file_system_browsertest.cc,1
+total,1

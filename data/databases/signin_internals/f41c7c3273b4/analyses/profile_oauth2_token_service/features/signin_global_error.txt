@@ -1,0 +1,4 @@
+file,# inclusions
+chrome/browser/signin/signin_global_error_factory.cc,1
+chrome/browser/signin/signin_global_error_unittest.cc,2
+total,3

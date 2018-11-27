@@ -1,0 +1,17 @@
+file,# inclusions
+chrome/browser/supervised_user/child_accounts/child_account_service.cc,7
+chrome/browser/supervised_user/child_accounts/child_account_service.h,2
+chrome/browser/supervised_user/child_accounts/child_account_service_factory.cc,2
+chrome/browser/supervised_user/child_accounts/child_account_service_unittest.cc,5
+chrome/browser/supervised_user/child_accounts/family_info_fetcher_unittest.cc,1
+chrome/browser/supervised_user/child_accounts/permission_request_creator_apiary.cc,5
+chrome/browser/supervised_user/child_accounts/permission_request_creator_apiary_unittest.cc,1
+chrome/browser/supervised_user/experimental/safe_search_url_reporter.cc,5
+chrome/browser/supervised_user/experimental/safe_search_url_reporter_unittest.cc,1
+chrome/browser/supervised_user/legacy/custodian_profile_downloader_service.cc,2
+chrome/browser/supervised_user/legacy/custodian_profile_downloader_service_factory.cc,2
+chrome/browser/supervised_user/supervised_user_google_auth_navigation_throttle.cc,2
+chrome/browser/supervised_user/supervised_user_service.cc,2
+chrome/browser/supervised_user/supervised_user_service_factory.cc,1
+chrome/browser/supervised_user/supervised_user_service_unittest.cc,5
+total,43

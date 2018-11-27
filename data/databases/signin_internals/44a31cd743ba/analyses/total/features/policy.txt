@@ -1,0 +1,17 @@
+file,# inclusions
+chrome/browser/chromeos/arc/policy/arc_android_management_checker.cc,4
+chrome/browser/chromeos/policy/android_management_client_unittest.cc,1
+chrome/browser/chromeos/policy/device_local_account_browsertest.cc,2
+chrome/browser/chromeos/policy/user_cloud_policy_manager_chromeos_unittest.cc,10
+chrome/browser/chromeos/policy/user_cloud_policy_token_forwarder.cc,2
+chrome/browser/chromeos/policy/user_cloud_policy_token_forwarder_factory.cc,4
+chrome/browser/policy/cloud/cloud_policy_browsertest.cc,2
+chrome/browser/policy/cloud/cloud_policy_manager_browsertest.cc,2
+chrome/browser/policy/cloud/component_cloud_policy_browsertest.cc,2
+chrome/browser/policy/cloud/user_policy_signin_service.cc,3
+chrome/browser/policy/cloud/user_policy_signin_service_base.cc,2
+chrome/browser/policy/cloud/user_policy_signin_service_base.h,1
+chrome/browser/policy/cloud/user_policy_signin_service_factory.cc,2
+chrome/browser/policy/cloud/user_policy_signin_service_mobile.cc,3
+chrome/browser/policy/cloud/user_policy_signin_service_unittest.cc,9
+total,49

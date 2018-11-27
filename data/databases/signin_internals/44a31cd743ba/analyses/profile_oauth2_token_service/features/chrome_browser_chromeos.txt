@@ -1,0 +1,3 @@
+file,# inclusions
+chrome/browser/chromeos/arc/arc_session_manager_browsertest.cc,3
+total,3

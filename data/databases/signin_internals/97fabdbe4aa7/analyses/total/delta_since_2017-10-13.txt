@@ -1,0 +1,7 @@
+feature,# inclusions,from prod,from prod non-factory,Dependency status
+ios/chrome/browser/ui/authentication/signin_interaction_controller.mm,-2,-2,-2,Completed
+ios/chrome/browser/ui/authentication/signin_interaction_controller_egtest.mm,-2,0,0,Completed
+ios/chrome/browser/ui/signin_interaction/signin_interaction_controller.mm,2,2,2,New
+ios/chrome/browser/ui/signin_interaction/signin_interaction_controller_egtest.mm,2,0,0,New
+ios/web_view/internal/autofill/web_view_personal_data_manager_factory.cc,1,1,0,New
+total,1,1,0,New

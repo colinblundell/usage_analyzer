@@ -1,0 +1,6 @@
+file,# inclusions
+chrome/browser/safe_browsing/chrome_password_protection_service.cc,2
+chrome/browser/safe_browsing/chrome_password_protection_service_browsertest.cc,2
+chrome/browser/safe_browsing/chrome_password_protection_service_unittest.cc,4
+chrome/browser/safe_browsing/download_protection/download_protection_service.cc,2
+total,10

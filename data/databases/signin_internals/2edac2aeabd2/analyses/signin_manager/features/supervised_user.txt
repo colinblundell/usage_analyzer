@@ -1,0 +1,7 @@
+file,# inclusions
+chrome/browser/supervised_user/child_accounts/child_account_service.cc,2
+chrome/browser/supervised_user/child_accounts/child_account_service_factory.cc,1
+chrome/browser/supervised_user/child_accounts/permission_request_creator_apiary.cc,3
+chrome/browser/supervised_user/experimental/safe_search_url_reporter.cc,3
+chrome/browser/supervised_user/legacy/custodian_profile_downloader_service_factory.cc,1
+total,10

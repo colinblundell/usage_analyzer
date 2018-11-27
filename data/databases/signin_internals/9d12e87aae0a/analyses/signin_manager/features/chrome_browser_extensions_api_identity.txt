@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/extensions/api/identity/gaia_web_auth_flow.cc,2
+chrome/browser/extensions/api/identity/identity_api.cc,2
+chrome/browser/extensions/api/identity/identity_apitest.cc,3
+total,7

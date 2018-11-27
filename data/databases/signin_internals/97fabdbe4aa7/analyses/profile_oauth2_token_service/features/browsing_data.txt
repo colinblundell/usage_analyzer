@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/browsing_data/history_counter_browsertest.cc,2
+chrome/browser/browsing_data/sync_aware_counter_browsertest.cc,2
+components/browsing_data/core/history_notice_utils_unittest.cc,1
+total,5

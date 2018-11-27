@@ -1,0 +1,8 @@
+file,# inclusions
+chrome/browser/chromeos/extensions/file_manager/private_api_drive.cc,2
+chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc,2
+chrome/browser/extensions/api/hotword_private/hotword_private_apitest.cc,2
+chrome/browser/extensions/extension_gcm_app_handler_unittest.cc,1
+chrome/browser/extensions/external_provider_impl_chromeos_unittest.cc,2
+chrome/browser/extensions/updater/chrome_extension_downloader_factory.cc,1
+total,10

@@ -1,0 +1,10 @@
+file,# inclusions
+chrome/browser/signin/account_consistency_mode_manager.h,1
+chrome/browser/signin/account_consistency_mode_manager_unittest.cc,1
+chrome/browser/signin/chromeos_mirror_account_consistency_browsertest.cc,1
+chrome/browser/signin/scoped_account_consistency.h,1
+components/signin/ios/browser/account_consistency_service.h,2
+components/signin/ios/browser/account_consistency_service.mm,2
+components/signin/ios/browser/account_consistency_service_unittest.mm,5
+ios/chrome/browser/signin/account_consistency_service_factory.mm,2
+total,15
