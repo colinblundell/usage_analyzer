@@ -22,9 +22,18 @@ class IncludedToIncludingAnalyzer:
   # following filters on its included_to_including dictionary:
   # - Filters out any included files as values.
   # - Filters out values based on the regexes in |including_files_filters|.
-  def __init__(self, database_filename, including_files_filters):
+  # - If |included_files_to_limit_to| is not None, limits the keys of the
+  #   including_to_included dictionary to elements in that set.
+  def __init__(self,
+               database_filename,
+               including_files_filters,
+               included_files_to_limit_to=None):
     self.inclusions_db = inclusions_database.ReadInclusionsDbFromDisk(
         database_filename)
+
+    if included_files_to_limit_to:
+      inclusions_database.LimitToSpecifiedIncludedFiles(
+          self.inclusions_db, included_files_to_limit_to)
 
     included_file_dict = inclusions_database.FilterOutIncludedFilesAsValues(
         self.inclusions_db)

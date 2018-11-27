@@ -12,7 +12,9 @@ from included_to_including_analyzer import IncludedToIncludingAnalyzer
 class TestGenerateIncludedToIncludingAnalyzer(unittest.TestCase):
   # Creates an IncludedToIncludingAnalyzer instance that operates on
   # the test config associated with these tests and |including_file_filters|.
-  def CreateAnalyzer(self, including_file_filters):
+  def CreateAnalyzer(self,
+                     including_file_filters,
+                     included_files_to_limit_to=None):
     with common_utils.TemporaryDirectory() as output_dir:
       # TODO: Should I have a test database that I read off disk?
       config_filename = (
@@ -26,9 +28,18 @@ class TestGenerateIncludedToIncludingAnalyzer(unittest.TestCase):
                                        database_name)
       assert os.path.isfile(database_filepath)
 
-      analyzer = IncludedToIncludingAnalyzer(database_filepath,
-                                             including_file_filters)
+      analyzer = IncludedToIncludingAnalyzer(
+          database_filepath,
+          including_file_filters,
+          included_files_to_limit_to=included_files_to_limit_to)
     return analyzer
+
+  def test_LimitIncludedFiles(self):
+    analyzer = self.CreateAnalyzer([], ["bar/core.h"])
+    expected_included_file_dict = {
+        "bar/core.h": ["bar/baz/bar_core_factory.h", "bar/bar.h"]
+    }
+    self.assertEqual(expected_included_file_dict, analyzer.included_file_dict)
 
   def test_GenerateAnalysisDefaultFilter(self):
     # Test with a filter that allows all including files.
