@@ -29,9 +29,10 @@ def GenerateAnalyses(database_filename, included_files_to_limit_to_filename):
     os.makedirs(output_dir)
 
   including_analyzer = (
-      IncludingToIncludedAnalyzer(database_filename,
-                                  signin_analysis_lib.INCLUDING_FILE_FILTERS,
-                          included_files_to_limit_to=included_files_to_limit_to))
+      IncludingToIncludedAnalyzer(
+          database_filename,
+          signin_analysis_lib.INCLUDING_FILE_FILTERS,
+          included_files_to_limit_to=included_files_to_limit_to))
 
   # Generate progress-over-time input.
 
@@ -134,9 +135,10 @@ def GenerateAnalyses(database_filename, included_files_to_limit_to_filename):
       f.write(feature_analysis_csv)
 
   included_analyzer = (
-      IncludedToIncludingAnalyzer(database_filename,
-                                  signin_analysis_lib.INCLUDING_FILE_FILTERS,
-                                  included_files_to_limit_to=included_files_to_limit_to))
+      IncludedToIncludingAnalyzer(
+          database_filename,
+          signin_analysis_lib.INCLUDING_FILE_FILTERS,
+          included_files_to_limit_to=included_files_to_limit_to))
   included_files_analysis = included_analyzer.GenerateAnalysis()
   included_files_order = common_utils.DictKeysSortedByValue(
       included_files_analysis)
