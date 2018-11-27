@@ -38,11 +38,12 @@ class TestInclusionsDatabase(unittest.TestCase):
     test_utils.VerifyBasicIncludingToIncluded(
         self, output_db["including_to_included"])
 
-  def test_GenerateInclusionsDatabaseSimpleWithLimitedIncludes(self):
+  def test_LimitToSpecifiedIncludedFilesSimple(self):
     output_db = inclusions_database.GenerateInclusionsDatabase(
-        test_utils.BASIC_TEST_CONFIG,
-        included_files_to_limit_to=test_utils
-        .BASIC_TEST_INCLUDED_FILES_TO_LIMIT_TO)
+        test_utils.BASIC_TEST_CONFIG)
+
+    inclusions_database.LimitToSpecifiedIncludedFiles(
+        output_db, test_utils.BASIC_TEST_INCLUDED_FILES_TO_LIMIT_TO)
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
@@ -76,10 +77,12 @@ class TestInclusionsDatabase(unittest.TestCase):
     test_utils.VerifyComplexIncludingToIncluded(
         self, output_db["including_to_included"])
 
-  def test_GenerateInclusionsDatabaseComplexWithLimitedIncludes(self):
+  def test_LimitToSpecifiedIncludedFilesComplex(self):
     output_db = inclusions_database.GenerateInclusionsDatabase(
-        test_utils.COMPLEX_TEST_CONFIG,
-        test_utils.COMPLEX_TEST_INCLUDED_FILES_TO_LIMIT_TO)
+        test_utils.COMPLEX_TEST_CONFIG)
+
+    inclusions_database.LimitToSpecifiedIncludedFiles(
+        output_db, test_utils.COMPLEX_TEST_INCLUDED_FILES_TO_LIMIT_TO)
 
     self.assertIn("timestamp (UTC)", output_db)
     self.assertIn("repo_rev", output_db)
