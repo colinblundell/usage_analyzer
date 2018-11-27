@@ -67,6 +67,14 @@ def GenerateInclusionsDatabase(config, included_files_to_limit_to=None):
 
   return inclusions_db
 
+# Modifies |inclusions_db| to have only the values in 
+# |included_files_to_limit_to| as values in
+# |including_to_included| and as keys in |included_to_including|.
+def LimitToSpecifiedIncludedFiles(inclusions_db, included_files_to_limit_to):
+  inclusions_db["including_to_included"] = common_utils.DictPreserveOnlySpecifiedValues(
+      inclusions_db["including_to_included"], included_files_to_limit_to)
+  inclusions_db["included_to_including"] = common_utils.DictPreserveOnlySpecifiedKeys(
+      inclusions_db["included_to_including"], included_files_to_limit_to)
 
 # Writes the given output database to disk at the following location:
 # <output_dir>/<config_name>/<repo_rev>/
