@@ -14,7 +14,9 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
   # Creates an IncludingToIncludedAnalyzer instance that operates on
   # the test config associated with these tests and uses
   # |including_file_filters|.
-  def CreateAnalyzer(self, including_file_filters, included_files_to_limit_to=None):
+  def CreateAnalyzer(self,
+                     including_file_filters,
+                     included_files_to_limit_to=None):
     with common_utils.TemporaryDirectory() as output_dir:
       # TODO: Should I have a test database that I read off disk?
       config_filename = (
@@ -28,15 +30,16 @@ class TestGenerateIncludingToIncludedAnalyzer(unittest.TestCase):
                                        database_name)
       assert os.path.isfile(database_filepath)
 
-      analyzer = IncludingToIncludedAnalyzer(database_filepath,
-                                             including_file_filters,
-                                             included_files_to_limit_to=included_files_to_limit_to)
+      analyzer = IncludingToIncludedAnalyzer(
+          database_filepath,
+          including_file_filters,
+          included_files_to_limit_to=included_files_to_limit_to)
     return analyzer
 
   def test_LimitIncludedFiles(self):
     analyzer = self.CreateAnalyzer([], ["foo/foo.h"])
     expected_including_file_dict = {
-      "bar/bar.h" : ["foo/foo.h"],
+        "bar/bar.h": ["foo/foo.h"],
     }
     self.assertEqual(expected_including_file_dict, analyzer.including_file_dict)
 
