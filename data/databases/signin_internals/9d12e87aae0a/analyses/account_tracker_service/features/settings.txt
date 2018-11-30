@@ -1,0 +1,6 @@
+file,# inclusions
+chrome/browser/ui/webui/settings/people_handler.cc,2
+chrome/browser/ui/webui/settings/people_handler.h,1
+ios/chrome/browser/ui/settings/accounts_collection_view_controller.mm,2
+ios/chrome/browser/ui/settings/sync_settings_collection_view_controller.mm,2
+total,7

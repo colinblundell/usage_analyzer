@@ -1,0 +1,12 @@
+file,# inclusions
+chrome/browser/android/profiles/profile_downloader_android.cc,2
+chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc,1
+chrome/browser/profiles/gaia_info_update_service_unittest.cc,2
+chrome/browser/profiles/profile_downloader.cc,1
+chrome/browser/profiles/profile_downloader.h,1
+chrome/browser/profiles/profile_downloader_unittest.cc,2
+chrome/browser/profiles/profile_impl.cc,1
+chrome/browser/profiles/profile_manager.cc,2
+chrome/browser/profiles/profile_window.cc,2
+chrome/browser/ui/cocoa/profiles/profile_chooser_controller_unittest.mm,1
+total,15

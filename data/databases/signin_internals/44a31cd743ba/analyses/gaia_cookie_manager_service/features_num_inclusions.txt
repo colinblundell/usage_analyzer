@@ -1,0 +1,24 @@
+feature,# inclusions,from prod,from prod non-factory
+total,79,49,34
+sync,8,2,1
+webui,7,7,7
+supervised_user,6,3,3
+profiles,6,6,6
+chrome/browser/ui,6,0,0
+account_reconcilor,5,4,2
+signin,5,3,1
+signin_tracker,4,3,2
+signin_ui_util,4,2,2
+chrome/browser/extensions/api/identity,3,0,0
+account_investigator,3,2,1
+about_signin,3,3,1
+account_consistency,3,2,1
+metrics,3,3,1
+browser_state,3,3,3
+chrome/browser/chromeos/login,3,3,2
+components/search_provider_logos,2,1,1
+dice,1,0,0
+gaia_cookie_manager,1,1,0
+safe_browsing,1,0,0
+chrome/test/base,1,0,0
+chrome/browser/search_provider_logos,1,1,0

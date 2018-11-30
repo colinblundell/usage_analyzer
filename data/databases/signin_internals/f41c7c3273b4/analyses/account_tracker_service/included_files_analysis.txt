@@ -1,0 +1,5 @@
+file,# inclusions
+total,128
+components/signin/core/browser/account_tracker_service.h,72
+chrome/browser/signin/account_tracker_service_factory.h,42
+ios/chrome/browser/signin/account_tracker_service_factory.h,14

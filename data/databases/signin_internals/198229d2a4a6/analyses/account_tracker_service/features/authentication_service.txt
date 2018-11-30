@@ -1,0 +1,6 @@
+file,# inclusions
+ios/chrome/browser/signin/authentication_service.mm,1
+ios/chrome/browser/signin/authentication_service_factory.mm,1
+ios/chrome/browser/signin/authentication_service_fake.mm,1
+ios/chrome/browser/signin/authentication_service_unittest.mm,1
+total,4

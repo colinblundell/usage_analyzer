@@ -1,0 +1,19 @@
+feature,# including files,prod,prod non-factory
+total,41,31,20
+webui,4,4,4
+account_reconcilor,4,3,1
+search,4,2,1
+signin_tracker,3,3,2
+browser_state,2,2,2
+supervised_user,2,2,2
+chrome/browser/extensions/api/identity,1,0,0
+chrome/browser/chromeos/login,3,3,2
+account_investigator,3,2,1
+about_signin,3,3,1
+sync,3,2,1
+account_consistency,3,2,1
+profiles,1,1,1
+signin,2,1,1
+chrome/test/base,1,0,0
+gaia_cookie_manager,1,1,0
+safe_browsing,1,0,0

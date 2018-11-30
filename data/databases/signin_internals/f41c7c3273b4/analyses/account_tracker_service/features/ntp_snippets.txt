@@ -1,0 +1,4 @@
+file,# inclusions
+components/ntp_snippets/remote/remote_suggestions_status_service_impl_unittest.cc,1
+components/ntp_snippets/remote/test_utils.cc,1
+total,2

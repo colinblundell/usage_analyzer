@@ -1,0 +1,6 @@
+file,# inclusions
+chrome/browser/search/one_google_bar/one_google_bar_service.cc,1
+chrome/browser/search/one_google_bar/one_google_bar_service_factory.cc,1
+chrome/browser/search/one_google_bar/one_google_bar_service_unittest.cc,1
+chrome/browser/ui/search/local_ntp_one_google_bar_browsertest.cc,1
+total,4
