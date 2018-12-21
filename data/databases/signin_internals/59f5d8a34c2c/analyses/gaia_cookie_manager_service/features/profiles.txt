@@ -1,0 +1,6 @@
+file,# inclusions
+chrome/browser/profiles/profile_manager.cc,2
+chrome/browser/ui/views/profiles/avatar_toolbar_button.cc,1
+chrome/browser/ui/views/profiles/avatar_toolbar_button.h,1
+chrome/browser/ui/views/profiles/profile_chooser_view.cc,2
+total,6

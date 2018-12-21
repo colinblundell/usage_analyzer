@@ -1,0 +1,12 @@
+file,# inclusions
+chrome/browser/ui/webui/settings/chromeos/account_manager_handler.cc,1
+chrome/browser/ui/webui/settings/chromeos/account_manager_handler.h,1
+chrome/browser/ui/webui/settings/md_settings_ui.cc,1
+chrome/browser/ui/webui/settings/people_handler.cc,10
+chrome/browser/ui/webui/settings/people_handler.h,1
+chrome/browser/ui/webui/settings/people_handler_unittest.cc,4
+chrome/browser/ui/webui/settings/settings_manage_profile_handler.cc,1
+ios/chrome/browser/ui/settings/accounts_collection_view_controller.mm,4
+ios/chrome/browser/ui/settings/sync_encryption_passphrase_table_view_controller.mm,2
+ios/chrome/browser/ui/settings/sync_settings_collection_view_controller.mm,4
+total,29

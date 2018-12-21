@@ -1,0 +1,4 @@
+file,# inclusions
+chrome/browser/extensions/extension_system_factory.cc,1
+chrome/browser/extensions/updater/chrome_extension_downloader_factory.cc,2
+total,3

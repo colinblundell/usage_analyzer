@@ -1,0 +1,9 @@
+file,# inclusions
+total,162
+chrome/browser/signin/signin_manager_factory.h,66
+components/signin/core/browser/signin_manager.h,50
+chrome/browser/signin/fake_signin_manager_builder.h,14
+components/signin/core/browser/signin_manager_base.h,12
+components/signin/core/browser/fake_signin_manager.h,10
+ios/chrome/browser/signin/signin_manager_factory.h,9
+ios/chrome/browser/signin/fake_signin_manager_builder.h,1

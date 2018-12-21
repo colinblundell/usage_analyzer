@@ -13,7 +13,7 @@ TO GENERATE A SIGNIN DATABASE
 
 Check out Chromium at the desired revision (most likely at HEAD).
 Run the following command:
-./generate_inclusions.py /path/to/chromium/src data/configs/signin.py data/databases/
+./generate_inclusions.py /path/to/chromium/src data/database_configs/signin_internals.py data/databases/
 
 TO GENERATE SIGNIN ANALYSES
 
@@ -22,6 +22,8 @@ and shouldn't change anything besides adding data for any new databases and/or
 analysis configs that you've added.
 
 ./scripts/generate_signin_analyses.sh
+
+Once the script is done, the result will be in data/databases/signin_internals/<git_hash>/analyses/
 
 TO ADD THE RESULTS OF AN ANALYSIS TO THE SPREADSHEETS
 

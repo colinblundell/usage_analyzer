@@ -1,0 +1,3 @@
+file,# inclusions
+chrome/browser/chromeos/arc/optin/arc_terms_of_service_default_negotiator_unittest.cc,1
+total,1

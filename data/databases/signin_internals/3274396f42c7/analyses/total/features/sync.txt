@@ -1,0 +1,19 @@
+file,# inclusions
+chrome/browser/sync/profile_sync_service_factory.cc,1
+chrome/browser/sync/sync_ui_util.cc,2
+chrome/browser/sync/sync_ui_util_unittest.cc,2
+chrome/browser/sync/test/integration/secondary_account_helper.cc,5
+chrome/browser/sync/test/integration/single_client_sessions_sync_test.cc,2
+chrome/browser/sync/test/integration/sync_auth_test.cc,2
+chrome/browser/sync/test/integration/sync_test.cc,1
+chrome/browser/ui/sync/one_click_signin_sync_starter.cc,3
+chrome/browser/ui/sync/one_click_signin_sync_starter_unittest.cc,7
+chrome/browser/ui/sync/sync_promo_ui_unittest.cc,2
+chrome/browser/ui/views/sync/profile_signin_confirmation_dialog_views.cc,1
+components/browser_sync/profile_sync_service.h,1
+components/sync/driver/sync_session_durations_metrics_recorder.h,1
+ios/chrome/browser/sync/profile_sync_service_factory.cc,1
+ios/web_view/internal/sync/cwv_sync_controller.mm,4
+ios/web_view/internal/sync/cwv_sync_controller_unittest.mm,7
+ios/web_view/internal/sync/web_view_profile_sync_service_factory.mm,2
+total,44

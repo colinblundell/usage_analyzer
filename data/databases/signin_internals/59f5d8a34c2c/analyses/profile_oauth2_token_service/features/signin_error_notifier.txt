@@ -1,0 +1,4 @@
+file,# inclusions
+chrome/browser/signin/signin_error_notifier_ash_unittest.cc,2
+chrome/browser/signin/signin_error_notifier_factory_ash.cc,1
+total,3

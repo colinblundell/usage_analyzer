@@ -1,0 +1,7 @@
+file,# inclusions
+chrome/browser/sync/profile_sync_service_factory.cc,1
+chrome/browser/sync/test/integration/secondary_account_helper.cc,3
+chrome/browser/ui/sync/one_click_signin_sync_starter_unittest.cc,1
+components/browser_sync/profile_sync_service.h,1
+ios/web_view/internal/sync/cwv_sync_controller_unittest.mm,1
+total,7

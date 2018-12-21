@@ -1,0 +1,12 @@
+file,# inclusions
+chrome/browser/ui/avatar_button_error_controller.h,1
+chrome/browser/ui/browser_command_controller_browsertest.cc,1
+chrome/browser/ui/browser_command_controller_unittest.cc,1
+chrome/browser/ui/chrome_pages.cc,2
+chrome/browser/ui/cocoa/test/cocoa_profile_test.mm,3
+chrome/browser/ui/passwords/google_password_manager_navigation_throttle_browsertest.cc,2
+chrome/browser/ui/signin_view_controller.cc,2
+chrome/browser/ui/views/frame/browser_view.cc,1
+chrome/browser/ui/views/frame/test_with_browser_view.cc,3
+chrome/browser/ui/zoom/zoom_controller_browsertest.cc,1
+total,17

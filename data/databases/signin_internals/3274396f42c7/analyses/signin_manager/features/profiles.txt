@@ -1,0 +1,9 @@
+file,# inclusions
+chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc,1
+chrome/browser/profiles/profile_impl.cc,2
+chrome/browser/profiles/profile_window.cc,2
+chrome/browser/profiles/profile_window_browsertest.cc,1
+chrome/browser/profiles/renderer_updater_factory.cc,1
+chrome/browser/ui/views/profiles/avatar_toolbar_button.cc,1
+chrome/browser/ui/views/profiles/profile_chooser_view.cc,1
+total,9
