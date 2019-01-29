@@ -4,8 +4,6 @@
     "repo_root":
         "CHROMIUM_ROOT",
     "included_files": [
-        "components/signin/core/browser/account_consistency_method.cc",
-        "components/signin/core/browser/account_consistency_method.h",
         "components/signin/core/browser/account_fetcher_service.cc",
         "components/signin/core/browser/account_fetcher_service.h",
         "components/signin/core/browser/account_info_fetcher.cc",
