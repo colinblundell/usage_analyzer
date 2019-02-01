@@ -1,0 +1,6 @@
+file,# inclusions
+chrome/browser/signin/chrome_signin_status_metrics_provider_delegate.h,1
+components/signin/core/browser/signin_status_metrics_provider.cc,1
+components/signin/core/browser/signin_status_metrics_provider.h,1
+ios/chrome/browser/signin/ios_chrome_signin_status_metrics_provider_delegate.cc,2
+total,5

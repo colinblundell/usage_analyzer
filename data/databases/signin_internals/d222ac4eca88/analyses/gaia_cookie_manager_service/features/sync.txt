@@ -1,0 +1,8 @@
+file,# inclusions
+chrome/browser/sync/profile_sync_service_factory.cc,1
+chrome/browser/sync/test/integration/secondary_account_helper.cc,3
+chrome/browser/sync/test/integration/single_client_sessions_sync_test.cc,2
+components/browser_sync/profile_sync_service.h,1
+components/sync/driver/sync_session_durations_metrics_recorder.h,1
+ios/web_view/internal/sync/cwv_sync_controller_unittest.mm,1
+total,9

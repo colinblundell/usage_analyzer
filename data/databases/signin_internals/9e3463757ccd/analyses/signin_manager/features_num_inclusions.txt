@@ -1,0 +1,22 @@
+feature,# inclusions,from prod,from prod non-factory
+total,46,25,17
+signin,16,8,4
+signin_status_metrics_provider,5,5,5
+profiles,4,3,3
+account_reconcilor,2,0,0
+autofill,2,0,0
+password_manager,2,0,0
+bookmarks,2,0,0
+chrome/browser/prefs,1,1,1
+chrome/browser/unified_consent,1,1,0
+ios/web_view/internal/signin,1,1,0
+chrome/browser/ui/webui/signin,1,1,1
+supervised_user,1,1,0
+ios/chrome/browser/prefs,1,1,1
+chrome/browser/chromeos/login,1,1,0
+chrome/browser/chromeos,1,0,0
+sync,1,0,0
+browser_state,1,1,1
+chrome/browser/android/signin,1,1,1
+account_consistency,1,0,0
+dice,1,0,0

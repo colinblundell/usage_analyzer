@@ -1,0 +1,3 @@
+file,# inclusions
+ios/web_view/internal/app/application_context.mm,1
+total,1

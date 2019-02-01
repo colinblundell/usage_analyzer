@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/sync/test/integration/secondary_account_helper.cc,2
+chrome/browser/sync/test/integration/single_client_sessions_sync_test.cc,2
+components/sync/driver/sync_session_durations_metrics_recorder.h,1
+total,5

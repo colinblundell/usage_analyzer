@@ -1,0 +1,4 @@
+file,# inclusions
+chrome/browser/ui/cocoa/test/cocoa_profile_test.mm,3
+chrome/browser/ui/views/frame/test_with_browser_view.cc,2
+total,5

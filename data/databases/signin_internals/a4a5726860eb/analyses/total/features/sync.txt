@@ -1,0 +1,14 @@
+file,# inclusions
+chrome/browser/sync/sync_ui_util_unittest.cc,1
+chrome/browser/sync/test/integration/secondary_account_helper.cc,3
+chrome/browser/sync/test/integration/single_client_sessions_sync_test.cc,2
+chrome/browser/sync/test/integration/sync_test.cc,1
+chrome/browser/ui/sync/sync_promo_ui_unittest.cc,2
+chrome/browser/ui/views/sync/inline_login_ui_browsertest.cc,1
+chrome/browser/ui/views/sync/profile_signin_confirmation_dialog_views.cc,1
+components/sync/driver/sync_session_durations_metrics_recorder.h,1
+ios/chrome/browser/sync/device_info_sync_service_factory.mm,1
+ios/web_view/internal/sync/cwv_sync_controller.mm,1
+ios/web_view/internal/sync/cwv_sync_controller_unittest.mm,6
+ios/web_view/internal/sync/web_view_device_info_sync_service_factory.mm,1
+total,21

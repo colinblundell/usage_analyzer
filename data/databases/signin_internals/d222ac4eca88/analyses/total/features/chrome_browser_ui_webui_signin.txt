@@ -1,0 +1,15 @@
+file,# inclusions
+chrome/browser/ui/webui/signin/inline_login_handler_chromeos.cc,2
+chrome/browser/ui/webui/signin/inline_login_handler_impl.cc,4
+chrome/browser/ui/webui/signin/inline_login_ui.cc,1
+chrome/browser/ui/webui/signin/login_ui_service.cc,1
+chrome/browser/ui/webui/signin/login_ui_service_factory.cc,3
+chrome/browser/ui/webui/signin/signin_create_profile_handler.cc,1
+chrome/browser/ui/webui/signin/signin_create_profile_handler_unittest.cc,2
+chrome/browser/ui/webui/signin/signin_utils_desktop.cc,2
+chrome/browser/ui/webui/signin/sync_confirmation_handler.cc,2
+chrome/browser/ui/webui/signin/sync_confirmation_handler.h,1
+chrome/browser/ui/webui/signin/sync_confirmation_handler_unittest.cc,8
+chrome/browser/ui/webui/signin/user_manager_screen_handler.cc,1
+chrome/browser/ui/webui/signin/user_manager_ui_browsertest.cc,1
+total,29

@@ -1,0 +1,10 @@
+file,# inclusions
+chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc,4
+chrome/browser/profiles/gaia_info_update_service_unittest.cc,1
+chrome/browser/profiles/profile_downloader.cc,3
+chrome/browser/profiles/profile_downloader.h,1
+chrome/browser/profiles/profile_downloader_unittest.cc,4
+chrome/browser/profiles/profile_impl.cc,4
+chrome/browser/profiles/profile_manager.cc,4
+chrome/browser/profiles/profile_window_browsertest.cc,1
+total,22

@@ -1,0 +1,4 @@
+file,# inclusions
+chrome/browser/extensions/api/identity/identity_api.cc,1
+chrome/browser/extensions/api/identity/identity_apitest.cc,5
+total,6

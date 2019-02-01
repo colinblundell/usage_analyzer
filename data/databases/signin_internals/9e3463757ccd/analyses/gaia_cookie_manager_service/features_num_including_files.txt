@@ -1,0 +1,18 @@
+feature,# including files,prod,prod non-factory
+total,38,26,13
+signin,5,3,1
+account_reconcilor,5,4,2
+supervised_user,3,2,2
+sync,3,1,1
+chrome/browser/ui,2,0,0
+autofill,4,4,1
+account_consistency,3,2,1
+chrome/browser/extensions/api/identity,1,0,0
+about_signin,3,3,1
+browser_state,2,2,2
+chrome/browser/chromeos/login,2,2,1
+profiles,1,1,1
+metrics,1,1,0
+chrome/test/base,1,0,0
+dice,1,0,0
+gaia_cookie_manager,1,1,0

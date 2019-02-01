@@ -1,0 +1,9 @@
+file,# inclusions
+chrome/browser/chromeos/login/screens/sync_consent_screen.cc,2
+chrome/browser/chromeos/login/session/user_session_manager.cc,2
+chrome/browser/chromeos/login/signin/oauth2_browsertest.cc,3
+chrome/browser/chromeos/login/signin/oauth2_login_manager.cc,3
+chrome/browser/chromeos/login/signin/oauth2_login_manager_factory.cc,3
+chrome/browser/chromeos/login/signin/oauth2_login_verifier.h,1
+chrome/browser/chromeos/login/users/avatar/user_image_manager_browsertest.cc,2
+total,16

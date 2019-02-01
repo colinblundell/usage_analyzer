@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/supervised_user/legacy/custodian_profile_downloader_service_factory.cc,1
+chrome/browser/supervised_user/supervised_user_service.cc,2
+chrome/browser/supervised_user/supervised_user_service_factory.cc,1
+total,4

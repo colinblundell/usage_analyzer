@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc,1
+chrome/browser/profiles/profile_impl.cc,2
+chrome/browser/profiles/profile_window_browsertest.cc,1
+total,4

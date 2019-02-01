@@ -1,0 +1,5 @@
+file,# inclusions
+components/signin/ios/browser/account_consistency_service.h,1
+components/signin/ios/browser/account_consistency_service_unittest.mm,2
+ios/chrome/browser/signin/account_consistency_service_factory.mm,1
+total,4

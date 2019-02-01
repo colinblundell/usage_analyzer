@@ -1,0 +1,22 @@
+feature,# inclusions,from prod,from prod non-factory
+total,56,28,17
+signin,19,7,5
+authentication_service,5,2,1
+supervised_user,4,4,2
+chrome/browser/chromeos/login,4,3,2
+policy,3,0,0
+about_signin,3,3,1
+account_reconcilor,2,0,0
+chrome/browser/extensions/api/identity,2,2,2
+sync,2,1,1
+signin_ui_util,2,0,0
+dice,1,0,0
+gaia_cookie_manager,1,1,0
+account_fetcher,1,1,0
+profiles,1,1,1
+webui,1,0,0
+ios/web_view/internal/signin,1,1,0
+browser_state,1,1,1
+chrome/browser/android/signin,1,1,1
+toolbar,1,0,0
+account_consistency,1,0,0

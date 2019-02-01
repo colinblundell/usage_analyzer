@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/supervised_user/child_accounts/child_account_service.cc,2
+chrome/browser/supervised_user/child_accounts/child_account_service.h,1
+chrome/browser/supervised_user/child_accounts/child_account_service_unittest.cc,2
+total,5

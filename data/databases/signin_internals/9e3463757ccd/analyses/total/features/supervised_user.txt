@@ -1,0 +1,8 @@
+file,# inclusions
+chrome/browser/supervised_user/child_accounts/child_account_service.cc,2
+chrome/browser/supervised_user/child_accounts/child_account_service.h,1
+chrome/browser/supervised_user/child_accounts/child_account_service_unittest.cc,4
+chrome/browser/supervised_user/legacy/custodian_profile_downloader_service_factory.cc,2
+chrome/browser/supervised_user/supervised_user_service.cc,2
+chrome/browser/supervised_user/supervised_user_service_factory.cc,1
+total,12

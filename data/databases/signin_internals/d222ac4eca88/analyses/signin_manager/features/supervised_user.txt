@@ -1,0 +1,4 @@
+file,# inclusions
+chrome/browser/supervised_user/child_accounts/child_account_service_factory.cc,1
+chrome/browser/supervised_user/legacy/custodian_profile_downloader_service_factory.cc,1
+total,2
