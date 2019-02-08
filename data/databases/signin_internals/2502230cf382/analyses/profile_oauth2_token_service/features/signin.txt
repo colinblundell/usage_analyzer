@@ -1,0 +1,14 @@
+file,# inclusions
+chrome/browser/signin/identity_manager_factory.cc,1
+chrome/browser/signin/identity_services_provider_android.cc,1
+chrome/browser/signin/identity_test_environment_profile_adaptor.cc,2
+chrome/browser/signin/signin_util_win_browsertest.cc,1
+components/signin/core/browser/mutable_profile_oauth2_token_service_delegate.h,1
+components/signin/core/browser/mutable_profile_oauth2_token_service_delegate_unittest.cc,1
+components/signin/core/browser/oauth2_token_service_delegate_android.h,1
+components/signin/ios/browser/profile_oauth2_token_service_ios_delegate_unittest.mm,1
+ios/chrome/browser/signin/identity_manager_factory.cc,1
+ios/chrome/browser/signin/identity_service_creator.cc,1
+ios/chrome/browser/signin/identity_test_environment_chrome_browser_state_adaptor.cc,2
+ios/chrome/browser/signin/signin_browser_state_info_updater_unittest.mm,2
+total,15

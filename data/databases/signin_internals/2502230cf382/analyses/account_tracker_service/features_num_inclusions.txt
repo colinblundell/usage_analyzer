@@ -1,0 +1,16 @@
+feature,# inclusions,from prod,from prod non-factory
+total,37,25,20
+signin,13,8,6
+arc/auth,4,3,3
+chrome/browser/chromeos,4,3,3
+about_signin,3,3,1
+settings,2,2,2
+profiles,2,2,2
+safe_browsing,2,2,2
+account_reconcilor,1,0,0
+ios/web_view/internal/signin,1,1,0
+chrome/browser/chromeos/login,1,0,0
+sync,1,0,0
+account_consistency,1,0,0
+dice,1,0,0
+browser_state,1,1,1

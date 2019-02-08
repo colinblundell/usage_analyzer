@@ -1,0 +1,5 @@
+file,# inclusions
+chrome/browser/chromeos/arc/auth/arc_auth_service.cc,2
+chrome/browser/chromeos/arc/auth/arc_auth_service.h,1
+chrome/browser/chromeos/arc/auth/arc_auth_service_browsertest.cc,1
+total,4
