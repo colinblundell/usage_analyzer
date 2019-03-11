@@ -1,0 +1,6 @@
+file,# inclusions
+total,13
+components/signin/core/browser/signin_manager.h,5
+chrome/browser/signin/signin_manager_factory.h,5
+ios/chrome/browser/signin/signin_manager_factory.h,3
+components/signin/core/browser/signin_manager_base.h,0

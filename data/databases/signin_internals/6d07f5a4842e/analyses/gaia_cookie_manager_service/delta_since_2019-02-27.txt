@@ -1,0 +1,19 @@
+feature,# inclusions,from prod,from prod non-factory,Dependency status
+chrome/browser/android/signin/signin_manager_android.cc,-1,-1,-1,Completed
+chrome/browser/chromeos/login/signin/oauth2_login_manager_factory.cc,-3,-3,0,Completed
+chrome/browser/profiles/profile_impl.cc,-2,-2,-2,Completed
+chrome/browser/signin/about_signin_internals_factory.cc,-1,-1,0,Completed
+chrome/browser/signin/dice_response_handler_unittest.cc,-6,0,0,Completed
+chrome/browser/signin/identity_test_environment_profile_adaptor.cc,-1,0,0,Ongoing
+components/signin/core/browser/about_signin_internals.cc,-1,-1,-1,Completed
+ios/chrome/browser/signin/about_signin_internals_factory.cc,-1,-1,0,Completed
+ios/chrome/browser/signin/identity_service_creator.cc,-2,-2,-2,Completed
+ios/chrome/browser/signin/identity_test_environment_chrome_browser_state_adaptor.cc,-1,0,0,Ongoing
+services/identity/identity_accessor_impl.cc,1,1,1,New
+services/identity/identity_accessor_impl.h,1,1,1,New
+services/identity/identity_accessor_impl_unittest.cc,3,0,0,New
+services/identity/identity_manager_impl.cc,-1,-1,-1,Completed
+services/identity/identity_manager_impl.h,-2,-2,-2,Completed
+services/identity/identity_manager_impl_unittest.cc,-3,0,0,Completed
+services/identity/public/cpp/identity_test_environment.cc,-1,0,0,Completed
+total,-21,-12,-7,New

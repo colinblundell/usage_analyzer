@@ -1,0 +1,6 @@
+feature,# including files,prod,prod non-factory
+total,7,5,3
+signin,4,2,0
+account_reconcilor,1,1,1
+chrome/browser/chromeos/login,1,1,1
+browser_state,1,1,1

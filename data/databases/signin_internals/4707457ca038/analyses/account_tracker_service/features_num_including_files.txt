@@ -1,0 +1,6 @@
+feature,# including files,prod,prod non-factory
+total,10,7,3
+signin,5,3,1
+about_signin,3,3,1
+dice,1,0,0
+profiles,1,1,1

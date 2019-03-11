@@ -1,0 +1,8 @@
+file,# inclusions
+chrome/browser/signin/chrome_device_id_helper.cc,1
+chrome/browser/signin/identity_manager_factory.cc,6
+chrome/browser/signin/identity_test_environment_profile_adaptor.cc,7
+ios/chrome/browser/signin/identity_manager_factory.cc,6
+ios/chrome/browser/signin/identity_service_creator.cc,4
+ios/chrome/browser/signin/identity_test_environment_chrome_browser_state_adaptor.cc,8
+total,32

@@ -1,0 +1,5 @@
+file,# inclusions
+total,8
+chrome/browser/signin/gaia_cookie_manager_service_factory.h,4
+components/signin/core/browser/gaia_cookie_manager_service.h,2
+ios/chrome/browser/signin/gaia_cookie_manager_service_factory.h,2

@@ -1,0 +1,7 @@
+feature,# inclusions,from prod,from prod non-factory
+total,13,10,5
+signin,8,6,2
+profiles,2,2,2
+dice,1,0,0
+chrome/browser/chromeos/login,1,1,0
+chrome/browser/android/signin,1,1,1

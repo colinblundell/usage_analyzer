@@ -1,0 +1,6 @@
+file,# inclusions
+chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc,1
+chrome/browser/profiles/profile_downloader.cc,2
+chrome/browser/profiles/profile_impl.cc,2
+chrome/browser/profiles/profile_manager.cc,1
+total,6
